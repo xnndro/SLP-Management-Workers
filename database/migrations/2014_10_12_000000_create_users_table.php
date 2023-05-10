@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,6 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('users');
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -23,13 +26,21 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        
+        DB::table('users')->insert([
+            ['name' => 'supervisor', 'email' => 'supervisor@stavvy.com','password'=> Hash::make('supervisor'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'user_role' => 'supervisor'],
+            ['name' => 'workers', 'email' => 'workers@stavvy.com','password'=>Hash::make('workers'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'user_role' => 'user'],
+        ]);
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('users');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };

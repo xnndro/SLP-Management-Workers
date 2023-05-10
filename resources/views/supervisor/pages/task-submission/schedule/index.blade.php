@@ -21,6 +21,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="editJadwal" tabindex="-1" aria-labelledby="editJadwalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editJadwalLabel">Edit Jadwal</h1>
+            </div>
+            <form class="">
+                <div class="modal-body">
+                    <div class="input-group flex-nowrap">
+                        <div class="custom-file w-100">
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                    </div>
+                </div>  
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="button">
+                        Unggah
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -43,8 +68,8 @@
                                 <td>Januari</td>
                                 <td>09-09-2023</td>
                                 <td>
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editJadwal">Edit</a>
+                                    <a href="javascript:void(0)" class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
                                 </td>
                             </tr>
                             <tr>
