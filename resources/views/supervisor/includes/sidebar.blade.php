@@ -9,15 +9,15 @@
                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                     class="hide-menu">Tugas </span></a>
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                <li class="sidebar-item"><a href="schedule.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('schedule')}}" class="sidebar-link"><span
                             class="hide-menu"> Jadwal
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a href="workers.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('workers')}}" class="sidebar-link"><span
                             class="hide-menu"> Pekerja
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a href="task-report.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('tasksReport')}}" class="sidebar-link"><span
                             class="hide-menu"> Laporan Kerja
                         </span></a>
                 </li>
