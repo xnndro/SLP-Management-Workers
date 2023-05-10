@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 Route::get('/', function () {
-    return view('auth.login');
+    return view('workers.pages.schedule');
 });
 
 Auth::routes();
@@ -30,8 +33,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['user']],function(){
         // Disini nanti semua route yang hanya bisa diakses oleh user
 
-    });
-
-    
+    });    
 });
 

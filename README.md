@@ -1,5 +1,18 @@
 # SLP Management Workers
 
+## Get Started
+- First, use git kraken to clone this repository
+- Second, open the project folder using your favorite code editor
+- Third, open the terminal and run installation command in Installation section
+- Fourth, run the project using the command in Usage section
+
+## If u are done with the project
+- First, open the terminal and run the command in Usage section
+- Second, open the git kraken and commit the changes
+- Third, push the changes to the repository
+- Fourth, open the github and create a pull request
+- Fifth, wait for the pull request to be approved
+
 ## Installation
 Install the laravel framework and the composer dependencies
 
@@ -62,6 +75,26 @@ Route::delete('route_name/{id}', 'ControllerName@destroy')->name('route_name.des
 ```sh
 php artisan make:seeder SeederName
 ```
+or u can do this
+```sh
+php artisan make:seeder SeederName --class=ClassName
+```
+- Publish the seeders
+```sh
+php artisan db:seed
+```
+or if u cannot using seeder, u can using Facade on migration files
+```sh
+use Illuminate\Support\Facades\DB;
+```
+and then u can use the Facade like this
+```sh
+DB::table('table_name')->insert([
+    'column_name' => 'value',
+    'column_name' => 'value',
+    'column_name' => 'value',
+]);
+```
 
 ## Shortcuts
 - Creating migration, and models together
@@ -75,3 +108,9 @@ so u don't need to create the migration file and the model file separately, and 
 php artisan make:controller ControllerName -r -m ModelName
 ```
 so u don't need to create the migration file, the model file, and the controller file separately, and the name of migration file will be the same as the name of the model file using format "create_table_name_table"
+
+## Adding Asset
+if u want to take the file from the public folder, u can use this
+```sh
+{{ asset('path/to/file') }}
+```
