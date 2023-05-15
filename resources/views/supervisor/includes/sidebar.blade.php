@@ -47,7 +47,7 @@
             aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                 class="hide-menu">Panduan</span></a>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="inventaris.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('supervisorInventaris')}}"
             aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span
                 class="hide-menu">Inventaris</span></a>
         </li>
