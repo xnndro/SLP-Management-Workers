@@ -34,6 +34,7 @@ class PanduanController extends Controller
     // {
     //     $this->validate($request, [
     //                 'title' => 'required',
+    //                 'role' => 'required',
     //                 'content' => 'required',
     //             ]);
         

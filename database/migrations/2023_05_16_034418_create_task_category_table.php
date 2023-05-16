@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventaris', function (Blueprint $table) {
+        Schema::create('task_category', function (Blueprint $table) {
             $table->id();
-            $table->string('inventaris_name');
-            $table->string('inventaris_image');
-            $table->string('inventaris_description');
-            $table->unsignedBigInteger('inventaris_total');
-            $table->string('inventaris_role');
+            $table->unsignedBigInteger('panduan_id');
+            $table->string('task_category_name');
             $table->timestamps();
+
+            $table->foreign('panduan_id')->references('id')->on('panduan');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventaris');
+        Schema::dropIfExists('task_category');
     }
 };
