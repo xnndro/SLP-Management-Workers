@@ -43,7 +43,7 @@
         </li>
         <li class="list-divider"></li>
         <li class="nav-small-cap"><span class="hide-menu">LAIN-LAIN</span></li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="panduan.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('supervisorPanduan') }}"
             aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                 class="hide-menu">Panduan</span></a>
         </li>
