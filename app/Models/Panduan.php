@@ -11,6 +11,7 @@ class Panduan extends Model
     protected $table = 'panduans';
     protected $fillable = [
         'panduan_title',
+        'workers_role',
         'panduan_content'
     ];
 }

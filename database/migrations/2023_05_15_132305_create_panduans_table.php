@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('panduans', function (Blueprint $table) {
             $table->id();
             $table->string('panduan_title');
+            $table->string('workers_role');
             $table->string('panduan_content');
             $table->timestamps();
         });
