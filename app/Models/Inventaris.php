@@ -13,6 +13,7 @@ class Inventaris extends Model
         'inventaris_name',
         'inventaris_image',
         'inventaris_description',
-        'inventaris_total'
+        'inventaris_total',
+        'inventaris_role'
     ];
 }

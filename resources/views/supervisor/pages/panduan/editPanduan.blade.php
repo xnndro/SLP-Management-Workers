@@ -50,7 +50,7 @@
                     
                     <!-- 2 button in div and that div is on right side -->
                     <div class="d-flex justify-content-between">
-                        <a href="" type="submit" style="background-color: transparent; color: #ff4f70;" data-confirm-delete="true" class="ms-3"><i class="fa fa-trash"></i></a>
+                        <a href="" type="submit" style="background-color: transparent; color: #ff4f70;" class="ms-3"><i class="fa fa-trash" data-confirm-delete="true" ></i></a>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{{ route('supervisorPanduan') }}" type="submit" style="border-radius: 14px;" class="px-3 btn btn-primary">Simpan</a>
                             <a href="{{ route('supervisorPanduan') }}" type="submit" style="border-radius: 14px;" class="px-3 btn btn-dark">Batalkan</a>
