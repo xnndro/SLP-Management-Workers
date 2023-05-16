@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Panduan extends Model
+class TaskCategory extends Model
 {
     use HasFactory;
-    protected $table = 'panduan';
+
+    protected $table = 'task_category';
     protected $fillable = [
-        'panduan_title',
-        'panduan_role',
-        'panduan_content'
+        'task_category_name',
+        'panduan_id'
     ];
 }
