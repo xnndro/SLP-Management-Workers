@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TaskManagement extends Model
 {
     use HasFactory;
+
     protected $table = 'task_management';
+
     protected $fillable = [
         'user_id',
         'work_date',

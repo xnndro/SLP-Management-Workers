@@ -6,21 +6,22 @@ use Illuminate\Http\Request;
 
 class TaskSubmissionController extends Controller
 {
-
     // Supervisor
     public function schedule()
     {
-        $title = "Hapus Jadwal!";
-        $text = "Apakah anda yakin ingin menghapus jadwal ini?";
+        $title = 'Hapus Jadwal!';
+        $text = 'Apakah anda yakin ingin menghapus jadwal ini?';
         confirmDelete($title, $text);
+
         return view('supervisor.pages.task-submission.schedule.index');
     }
 
     public function workers()
     {
-        $title = "Hapus Pekerja!";
-        $text = "Apakah anda yakin ingin menghapus pekerja ini?";
+        $title = 'Hapus Pekerja!';
+        $text = 'Apakah anda yakin ingin menghapus pekerja ini?';
         confirmDelete($title, $text);
+
         return view('supervisor.pages.task-submission.workers.index');
     }
 
@@ -70,9 +71,10 @@ class TaskSubmissionController extends Controller
 
     public function tasksReport()
     {
-        $title = "Hapus Laporan!";
-        $text = "Apakah anda yakin ingin menghapus laporan pekerjaan ini?";
+        $title = 'Hapus Laporan!';
+        $text = 'Apakah anda yakin ingin menghapus laporan pekerjaan ini?';
         confirmDelete($title, $text);
+
         return view('supervisor.pages.task-submission.tasksReport.index');
     }
 
@@ -104,10 +106,9 @@ class TaskSubmissionController extends Controller
 
     //     return redirect()->route('taskSubmission')->with('success', 'Data berhasil ditambahkan');
     // }
-    
+
     public function scheduleWorkers()
     {
         return view('workers.pages.schedule');
     }
-
 }

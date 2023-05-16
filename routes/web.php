@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +43,6 @@ Route::get('/paidLeaveCategory', [App\Http\Controllers\PaidLeaveController::clas
 Route::get('/kategoriCuti', [App\Http\Controllers\PaidLeaveController::class, 'kategoriCuti'])->name('kategoriCuti');
 Route::get('/pengajuanCuti', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveRequest'])->name('pengajuanCuti');
 
-
-
 Route::get('/supervisorInventaris', [App\Http\Controllers\InventarisController::class, 'supervisorInventaris'])->name('supervisorInventaris');
 Route::get('/createInventaris', [App\Http\Controllers\InventarisController::class, 'createInventaris'])->name('createInventaris');
 Route::get('/editInventaris', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
@@ -66,13 +64,12 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::group(['middleware' => ['supervisor']],function(){
+    Route::group(['middleware' => ['supervisor']], function () {
         // Disini nanti semua route yang hanya bisa diakses oleh supervisor
     });
 
-    Route::group(['middleware' => ['user']],function(){
+    Route::group(['middleware' => ['user']], function () {
         // Disini nanti semua route yang hanya bisa diakses oleh user
 
-    });    
+    });
 });
-

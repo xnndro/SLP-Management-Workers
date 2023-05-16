@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Inventaris extends Model
 {
     use HasFactory;
+
     protected $table = 'inventaris';
+
     protected $fillable = [
         'inventaris_name',
         'inventaris_image',
         'inventaris_description',
         'inventaris_total',
-        'inventaris_role'
+        'inventaris_role',
     ];
 }

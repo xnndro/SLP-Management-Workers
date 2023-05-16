@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('paid_leave_requests');
+
         Schema::create('paid_leave_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('status', ['1','2','3'])->comment('1=Dalam  Proses, 2=Disetujui, 3=Ditolak');
+            $table->enum('status', ['1', '2', '3'])->comment('1=Dalam  Proses, 2=Disetujui, 3=Ditolak');
             $table->text('message');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('paid_leave_categories'); 
+            $table->foreign('category_id')->references('id')->on('paid_leave_categories');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -30,6 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('paid_leave_requests');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };

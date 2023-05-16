@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PaidLeaveCategory extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
 
-    public function paidLeaveRequest(){
+    public function paidLeaveRequest()
+    {
         return $this->hasMany(PaidLeaveRequest::class);
     }
 }

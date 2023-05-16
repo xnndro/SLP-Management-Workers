@@ -10,8 +10,9 @@ class TaskCategory extends Model
     use HasFactory;
 
     protected $table = 'task_category';
+
     protected $fillable = [
         'task_category_name',
-        'panduan_id'
+        'panduan_id',
     ];
 }

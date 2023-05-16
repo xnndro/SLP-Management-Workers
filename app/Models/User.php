@@ -42,10 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function paidLeaveRequest(){
+    public function paidLeaveRequest()
+    {
         return $this->hasMany(PaidLeaveRequest::class);
     }
-    public function paidLeaveList(){
+
+    public function paidLeaveList()
+    {
         return $this->hasMany(PaidLeaveList::class);
     }
 }

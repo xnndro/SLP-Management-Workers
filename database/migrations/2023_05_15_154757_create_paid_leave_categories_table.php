@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('paid_leave_categories');
+
         Schema::create('paid_leave_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -25,6 +27,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('paid_leave_categories');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };
