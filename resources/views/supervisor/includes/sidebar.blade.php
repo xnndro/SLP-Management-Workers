@@ -51,7 +51,7 @@
             aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span
                 class="hide-menu">Inventaris</span></a>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="keluhan.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('keluhan')}}"
             aria-expanded="false"><i data-feather="bar-chart" class="feather-icon"></i><span
                 class="hide-menu">Keluhan</span></a>
         </li>
