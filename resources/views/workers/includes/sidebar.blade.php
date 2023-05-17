@@ -38,11 +38,11 @@
                 aria-expanded="false"><i data-feather="bar-chart" class="feather-icon"></i><span
                     class="hide-menu">Keluhan </span></a>
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                <li class="sidebar-item"><a href="complain-report-detail.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('keluhanPelaporan')}}" class="sidebar-link"><span
                             class="hide-menu"> Laporan
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a href="complain-solve-list.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('keluhanPenanganan')}}" class="sidebar-link"><span
                             class="hide-menu"> Penanganan
                         </span></a>
                 </li>
