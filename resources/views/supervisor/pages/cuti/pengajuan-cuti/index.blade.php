@@ -110,7 +110,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/pending-icon.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/pending-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Total Pengajuan</h6>
@@ -130,7 +130,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/success-box.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/success-box.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Disetujui</h6>
@@ -151,7 +151,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/ignore-icon.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/ignore-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Ditolak</h6>
@@ -207,7 +207,7 @@
                                     <td>30-10-2023</td>
                                     <td>
                                         <button type="button" class=" btn border-0" data-bs-toggle="modal" data-bs-target="#detail">
-                                            <img src="../../assets/images/detail-icon.svg" alt="" srcset="">
+                                            <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
                                         </button>
                                     </td>
                                 </tr>
@@ -220,7 +220,7 @@
                                     <td>30-10-2023</td>
                                     <td>
                                         <button type="button" class="btn border-0" data-bs-toggle="modal" data-bs-target="#detail">
-                                            <img src="../../assets/images/detail-icon.svg" alt="" srcset="">
+                                            <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
                                         </button>
                                     </td>
                                 </tr>

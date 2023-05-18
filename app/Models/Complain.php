@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Complain extends Model
 {
     use HasFactory;
+
     protected $table = 'complains';
+
     protected $fillable = [
         'user_report_id',
         'place_id',
@@ -16,6 +18,6 @@ class Complain extends Model
         'complain_description',
         'complain_category',
         'complain_urgency',
-        'status_report'
+        'status_report',
     ];
 }

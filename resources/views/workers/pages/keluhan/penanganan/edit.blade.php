@@ -143,7 +143,7 @@
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
                                         <input class="form-control" type="file" id="formFile"
-                                            value="../../assets/images/img2.jpg">
+                                            value="{{asset('../../assets/images/img2.jpg')}}">
                                     </div>
                                     <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                                         data-bs-target="#image-preview" type="button">
@@ -169,7 +169,7 @@
                     </div>
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start mt-5 mb-n4">
-                        <img style="width: 250px;" src="../../assets/images/sapu-form.png" alt="">
+                        <img style="width: 250px;" src="{{asset('../../assets/images/sapu-form.png')}}" alt="">
                     </div>
                 </form>
             </div>

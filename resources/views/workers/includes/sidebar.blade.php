@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('pengajuanCuti')}}"
                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                     class="hide-menu">Pengajuan Cuti</span></a>
         </li>

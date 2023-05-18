@@ -35,7 +35,7 @@
                 </ol>
             </div>
             <div style="float: inline-end;">
-                <img style="float: right; width: 250px;" src="../../assets/images/sapu-form.png" alt="">
+                <img style="float: right; width: 250px;" src="{{asset('../../assets/images/sapu-form.png')}}" alt="">
             </div>
         </div>
     </div>

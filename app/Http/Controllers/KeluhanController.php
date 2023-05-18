@@ -6,27 +6,27 @@ use Illuminate\Http\Request;
 
 class KeluhanController extends Controller
 {
-
     // SUPERVISOR
     public function daftarKeluhan()
     {
         return view('supervisor.pages.keluhan.index');
     }
-    
-    public function verifikasi(){
+
+    public function verifikasi()
+    {
         return view('supervisor.pages.keluhan.verification');
     }
-    
-    public function ulasan(){
+
+    public function ulasan()
+    {
         return view('supervisor.pages.keluhan.feedback');
     }
-    
+
     // public function show(string $id)
     public function detailKeluhan() // sementara
     {
         return view('supervisor.pages.keluhan.view');
     }
-
 
     // WORKERS
     // -- Pelaporan
@@ -84,7 +84,6 @@ class KeluhanController extends Controller
     {
         //
     }
-
 
     /**
      * Show the form for editing the specified resource.

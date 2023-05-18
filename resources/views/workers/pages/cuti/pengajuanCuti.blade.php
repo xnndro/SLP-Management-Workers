@@ -101,7 +101,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/pending-icon.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/pending-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Sisa Cuti Kerja</h6>
@@ -121,7 +121,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/write-icon.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/write-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Proses Pengajuan</h6>
@@ -142,7 +142,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/success-box.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/success-box.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Disetujui</h6>

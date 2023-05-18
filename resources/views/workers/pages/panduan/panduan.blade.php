@@ -22,7 +22,7 @@
     <div class="justify-content-center col-md-3">
         <div class="card text-wrap">
             <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                <img src="{{asset('../../assets/images/product/chair.png')}}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
             </div>
             <div class="card-body text-wrap">
                 <div class="d-flex text-white mt-3 flex-wrap text-wrap">
@@ -39,7 +39,7 @@
     <div class="justify-content-center col-md-3">
         <div class="card text-wrap">
             <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                <img src="{{asset('../../assets/images/product/chair.png')}}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
             </div>
             <div class="card-body text-wrap">
                 <div class="d-flex text-white mt-3 flex-wrap text-wrap">
@@ -56,7 +56,7 @@
     <div class="justify-content-center col-md-3">
         <div class="card text-wrap">
             <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                <img src="{{asset('../../assets/images/product/chair.png')}}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
             </div>
             <div class="card-body text-wrap">
                 <div class="d-flex text-white mt-3 flex-wrap text-wrap">
@@ -73,7 +73,7 @@
     <div class="justify-content-center col-md-3">
         <div class="card text-wrap">
             <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                <img src="{{asset('../../assets/images/product/chair.png')}}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
             </div>
             <div class="card-body text-wrap">
                 <div class="d-flex text-white mt-3 flex-wrap text-wrap">
@@ -90,7 +90,7 @@
     <div class="justify-content-center col-md-3">
         <div class="card text-wrap">
             <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                <img src="{{asset('../../assets/images/product/chair.png')}}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
             </div>
             <div class="card-body text-wrap">
                 <div class="d-flex text-white mt-3 flex-wrap text-wrap">
@@ -107,7 +107,7 @@
     <div class="justify-content-center col-md-3">
         <div class="card text-wrap">
             <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                <img src="{{asset('../../assets/images/product/chair.png')}}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
             </div>
             <div class="card-body text-wrap">
                 <div class="d-flex text-white mt-3 flex-wrap text-wrap">

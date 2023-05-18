@@ -94,7 +94,7 @@
     <div class="row" style="background-color: #31CFD2;margin-top: 10vh;">
         <div class="col-lg-12 d-flex flex-row justify-content-between">
             <div class="col-lg-4 d-flex justify-content-center align-items-center bottom-0 position-relative" style="margin-bottom: 13.4vh;">
-                <img src="../../assets/images/list-cuti-icon.svg" alt="" class="img-fluid position-absolute">
+                <img src="{{asset('../../assets/images/list-cuti-icon.svg')}}" alt="" class="img-fluid position-absolute">
             </div>
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                 <div class="form-group">
@@ -123,7 +123,7 @@
                     <div class="card-body">
                         <div class="d-flex text-white">
                             <div>
-                                <img src="../../assets/images/umum-icon.png" class="ms-1" width="auto">   
+                                <img src="{{asset('../../assets/images/umum-icon.png')}}" class="ms-1" width="auto">   
                             </div>
                             <div class="ms-auto">
                                 <h6 class="font-weight-normal text-truncate">Cuti Umum</h6>
@@ -142,7 +142,7 @@
                     <div class="card-body">
                         <div class="d-flex text-white">
                             <div>
-                                <img src="../../assets/images/hamil-icon.png" class="" width="100">   
+                                <img src="{{asset('../../assets/images/hamil-icon.png')}}" class="" width="100">   
                             </div>
                             <div class="ms-auto">
                                 <h6 class="font-weight-normal text-truncate">Cuti Kehamilan</h6>
@@ -161,7 +161,7 @@
                     <div class="card-body">
                         <div class="d-flex text-white">
                             <div>
-                                <img src="../../assets/images/kesehatan icon.svg" class="" width="100">   
+                                <img src="{{asset('../../assets/images/kesehatan icon.svg')}}" class="" width="100">   
                             </div>
                             <div class="ms-auto">
                                 <h6 class="font-weight-normal text-truncate">Cuti Kesehatan</h6>
@@ -180,7 +180,7 @@
                     <div class="card-body">
                         <div class="d-flex text-white">
                             <div>
-                                <img src="../../assets/images/pending-icon.svg" class="rounded-circle m-n5" width="150">   
+                                <img src="{{asset('../../assets/images/pending-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                             </div>
                             <div class="ms-auto">
                                 <h6 class="font-weight-normal text-truncate">Cuti Kedukaan</h6>
@@ -219,7 +219,7 @@
                                             <td>House Keeping</td>
                                             <td>
                                                 <button type="button" class=" btn border-0" data-bs-toggle="modal" data-bs-target="#detail">
-                                                    <img src="../../assets/images/detail-icon.svg" alt="" srcset="">
+                                                    <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
                                                 </button>
                                             </td>
                                         </tr>
@@ -229,7 +229,7 @@
                                             <td>Fasecade Cleaner</td>
                                             <td>
                                                 <button type="button" class="btn border-0" data-bs-toggle="modal" data-bs-target="#detail">
-                                                    <img src="../../assets/images/detail-icon.svg" alt="" srcset="">
+                                                    <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
                                                 </button>
                                             </td>
                                         </tr>

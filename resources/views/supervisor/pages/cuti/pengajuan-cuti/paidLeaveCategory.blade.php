@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-5">
                                 <div class="text-end">
-                                    <img src="../../assets/images/cuti-umum-icon.svg" class="mx-n5"  width="180"> 
+                                    <img src="{{asset('../../assets/images/cuti-umum-icon.svg')}}" class="mx-n5"  width="180"> 
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         </blockquote>
                         <div class="text-end">
                             <button class="btn bg-primary rounded-circle mt-2" data-bs-toggle="modal" data-bs-target="#edit">
-                                <img src="../../assets/images/edit-icon.svg" class=""alt="">
+                                <img src="{{asset('../../assets/images/edit-icon.svg')}}" class=""alt="">
                             </button>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-5">
                                 <div class="text-end">
-                                    <img src="../../assets/images/kehamilan-icon.svg" class="me-n1"  width="220"> 
+                                    <img src="{{asset('../../assets/images/kehamilan-icon.svg')}}" class="me-n1"  width="220"> 
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                         </blockquote>
                         <div class="text-end">
                             <button class="btn bg-danger rounded-circle mt-2" data-bs-toggle="modal" data-bs-target="#edit">
-                                <img src="../../assets/images/edit-icon.svg" class=""alt="">
+                                <img src="{{asset('../../assets/images/edit-icon.svg')}}" class=""alt="">
                             </button>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-5">
                                 <div class="text-end">
-                                    <img src="../../assets/images/kesehatan icon.svg" class="mx-n5 mt-3"  width="180"> 
+                                    <img src="{{asset('../../assets/images/kesehatan icon.svg')}}" class="mx-n5 mt-3"  width="180"> 
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                         </blockquote>
                         <div class="text-end">
                             <button class="btn bg-success rounded-circle mt-2" data-bs-toggle="modal" data-bs-target="#edit">
-                                <img src="../../assets/images/edit-icon.svg" class=""alt="">
+                                <img src="{{asset('../../assets/images/edit-icon.svg')}}" class=""alt="">
                             </button>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                             </div>
                             <div class="col-5">
                                 <div class="text-end">
-                                    <img src="../../assets/images/kedukaan-icon.png" class="mx-n5"  width="150"> 
+                                    <img src="{{asset('../../assets/images/kedukaan-icon.png')}}" class="mx-n5"  width="150"> 
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                         </blockquote>
                         <div class="text-end">
                             <button class="btn bg-warning rounded-circle mt-2" data-bs-toggle="modal" data-bs-target="#edit">
-                                <img src="../../assets/images/edit-icon.svg" class=""alt="">
+                                <img src="{{asset('../../assets/images/edit-icon.svg')}}" class=""alt="">
                             </button>
                         </div>
                     </div>

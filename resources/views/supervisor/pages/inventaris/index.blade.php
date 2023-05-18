@@ -16,7 +16,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/housekeeping.png" style="opacity: 50%;" class="m-n4" width="90">   
+                        <img src="{{asset('../../assets/images/housekeeping.png')}}" style="opacity: 50%;" class="m-n4" width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Housekeeping</h6>
@@ -34,7 +34,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/technician.png" style="opacity: 50%;" class="m-n4" width="90">   
+                        <img src="{{asset('../../assets/images/technician.png')}}" style="opacity: 50%;" class="m-n4" width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Technician</h6>
@@ -53,7 +53,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/facadeCleaner.png" style="opacity: 50%;" class="m-n4"width="90">   
+                        <img src="{{asset('../../assets/images/facadeCleaner.png')}}" style="opacity: 50%;" class="m-n4"width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Facade Cleaner</h6>
@@ -71,7 +71,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div class="align-items-center">
-                        <img src="../../assets/images/gardener.png" style="opacity: 50%;" class="m-n4" width="90">   
+                        <img src="{{asset('../../assets/images/gardener.png')}}" style="opacity: 50%;" class="m-n4" width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Gardener</h6>
@@ -103,7 +103,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><img src="../../assets/images/product/p1.jpg" alt="Gambar" width="200" height="200"></td>
+                                <td><img src="{{asset('../../assets/images/product/p1.jpg')}}" alt="Gambar" width="200" height="200"></td>
                                 <td>System Architect</td>
                                 <td>Edinburgh</td>
                                 <td>61</td>
@@ -114,7 +114,7 @@
                             </tr>
                             
                             <tr>
-                                <td><img src="../../assets/images/product/p2.jpg" alt="Gambar" width="200" height="200"></td>
+                                <td><img src="{{asset('../../assets/images/product/p2.jpg')}}" alt="Gambar" width="200" height="200"></td>
                                 <td>Accountant</td>
                                 <td>Tokyo</td>
                                 <td>63</td>
@@ -124,7 +124,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="../../assets/images/product/p3.jpg" alt="Gambar" width="200" height="200"></td>
+                                <td><img src="{{asset('../../assets/images/product/p3.jpg')}}" alt="Gambar" width="200" height="200"></td>
                                 <td>Junior Technical Author</td>
                                 <td>San Francisco</td>
                                 <td>66</td>

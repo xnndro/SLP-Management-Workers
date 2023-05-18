@@ -77,7 +77,7 @@
                     </div>
                 </form>
             </div>
-            <img style="width: 250px;" src="../../assets/images/sapu-form.png" alt="">
+            <img style="width: 250px;" src="{{asset('../../assets/images/sapu-form.png')}}" alt="">
         </div>
     </div>
 </div>
