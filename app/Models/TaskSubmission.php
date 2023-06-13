@@ -16,4 +16,9 @@ class TaskSubmission extends Model
         'task_report',
         'task_comment',
     ];
+
+    public function task_management()
+    {
+        return $this->belongsTo(TaskManagement::class);
+    }
 }

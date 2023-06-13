@@ -22,6 +22,9 @@ Route::get('/', function () {
 });
 
 Route::get('/schedule', [App\Http\Controllers\TaskSubmissionController::class, 'schedule'])->name('schedule');
+Route::post('/scheduleUpload', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleUpload'])->name('scheduleUpload');
+Route::post('/scheduleEdit/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleEdit'])->name('scheduleEdit');
+Route::delete('/scheduleDelete/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleDelete'])->name('scheduleDelete');
 Route::get('/tasksReport', [App\Http\Controllers\TaskSubmissionController::class, 'tasksReport'])->name('tasksReport');
 
 Route::get('/workers', [App\Http\Controllers\TaskSubmissionController::class, 'workers'])->name('workers');

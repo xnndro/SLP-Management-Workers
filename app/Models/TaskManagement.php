@@ -14,9 +14,23 @@ class TaskManagement extends Model
     protected $fillable = [
         'user_id',
         'work_date',
-        'work_time',
         'place_id',
         'task_category_id',
         'task_status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function place()
+    {
+        return $this->belongsTo(Place::class);
+    }
+
+    public function task_category()
+    {
+        return $this->belongsTo(TaskCategory::class);
+    }
 }
