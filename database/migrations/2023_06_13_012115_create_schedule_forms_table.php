@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('task_category', function (Blueprint $table) {
+        Schema::create('schedule_forms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('panduan_id')->nullable();
-            $table->string('task_category_name');
+            $table->string('form_month');
+            $table->string('form_file');
             $table->timestamps();
-
-            $table->foreign('panduan_id')->references('id')->on('panduan');
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('task_category');
+        Schema::dropIfExists('schedule_forms');
     }
 };

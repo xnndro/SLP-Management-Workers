@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('task_management', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->date('work_date');
-            $table->string('work_time');
+            $table->date('work_date')->format('Y-m-d');
             $table->unsignedBigInteger('place_id');
             $table->unsignedBigInteger('task_category_id');
             $table->string('task_status');
