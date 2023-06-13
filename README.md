@@ -7,7 +7,10 @@
 - Fourth, run the project using the command in Usage section
 
 ## If u are done with the project
-- First, open the terminal and run the command in Usage section
+- First, open the terminal and run the linter first to check if there are any errors
+```sh
+./vendor/bin/pint
+```
 - Second, open the git kraken and commit the changes
 - Third, push the changes to the repository
 - Fourth, open the github and create a pull request

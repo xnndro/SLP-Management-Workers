@@ -1,6 +1,5 @@
 @extends('workers.layouts.master')
-
-@section('content')
+@push('after-style')
 <style>
     /* The actual vertical-rule (the vertical ruler) */
     .vertical-rule {
@@ -28,7 +27,8 @@
     }
 
 </style>
-
+@endpush
+@section('content')
 <!-- Modal for Complain Informations -->
 <div class="modal fade" id="scrollable-modal" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle"
     aria-hidden="true">
@@ -40,7 +40,7 @@
             <div class="modal-body mx-4">
                 <div class="row">
                     <div class="col-4 d-flex justify-content-center align-items-start vertical-rule">
-                        <img class="complain-icon" src="../../assets/images/keluhan-inventaris.svg" width="70" alt="">
+                        <img class="complain-icon" src="{{asset('../../assets/images/keluhan-inventaris.svg')}}" width="70" alt="">
                     </div>
                     <div class="col-8">
                         <h4 class="modal-title text-dark fw-medium" id="scrollableModalTitle">Inventaris
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="col-4 d-flex justify-content-center align-items-start vertical-rule">
-                        <img class="complain-icon" src="../../assets/images/keluhan-fasilitas.svg" width="70" alt="">
+                        <img class="complain-icon" src="{{asset('../../assets/images/keluhan-fasilitas.svg')}}" width="70" alt="">
                     </div>
                     <div class="col-8">
                         <h4 class="modal-title text-dark fw-medium" id="scrollableModalTitle">Fasilitas</h4>
@@ -66,14 +66,14 @@
             <div class="modal-body mx-4">
                 <div class="row">
                     <div class="col-4 d-flex justify-content-center align-items-start vertical-rule">
-                        <img class="complain-icon" src="../../assets/images/keluhan-genting.svg" width="70" alt="">
+                        <img class="complain-icon" src="{{asset('../../assets/images/keluhan-genting.svg')}}" width="70" alt="">
                     </div>
                     <div class="col-8">
                         <h4 class="modal-title text-dark fw-medium" id="scrollableModalTitle">Genting</h4>
                         <p>Keluhan pada level yang harus segera ditangani secepatnya</p>
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-start vertical-rule">
-                        <img class="complain-icon" src="../../assets/images/keluhan-penting.svg" width="70" alt="">
+                        <img class="complain-icon" src="{{asset('../../assets/images/keluhan-penting.svg')}}" width="70" alt="">
                     </div>
                     <div class="col-8">
                         <h4 class="modal-title text-dark fw-medium" id="scrollableModalTitle">Penting</h4>
@@ -187,7 +187,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/write-board.svg" class="m-n5" width="180">
+                        <img src="{{asset('../../assets/images/write-board.svg')}}" class="m-n5" width="180">
                     </div>
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Ditugaskan</h6>
@@ -206,7 +206,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/clock.svg" class="m-n5" width="165">
+                        <img src="{{asset('../../assets/images/clock.svg')}}" class="m-n5" width="165">
                     </div>
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Dikerjakan</h6>
@@ -224,7 +224,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/checked-board.svg" class="m-n5" width="168">
+                        <img src="{{asset('../../assets/images/checked-board.svg')}}" class="m-n5" width="168">
                     </div>
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Diverifikasi</h6>

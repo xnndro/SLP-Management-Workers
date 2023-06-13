@@ -183,7 +183,7 @@
                     </div>
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start mt-5 mb-n4">
-                        <img style="width: 250px;" src="../../assets/images/sapu-form.png" alt="">
+                        <img style="width: 250px;" src="{{asset('../../assets/images/sapu-form.png')}}" alt="">
                     </div>
                 </form>
             </div>

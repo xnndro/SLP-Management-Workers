@@ -14,7 +14,7 @@
                         </span></a>
                 </li>
                 <li class="sidebar-item"><a href="{{route('workers')}}" class="sidebar-link"><span
-                            class="hide-menu"> Pekerja
+                            class="hide-menu"> Data Pekerja
                         </span></a>
                 </li>
                 <li class="sidebar-item"><a href="{{route('tasksReport')}}" class="sidebar-link"><span
@@ -23,19 +23,15 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="workers.html"
-            aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                class="hide-menu">Data Pekerja</span></a>
-        </li>
         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
             aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                 class="hide-menu">Cuti </span></a>
             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                <li class="sidebar-item"><a href="paidleaves-list.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('requestList')}}" class="sidebar-link"><span
                             class="hide-menu"> Pengajuan Cuti
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a href="cuti-pekerja.html" class="sidebar-link"><span
+                <li class="sidebar-item"><a href="{{route('paidLeaveList')}}" class="sidebar-link"><span
                             class="hide-menu"> Daftar Cuti
                         </span></a>
                 </li>
@@ -43,11 +39,11 @@
         </li>
         <li class="list-divider"></li>
         <li class="nav-small-cap"><span class="hide-menu">LAIN-LAIN</span></li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="panduan.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('supervisorPanduan') }}"
             aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                 class="hide-menu">Panduan</span></a>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="inventaris.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('supervisorInventaris')}}"
             aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span
                 class="hide-menu">Inventaris</span></a>
         </li>

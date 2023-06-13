@@ -19,18 +19,18 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('pengajuanCuti')}}"
                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                     class="hide-menu">Pengajuan Cuti</span></a>
         </li>
 
         <li class="list-divider"></li>
         <li class="nav-small-cap"><span class="hide-menu">LAIN-LAIN</span></li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('workersPanduan') }}"
                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                     class="hide-menu">Panduan</span></a>
         </li>
-        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('workersInventaris') }}"
                 aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span
                     class="hide-menu">Inventaris</span></a>
         </li>
