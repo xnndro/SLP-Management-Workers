@@ -11,9 +11,8 @@ class PaidLeaveController extends Controller
     private $param = 0;
     public function requestList()
     {
-        $data = PaidLeaveRequest::where('status', '1');
-        $data = $data->get();
-        return view('supervisor.pages.cuti.pengajuan-cuti.index')->with("data", $data); 
+        $data = PaidLeaveRequest::where('status', '1')->get(); // ini cara yang lebi bersih, jangan lupa user _id diganti
+        return view('supervisor.pages.cuti.pengajuan-cuti.index',compact('data')); 
     }
 
     public function paidLeaveList()
@@ -33,8 +32,9 @@ class PaidLeaveController extends Controller
 
     public function paidLeaveRequest()
     {
-        $request = PaidLeaveRequest::where('user_id','1');
-        return view('workers.pages.cuti.pengajuanCuti')->with("requests", $request->get());   
+        $request = PaidLeaveRequest::where('user_id','1')->get();
+        // return view('workers.pages.cuti.pengajuanCuti')->with("requests", $request->get());   
+        return view('workers.pages.cuti.pengajuanCuti',compact('request')); // ini cara yang lebi bersih
     }
     public function createCuti(Request $request)
     {
@@ -52,25 +52,26 @@ class PaidLeaveController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $id);
         if($validator->fails()){
-            //dd($validator);
             return redirect()->back()->withInput()->withErrors($validator);
         }else{
             $category = PaidLeaveCategory::where('name', $request->category);
             $category = $category->get(); 
-            //return dd($category[0]->id);
-            $mhs = PaidLeaveRequest::create([
-                'user_id' => '1',
-                'category_id' => $category[0]->id,
-                'start_date' => $request->tanggalMulai, 
-                'end_date' => $request->tanggalAkhir, 
-                'status' => '1', 
-                'message' => $request->pesan
-            ]);
-            return redirect()->back();
+            
+            $cuti = new PaidLeaveRequest();
+            $cuti->user_id = '1'; // ini jangan lupa di ubah, di assign ke user yang request
+            $cuti->category_id = $category[0]->id;
+            $cuti->start_date = $request->tanggalMulai;
+            $cuti->end_date = $request->tanggalAkhir;
+            $cuti->status = '1';
+            $cuti->message = $request->pesan;
+            $cuti->save();
+            return redirect()->back()->with('success', 'Pengajuan cuti berhasil dibuat');
         }
     }
 
-    public function lihat_detail(PaidLeaveRequest $request){
-        return view('supervisor.pages.cuti.pengajuan-cuti.index')->with("data", $request->get());
+    public function lihat_detail(Request $request){
+        $data = PaidLeaveRequest::where('id', $request->id)->get();
+        return view('supervisor.pages.cuti.pengajuan-cuti.index',compact('data'));
+        // return view('supervisor.pages.cuti.pengajuan-cuti.index')->with("data", $request->get());
     }
 }
