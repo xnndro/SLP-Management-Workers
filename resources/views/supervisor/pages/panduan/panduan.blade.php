@@ -20,107 +20,25 @@
     </div>
     
     <!-- Start Cards -->
-    <div class="justify-content-center col-md-3">
-        <div class="card text-wrap">
-            <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
-            </div>
-            <div class="card-body text-wrap">
-                <div class="d-flex text-white mt-3 flex-wrap text-wrap">
-                    <div class="mt-5">
-                        <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">Membersihkan Ruang Kelas</h6>
-                        <div class="d-flex align-items-end">
-                            <a href="{{ route('supervisorDetailPanduan') }}"style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
+    @foreach ($panduans as $panduan)
+        <div class="justify-content-center col-md-3">
+            <div class="card text-wrap">
+                <div style="position:absolute; top:0; bottom:0;" class="z-1">
+                    <img src="{{ $panduan->panduan_image }}" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
+                </div>
+                <div class="card-body text-wrap">
+                    <div class="d-flex text-white mt-3 flex-wrap text-wrap">
+                        <div class="mt-5">
+                            <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">{{ $panduan->panduan_title }}</h6>
+                            <div class="d-flex align-items-end">
+                                <a href="{{ route('supervisorDetailPanduan', ['id'=>$panduan->id]) }}"style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="justify-content-center col-md-3">
-        <div class="card text-wrap">
-            <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
-            </div>
-            <div class="card-body text-wrap">
-                <div class="d-flex text-white mt-3 flex-wrap text-wrap">
-                    <div class="mt-5">
-                        <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">Membersihkan Ruang Kelas</h6>
-                        <div class="d-flex align-items-end">
-                            <a href="{{ route('supervisorDetailPanduan') }}" type="submit" style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="justify-content-center col-md-3">
-        <div class="card text-wrap">
-            <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
-            </div>
-            <div class="card-body text-wrap">
-                <div class="d-flex text-white mt-3 flex-wrap text-wrap">
-                    <div class="mt-5">
-                        <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">Membersihkan Ruang Kelas</h6>
-                        <div class="d-flex align-items-end">
-                            <a href="{{ route('supervisorDetailPanduan') }}" type="submit" style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="justify-content-center col-md-3">
-        <div class="card text-wrap">
-            <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
-            </div>
-            <div class="card-body text-wrap">
-                <div class="d-flex text-white mt-3 flex-wrap text-wrap">
-                    <div class="mt-5">
-                        <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">Membersihkan Ruang Kelas</h6>
-                        <div class="d-flex align-items-end">
-                            <a href="{{ route('supervisorDetailPanduan') }}" type="submit" style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="justify-content-center col-md-3">
-        <div class="card text-wrap">
-            <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
-            </div>
-            <div class="card-body text-wrap">
-                <div class="d-flex text-white mt-3 flex-wrap text-wrap">
-                    <div class="mt-5">
-                        <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">Membersihkan Ruang Kelas</h6>
-                        <div class="d-flex align-items-end">
-                            <a href="{{ route('supervisorDetailPanduan') }}" type="submit" style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="justify-content-center col-md-3">
-        <div class="card text-wrap">
-            <div style="position:absolute; top:0; bottom:0;" class="z-1">
-                <img src="../../assets/images/product/chair.png" style="position: relative; margin-top: -31px;" class="mb-10" width="100" >   
-            </div>
-            <div class="card-body text-wrap">
-                <div class="d-flex text-white mt-3 flex-wrap text-wrap">
-                    <div class="mt-5">
-                        <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">Membersihkan Ruang Kelas</h6>
-                        <div class="d-flex align-items-end">
-                            <a href="{{ route('supervisorDetailPanduan') }}" style="border-radius: 12px;" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        
+    @endforeach
 </div>
 @endsection

@@ -1,12 +1,14 @@
 @extends('workers.layouts.master')
 
 @section('content')
-
 <div class="row">
     <div class="align-self-center">
-        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Inventaris</h4>
+        <div class="d-flex justify-content-between mb-3">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Inventaris</h4>
+        </div>
     </div>
 </div>
+
 <div class="row mt-3">
     <div class="col-md-6 col-lg-3 col-xlg-3">
         <div class="card border-end card-hover overflow-hidden my-3 my-sm-2" style="background-color: rgb(11, 128, 128);">
@@ -18,7 +20,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Housekeeping</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{ $housekeeping_count }}</h2>
                         </div>
                     </div>
                 </div>
@@ -36,10 +38,11 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Technician</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{ $technician_count }}</h2>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -54,7 +57,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Facade Cleaner</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{ $facade_cleaner_count }}</h2>
                         </div>
                     </div>
                 </div>
@@ -72,7 +75,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Gardener</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{ $gardener_count }}</h2>
                         </div>
                     </div>
                 </div>
@@ -93,76 +96,24 @@
                                 <th style="border-radius: 10px 0px 0px 10px;">Gambar</th>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
-                                <th style="border-radius: 0px 10px 10px 0px;">Total</th>
+                                <th>Total</th>
+                                <th style="border-radius: 0px 10px 10px 0px;">Ubah</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><img src="../../assets/images/product/p1.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p2.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p3.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>33</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Integration Specialist</td>
-                                <td>New York</td>
-                                <td>61</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td>59</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Integration Specialist</td>
-                                <td>Tokyo</td>
-                                <td>55</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Javascript Developer</td>
-                                <td>San Francisco</td>
-                                <td>39</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Software Engineer</td>
-                                <td>Edinburgh</td>
-                                <td>23</td>
-                            </tr>
-                            <tr>
-                                <td><img src="../../assets/images/product/p4.jpg" alt="Gambar" width="200" height="200"></td>
-                                <td>Office Manager</td>
-                                <td>London</td>
-                                <td>30</td>
-                            </tr>
+                            @foreach ($inventories as $inventory)
+                                <tr>
+                                    <td><img src="{{ $inventory->inventaris_image }}" alt="Gambar" width="200" height="200"></td>
+                                    <td>{{ $inventory->inventaris_name }}</td>
+                                    <td>{{ $inventory->inventaris_description }}</td>
+                                    <td>{{ $inventory->inventaris_total }}</td>
+                                    <td>
+                                        <a href="{{ route('editInventaris') }}" type="button" style="background-color: transparent; color: #22ca80;" class="btn-circle-lg"><i class="fa fa-edit"></i></a>
+                                        <a href="" type="submit" style="background-color: transparent; color: #ff4f70;" data-confirm-delete="true" class="btn-circle-lg"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>
@@ -184,5 +135,4 @@
         </div>
     </div>
 </div>
-
 @endsection

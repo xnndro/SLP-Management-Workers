@@ -9,18 +9,15 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('task_category', function (Blueprint $table) {
+        Schema::create('inventaris_roles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('panduan_id');
-            $table->string('task_category_name');
+            $table->string('inventory_roles_name');
             $table->timestamps();
-
-            $table->foreign('panduan_id')->references('id')->on('panduan');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('task_category');
+        Schema::dropIfExists('inventaris_roles');
     }
 };

@@ -11,7 +11,13 @@ class Panduan extends Model
     protected $table = 'panduan';
     protected $fillable = [
         'panduan_title',
+        'panduan_content',
         'panduan_role',
-        'panduan_content'
+        'panduan_image',
+        'inventaris_role_id',
     ];
+
+    public function role(){
+        $this->belongsTo(InventarisRole::class);
+    }
 }
