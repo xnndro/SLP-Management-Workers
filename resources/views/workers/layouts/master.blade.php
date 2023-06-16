@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLP Management Workers</title>
+    
+    @stack('before-style')
     @include('workers.includes.style')
-    @include('sweetalert::alert')
-
+    @stack('after-style')
+    
+    
     
 </head>
 <body>
+    @include('sweetalert::alert')
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -54,7 +58,11 @@
             </footer>
         </div>
     </div>
+    
+    @stack('before-script')
     @include('workers.includes.script')
+    @stack('after-script')
+
     
 </body>
 </html>

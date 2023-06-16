@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('task_category', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('panduan_id');
+            $table->unsignedBigInteger('panduan_id')->nullable();
             $table->string('task_category_name');
             $table->timestamps();
 

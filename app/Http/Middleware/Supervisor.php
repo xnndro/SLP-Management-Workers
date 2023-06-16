@@ -18,6 +18,7 @@ class Supervisor
         if (auth()->user()->role == 'supervisor') {
             return $next($request);
         }
+
         return redirect('home')->with('error', 'You have not access');
     }
 }

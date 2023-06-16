@@ -29,7 +29,7 @@
                                 <h4>Ubah Foto</h4>
                             </header>
                             <div>
-                                <img style="height: 300px;" src="../../assets/images/product/p2.jpg" alt="">
+                                <img style="height: 300px;" src="{{asset('../../assets/images/product/p2.jpg')}}" alt="">
                             </div>
                             <form class="mt-10">
                                 <div class="input-group flex-nowrap">
@@ -81,7 +81,7 @@
                     </div>
                 </form>
             </div>
-            <img style="width: 250px;" src="../../assets/images/sapu-form.png" alt="">
+            <img style="width: 250px;" src="{{asset('../../assets/images/sapu-form.png')}}" alt="">
         </div>
     </div>
 </div>

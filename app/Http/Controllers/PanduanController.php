@@ -33,11 +33,12 @@ class PanduanController extends Controller
         ]);
     }
 
-    public function editPanduan() # id nya 
+    public function editPanduan() // id nya
     {
-        $title = "Hapus Panduan!";
-        $text = "Apakah anda yakin ingin menghapus panduan ini?";
+        $title = 'Hapus Panduan!';
+        $text = 'Apakah anda yakin ingin menghapus panduan ini?';
         confirmDelete($title, $text);
+
         return view('supervisor.pages.panduan.editPanduan');
     }
 
@@ -48,12 +49,12 @@ class PanduanController extends Controller
     //                 'role' => 'required',
     //                 'content' => 'required',
     //             ]);
-        
+
     //             $panduan = Panduan::find($id);
     //             $panduan->title = $request->title;
     //             $panduan->content = $request->content;
     //             $panduan->save();
-        
+
     //             return redirect()->route('supervisorPanduan')->with('success', 'Data berhasil diupdate');
     // }
 
@@ -112,5 +113,4 @@ class PanduanController extends Controller
             return redirect()->back()->with('Success', 'Berhasil menanmbahkan panduan');
         }
     }
-
 }

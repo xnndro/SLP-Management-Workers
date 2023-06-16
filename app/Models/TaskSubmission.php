@@ -8,11 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class TaskSubmission extends Model
 {
     use HasFactory;
+
     protected $table = 'task_submission';
+
     protected $fillable = [
         'task_management_id',
         'task_report',
         'task_comment',
     ];
 
+    public function task_management()
+    {
+        return $this->belongsTo(TaskManagement::class);
+    }
 }

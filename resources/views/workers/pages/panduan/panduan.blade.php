@@ -18,7 +18,6 @@
             </form>
         </div>
     </div>
-    
     <!-- Start Cards -->
     @foreach ($panduans as $panduan)
         <div class="justify-content-center col-md-3">

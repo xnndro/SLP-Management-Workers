@@ -12,8 +12,8 @@ class InventarisController extends Controller
     // Supervisor
     public function supervisorInventaris()
     {
-        $title = "Hapus Inventaris!";
-        $text = "Apakah anda yakin ingin menghapus inventaris ini?";
+        $title = 'Hapus Inventaris!';
+        $text = 'Apakah anda yakin ingin menghapus inventaris ini?';
         confirmDelete($title, $text);
         return view('supervisor.pages.inventaris.index', [
             'inventories' =>  Inventaris::all(),
@@ -37,7 +37,7 @@ class InventarisController extends Controller
     }
 
     //Workers
-    public function workersInventaris() 
+    public function workersInventaris()
     {
         return view('workers.pages.inventaris.index', [
             'inventories' =>  Inventaris::all(),

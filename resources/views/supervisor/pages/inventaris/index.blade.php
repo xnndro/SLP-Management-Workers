@@ -16,7 +16,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/housekeeping.png" style="opacity: 50%;" class="m-n4" width="90">   
+                        <img src="{{asset('../../assets/images/housekeeping.png')}}" style="opacity: 50%;" class="m-n4" width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Housekeeping</h6>
@@ -34,7 +34,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/technician.png" style="opacity: 50%;" class="m-n4" width="90">   
+                        <img src="{{asset('../../assets/images/technician.png')}}" style="opacity: 50%;" class="m-n4" width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Technician</h6>
@@ -53,7 +53,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/facadeCleaner.png" style="opacity: 50%;" class="m-n4"width="90">   
+                        <img src="{{asset('../../assets/images/facadeCleaner.png')}}" style="opacity: 50%;" class="m-n4"width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Facade Cleaner</h6>
@@ -71,7 +71,7 @@
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div class="align-items-center">
-                        <img src="../../assets/images/gardener.png" style="opacity: 50%;" class="m-n4" width="90">   
+                        <img src="{{asset('../../assets/images/gardener.png')}}" style="opacity: 50%;" class="m-n4" width="90">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Gardener</h6>

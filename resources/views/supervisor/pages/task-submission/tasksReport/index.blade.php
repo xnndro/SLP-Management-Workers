@@ -10,7 +10,7 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <h4 class="modal-title" id="myLargeModalLabel">Bukti Kerja</h4>
             </div>
             <div class="modal-body">
-                <img src="../../assets/images/img1.jpg" class="img-fluid" alt="...">
+                <img src="{{asset('../../assets/images/img1.jpg')}}" class="img-fluid" alt="...">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -53,7 +53,7 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/success-box.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/success-box.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Laporan Disetujui</h6>
@@ -72,7 +72,7 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/pending-icon.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/pending-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Laporan Pending</h6>
@@ -91,7 +91,7 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="card-body">
                 <div class="d-flex text-white">
                     <div>
-                        <img src="../../assets/images/write-icon.svg" class="rounded-circle m-n5" width="150">   
+                        <img src="{{asset('../../assets/images/write-icon.svg')}}" class="rounded-circle m-n5" width="150">   
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Laporan Ditolak</h6>
