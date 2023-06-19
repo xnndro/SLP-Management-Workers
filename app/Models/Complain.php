@@ -4,6 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use App\Models\ComplainAssignment;
+use App\Models\ComplainSubmission;
+use App\Models\ComplainDecline;
+use App\Models\Place;
+use App\Models\User;
 
 class Complain extends Model
 {
@@ -20,4 +28,45 @@ class Complain extends Model
         'complain_urgency',
         'status_report',
     ];
+
+    public function latestAssigned() : HasOne
+    {
+        return $this->hasOne(ComplainAssignment::class)->latestOfMany();
+    }
+
+    public function latestDeclined() : HasOne
+    {
+        return $this->hasOne(ComplainDecline::class)->latestOfMany();
+    }
+
+    public function submission() : HasOne
+    {
+        return $this->hasOne(ComplainSubmission::class)->latestOfMany();
+    }
+
+    public function place() : BelongsTo
+    {
+        return $this->belongsTo(Place::class);
+    }
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category() : BelongsTo
+    {
+        return $this->belongsTo(ComplainCategory::class, 'complain_category');
+    }
+
+    public function urgency() : BelongsTo
+    {
+        return $this->belongsTo(ComplainUrgency::class, 'complain_urgency');
+    }
+
+    public function status() : BelongsTo
+    {
+        return $this->belongsTo(ReportStatus::class, 'report_status');
+    }
+
 }

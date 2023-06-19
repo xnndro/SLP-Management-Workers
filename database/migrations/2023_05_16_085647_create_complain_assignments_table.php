@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('complain_assignments', function (Blueprint $table) {
-            $table->id('assignment_id');
-            $table->foreignId('user_assign_id');
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('complain_id');
             $table->text('assign_description');
-            $table->string('status_assign');
+            $table->foreignId('assign_status');
             $table->timestamps();
 
-            $table->foreign('user_assign_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('complain_id')->references('id')->on('complains');
+            $table->foreign('assign_status')->references('id')->on('assign_statuses');
         });
     }
 

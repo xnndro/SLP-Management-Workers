@@ -12,14 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('place');
-
-        Schema::create('place', function (Blueprint $table) {
+        Schema::create('complain_urgencies', function (Blueprint $table) {
             $table->id();
-            $table->string('place_name');
+            $table->string('name');
             $table->timestamps();
-
         });
+
+        DB::table('complain_urgencies')->insert([
+            ['name' => 'Belum ditugaskan'],
+            ['name' => 'Penting'],
+            ['name' => 'Genting']
+        ]);
     }
 
     /**
@@ -27,8 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('place');
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Schema::dropIfExists('complain_urgencies');
     }
 };

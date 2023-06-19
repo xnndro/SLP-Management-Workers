@@ -4,9 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
+use App\Models\Complain;
+use App\Models\ComplainAssignment;
 
 class User extends Authenticatable
 {
@@ -51,4 +55,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaidLeaveList::class);
     }
+
+    public function complain_reports() : HasMany
+    {
+        return $this->hasMany(Complain::class);
+    }
+
+    public function complain_assignments() : HasMany
+    {
+        return $this->hasMany(ComplainAssignment::class);
+    }
+
 }

@@ -317,7 +317,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <td>KF0001</td>
                                 <td>Fasilitas</td>
                                 <td>
@@ -335,7 +335,41 @@
                                             data-bs-toggle="modal" data-bs-target="#declineJob">Tolak</button>
                                     </div>
                                 </td>
+                            </tr> --}}
+                            @foreach ($assignments as $asg)
+                            <tr>
+                                <td>{{$asg->id}}</td>
+                                <td>{{$asg->complain->category->name}}</td>
+                                <td>
+                                    <a class="fw-bold" href="{{route('keluhanPenangananShow')}}">{{$asg->complain->complain_title}}</a>
+                                </td>
+                                <td>{{$asg->created_at}}</td>
+                                @if ($asg->assign_status == 1)    
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{route('terimaPenugasan',$asg->id)}}"
+                                                class="btn waves-effect waves-light bg-cyan text-white w-50 flex-item mx-2">
+                                                Terima
+                                            </a>
+                                            <a href="{{route('tolakPenugasan',$asg->id)}}"
+                                                class="btn waves-effect waves-light btn-danger text-white w-50 flex-item mx-2"
+                                                data-bs-toggle="modal" data-bs-target="#declineJob">
+                                                Tolak
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                @elseif ($asg->assign_status == 2)
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{route('keluhanPenangananCreate')}}"
+                                            class="btn waves-effect waves-light btn-primary w-75">Unggah</a>
+                                    </div>
+                                </td>
+                                @endif
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

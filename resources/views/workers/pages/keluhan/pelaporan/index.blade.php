@@ -206,22 +206,32 @@
                                 <td>KI0001</td>
                                 <td>Inventaris</td>
                                 <td>
-                                    <a class="fw-bold" href="{{route('keluhanPelaporanShow')}}">Tangga Hilang</a>
+                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit')}}">Tangga Hilang</a>
                                 </td>
                                 <td>09-09-2023</td>
-                                <td>Proses</td>
+                                <td>Menunggu</td>
                             </tr>
                             <tr>
                                 <td>KF0001</td>
                                 <td>Fasilitas</td>
                                 <td>
-                                    <a class="fw-bold" href="{{route('keluhanPelaporanShow')}}">Air Urinoir Tidak
+                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit')}}">Air Urinoir Tidak
                                         Keluar</a>
                                 </td>
                                 <td>09-09-2023</td>
-                                <td>Proses</td>
+                                <td>Menunggu</td>
                             </tr>
-
+                            @foreach ($complains as $complain)
+                            <tr>
+                                <td>{{$complain->id}}</td>
+                                <td>{{$complain->category->name}}</td>
+                                <td>
+                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit')}}">{{$complain->complain_title}}</a>
+                                </td>
+                                <td>{{$complain->created_at}}</td>
+                                <td>{{$complain->status->name}}</td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -245,4 +255,17 @@
         </div>
     </div>
 </div>
+@if (session('success'))
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Sukses',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        });
+    </script>
+@endif
 @endsection
