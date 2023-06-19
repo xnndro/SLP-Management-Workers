@@ -2,14 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Complain;
+use App\Models\ComplainAssignment;
+use App\Models\ComplainCategory;
+use App\Models\ComplainUrgency;
+use App\Models\Place;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use PhpOption\None;
 
 class KeluhanController extends Controller
 {
-    // SUPERVISOR
-    public function daftarKeluhan()
+    public function __construct()
     {
-        return view('supervisor.pages.keluhan.index');
+        $this->middleware('auth');
+    }
+
+    // ================================== SUPERVISOR ==================================
+    public function daftarKeluhan()
+    {   
+        $complains = Complain::all();
+        $users = User::where('user_role', 'user')->get();
+        $urgencies = ComplainUrgency::where('id','!=',1)->get();
+        return view('supervisor.pages.keluhan.index', compact('complains','users','urgencies'));
+    }
+
+    public function simpanPenugasan(Request $request, Complain $complain)
+    {
+        $rules= [
+            'user' => 'required',
+            'urgency' => 'required',
+            'description' => 'required',
+        ];
+
+        $msg = [
+            // 'required' => ':attribute wajib diisi',
+            // 'min' => ':attribute minimal berisi :min karakter',
+            // 'max' => ':attribute maksimal berisi :max karakter'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$msg);
+        if($validator->fails()){
+            return redirect()->back()->withInput()->withErrors($validator);
+        }else{
+            //update
+            $complain->complain_urgency = $request->urgency;
+            $complain->report_status = 2;
+            $complain->save();
+
+            //simpan
+            $asg = new ComplainAssignment();
+            $asg->complain_id = $complain->id;
+            $asg->user_id = $request->user;
+            $asg->assign_description = $request->description;
+            $asg->assign_status = 1;
+
+            $asg->save();
+            
+            session()->flash('success', 'Penugasan berhasil dibuat!');
+
+            return redirect()->route('keluhan');
+        }
     }
 
     public function verifikasi()
@@ -28,16 +82,58 @@ class KeluhanController extends Controller
         return view('supervisor.pages.keluhan.view');
     }
 
-    // WORKERS
-    // -- Pelaporan
+
+    // ================================== WORKERS ==================================
+    // --------------------------------- Pelaporan ---------------------------------
     public function daftarPelaporan()
     {
-        return view('workers.pages.keluhan.pelaporan.index');
+        $complains = Complain::all();
+        return view('workers.pages.keluhan.pelaporan.index', compact('complains'));
     }
 
     public function buatPelaporan()
+    {   
+        $categories = ComplainCategory::all();
+        $places = Place::all();
+        return view('workers.pages.keluhan.pelaporan.create', compact('categories','places'));
+    }
+
+    public function simpanPelaporan(Request $request)
     {
-        return view('workers.pages.keluhan.pelaporan.create');
+        $rules= [
+            'category' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'place' => 'required'
+        ];
+
+        $msg = [
+            // 'required' => ':attribute wajib diisi',
+            // 'min' => ':attribute minimal berisi :min karakter',
+            // 'max' => ':attribute maksimal berisi :max karakter'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$msg);
+        if($validator->fails()){
+            return redirect()->back()->withInput()->withErrors($validator);
+        }else{
+            //simpan
+            $user = auth()->user();
+            $complain = new Complain;
+            $complain->user_id = $user->id;
+            $complain->place_id = $request->place;
+            $complain->complain_title = $request->title;
+            $complain->complain_description = $request->description;
+            $complain->complain_category = $request->category;
+            $complain->complain_urgency = 1;
+            $complain->report_status = 1;
+
+            $complain->save();
+            
+            session()->flash('success', 'Laporan berhasil dibuat!');
+
+            return redirect()->route('keluhanPelaporan');
+        }
     }
 
     // public function edit(string $id)
@@ -46,10 +142,34 @@ class KeluhanController extends Controller
         return view('workers.pages.keluhan.pelaporan.edit');
     }
 
-    // -- Penanganan
+    // --------------------------------- Penanganan ---------------------------------
     public function daftarPenanganan()
     {
-        return view('workers.pages.keluhan.penanganan.index');
+        $user = auth()->user();
+        $assignments = ComplainAssignment::where('user_id', $user->id)->get();
+        return view('workers.pages.keluhan.penanganan.index', compact('assignments'));
+    }
+
+    public function terimaPenugasan(ComplainAssignment $ca)
+    {
+        $complainAssignment = ComplainAssignment::findOrFail($ca);
+
+        $complainAssignment->assign_status = 2;
+        $complainAssignment->updated_at = now();
+        $complainAssignment->save();
+
+        return redirect()->back();
+    }
+
+    public function tolakPenugasan(ComplainAssignment $ca)
+    {
+        $complainAssignment = ComplainAssignment::findOrFail($ca);
+
+        $complainAssignment->assign_status = 3;
+        $complainAssignment->updated_at = now();
+        $complainAssignment->save();
+
+        return redirect()->back();
     }
 
     public function buatPenanganan()
