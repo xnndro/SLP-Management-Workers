@@ -10,11 +10,11 @@
     @include('workers.includes.style')
     @stack('after-style')
     
-    @include('sweetalert::alert')
-
+    
     
 </head>
 <body>
+    @include('sweetalert::alert')
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -58,7 +58,11 @@
             </footer>
         </div>
     </div>
+    
+    @stack('before-script')
     @include('workers.includes.script')
+    @stack('after-script')
+
     
 </body>
 </html>

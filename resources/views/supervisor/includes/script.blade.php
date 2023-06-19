@@ -19,7 +19,6 @@
 <script src="{{asset('../../dist/js/pages/datatable/datatable-basic.init.js')}}"></script>
 <script src="{{asset('../../assets/extra-libs/prism/prism.js')}}"></script>
 <script src="{{asset('../../assets/libs/moment/min/moment.min.js')}}"></script>
-<script src="{{asset('../../assets/libs/fullcalendar/dist/fullcalendar.min.js')}}"></script>
 <script src="{{asset('../../dist/js/pages/calendar/cal-init.js')}}"></script>
 <script src="{{asset('../../assets/extra-libs/taskboard/js/jquery.ui.touch-punch-improved.js')}}"></script>
 <script src="{{asset('../../assets/extra-libs/taskboard/js/jquery-ui.min.js')}}"></script>

@@ -15,4 +15,14 @@ class TaskCategory extends Model
         'task_category_name',
         'panduan_id',
     ];
+
+    public function panduan()
+    {
+        return $this->belongsTo(Panduan::class);
+    }
+
+    public function task_management()
+    {
+        return $this->hasMany(TaskManagement::class);
+    }
 }

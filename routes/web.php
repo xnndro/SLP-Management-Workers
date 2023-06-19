@@ -22,6 +22,9 @@ Route::get('/', function () {
 });
 
 Route::get('/schedule', [App\Http\Controllers\TaskSubmissionController::class, 'schedule'])->name('schedule');
+Route::post('/scheduleUpload', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleUpload'])->name('scheduleUpload');
+Route::post('/scheduleEdit/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleEdit'])->name('scheduleEdit');
+Route::delete('/scheduleDelete/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleDelete'])->name('scheduleDelete');
 Route::get('/tasksReport', [App\Http\Controllers\TaskSubmissionController::class, 'tasksReport'])->name('tasksReport');
 
 Route::get('/workers', [App\Http\Controllers\TaskSubmissionController::class, 'workers'])->name('workers');
@@ -35,13 +38,16 @@ Route::get('/tasks', [App\Http\Controllers\TaskSubmissionController::class, 'tas
 Route::get('/scheduleWorkers', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleWorkers'])->name('scheduleWorkers');
 
 Route::get('/requestList', [App\Http\Controllers\PaidLeaveController::class, 'requestList'])->name('requestList');
+Route::get('/lihat_detail', [App\Http\Controllers\PaidLeaveController::class, 'lihat_detail'])->name('lihat_detail');
 Route::get('/paidLeaveList', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveList'])->name('paidLeaveList');
 Route::get('/paidLeaveCategory', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveCategory'])->name('paidLeaveCategory');
 Route::get('/kategoriCuti', [App\Http\Controllers\PaidLeaveController::class, 'kategoriCuti'])->name('kategoriCuti');
 Route::get('/pengajuanCuti', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveRequest'])->name('pengajuanCuti');
+Route::post('/createCuti', [App\Http\Controllers\PaidLeaveController::class, 'createCuti'])->name('createCuti'); 
 
 Route::get('/supervisorInventaris', [App\Http\Controllers\InventarisController::class, 'supervisorInventaris'])->name('supervisorInventaris');
 Route::get('/createInventaris', [App\Http\Controllers\InventarisController::class, 'createInventaris'])->name('createInventaris');
+Route::post('/createInventaris', [App\Http\Controllers\InventarisController::class, 'add'])->name('add');
 Route::get('/editInventaris', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
 Route::get('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
 Route::get('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
@@ -49,12 +55,13 @@ Route::get('/workersInventaris', [App\Http\Controllers\InventarisController::cla
 
 Route::get('/supervisorPanduan', [App\Http\Controllers\PanduanController::class, 'supervisorPanduan'])->name('supervisorPanduan');
 Route::get('/createPanduan', [App\Http\Controllers\PanduanController::class, 'createPanduan'])->name('createPanduan');
-Route::get('/supervisorDetailPanduan', [App\Http\Controllers\PanduanController::class, 'supervisorDetailPanduan'])->name('supervisorDetailPanduan');
+Route::post('/createPanduan', [App\Http\Controllers\PanduanController::class, 'add'])->name('add');
+Route::get('/supervisorDetailPanduan/{id}', [App\Http\Controllers\PanduanController::class, 'supervisorDetailPanduan'])->name('supervisorDetailPanduan');
 Route::get('/editPanduan', [App\Http\Controllers\PanduanController::class, 'editPanduan'])->name('editPanduan');
 Route::post('/updatePanduan/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'updatePanduan'])->name('updatePanduan');
 Route::get('/deletePanduan/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'deletePanduan'])->name('deletePanduan');
 Route::get('/workersPanduan', [App\Http\Controllers\PanduanController::class, 'workersPanduan'])->name('workersPanduan');
-Route::get('/workersDetailPanduan', [App\Http\Controllers\PanduanController::class, 'workersDetailPanduan'])->name('workersDetailPanduan');
+Route::get('/workersDetailPanduan/{id}', [App\Http\Controllers\PanduanController::class, 'workersDetailPanduan'])->name('workersDetailPanduan');
 
 // PELAPORAN KELUHAN
 Route::get('/pelaporanKeluhan', [App\Http\Controllers\KeluhanController::class, 'daftarPelaporan'])->name('keluhanPelaporan');
