@@ -18,7 +18,8 @@
     </div>
 </div>
 
-<form action="/createInventaris" method="POST" id='form'>
+<form action="{{route('addInventaris')}}" method="POST" id='form' enctype="multipart/form-data">
+    @csrf
 <div class="row col-md-12">
     <div class="col-lg-12 d-flex align-items-center justify-content-center">
         <div class="card" style="box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
@@ -33,7 +34,7 @@
                             <form class="mt-4">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                            <input class="form-control@error('filegambar') is-invalid @enderror" value="{{  old('filegambar') }}" type="file" name="filegambar">
+                                            <input class="form-control @error('filegambar') is-invalid @enderror" value="{{  old('filegambar') }}" type="file" name="filegambar">
                                     </div>
                                     <button class="btn btn-outline-primary" type="button">
                                         Unggah
@@ -72,9 +73,14 @@
                     <div class="mb-3 row justify-content-between">
                         <label class="col-sm-5 col-form-label" style="color: #5F76E8;" >Dapat dilihat oleh</label>
                         <div class="col-sm-5">
-                            <select id="select"class="custom-select form-control bg-white custom-radius custom-shadow border-0 @error('role_id') is-invalid @enderror" value="{{  old('role_id') }}" name="role_id">
+                            <select id="select"class="custom-select form-control bg-white custom-radius custom-shadow border-0 @error('role_id') is-invalid @enderror" name="role_id">
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->inventory_roles_name }}</option>
+                                    {{-- if error --}}
+                                    @if (old('role_id') == $role->id)
+                                        <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
+                                    @else
+                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('role_id')

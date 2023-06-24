@@ -4,14 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-use App\Models\User;
-use App\Models\Complain;
-use App\Models\ComplainDecline;
-use App\Models\ComplainSubmission;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ComplainAssignment extends Model
 {
@@ -25,29 +20,28 @@ class ComplainAssignment extends Model
         'status_assign',
     ];
 
-    public function complain() : BelongsTo
+    public function complain(): BelongsTo
     {
         return $this->belongsTo(Complain::class);
     }
 
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    
-    public function declines() : HasMany
+
+    public function declines(): HasMany
     {
         return $this->hasMany(ComplainDecline::class);
     }
 
-    public function submissions() : HasOne
+    public function submissions(): HasOne
     {
         return $this->hasOne(ComplainSubmission::class);
     }
 
-    public function assign_status() : BelongsTo
+    public function assign_status(): BelongsTo
     {
         return $this->belongsTo(AssignStatus::class, 'assign_status');
     }
-
 }

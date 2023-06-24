@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('inventaris_image');
             $table->string('inventaris_description');
             $table->unsignedBigInteger('inventaris_total');
-            $table->foreignId('inventaris_role_id')->references('id')->on('inventaris_roles');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('inventaris')  ;
+        Schema::dropIfExists('inventaris');
     }
 };

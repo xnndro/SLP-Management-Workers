@@ -20,7 +20,7 @@ return new class extends Migration
 
         DB::table('complain_categories')->insert([
             ['name' => 'Inventaris'],
-            ['name' => 'Fasilitas']
+            ['name' => 'Fasilitas'],
         ]);
     }
 

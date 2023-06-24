@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-
-use App\Models\ComplainAssignment;
-
 class ComplainDecline extends Model
 {
     use HasFactory;
@@ -20,7 +17,7 @@ class ComplainDecline extends Model
         'decline_description',
     ];
 
-    public function asssignment() : BelongsTo
+    public function asssignment(): BelongsTo
     {
         return $this->belongsTo(ComplainAssignment::class);
     }

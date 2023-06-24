@@ -5,7 +5,7 @@
     <div class="align-self-center">
         <div class="d-flex justify-content-between mb-3">
             <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Inventaris</h4>
-            <a href="{{ route('createInventaris') }}" type="button"style="border-radius: 10px; padding:13px;" class="btn btn-success"><h6 class="mb-0">Tambah Inventaris</h6></a>
+            <a href="{{ route('createInventaris') }}" type="button"style="padding:13px;" class="btn btn-success"><h6 class="mb-0">Tambah Inventaris</h6></a>
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Housekeeping</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{ $housekeeping_count }}</h2>
+                            <h2 class="text-white font-weight-medium">{{ $count[2]??0 }}</h2>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Technician</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{ $technician_count }}</h2>
+                            <h2 class="text-white font-weight-medium">{{ $count[5]??0 }}</h2>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Facade Cleaner</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{ $facade_cleaner_count }}</h2>
+                            <h2 class="text-white font-weight-medium">{{ $count[3]??0 }}</h2>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Gardener</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{ $gardener_count }}</h2>
+                            <h2 class="text-white font-weight-medium">{{ $count[4]??0 }}</h2>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,9 @@
                         <tbody>
                             @foreach ($inventories as $inventory)
                                 <tr>
-                                    <td><img src="{{ $inventory->inventaris_image }}" alt="Gambar" width="200" height="200"></td>
+                                    <td><img src="
+                                        {{ $inventory->inventaris_image }}
+                                        " alt="Gambar" width="200" height="200"></td>
                                     <td>{{ $inventory->inventaris_name }}</td>
                                     <td>{{ $inventory->inventaris_description }}</td>
                                     <td>{{ $inventory->inventaris_total }}</td>

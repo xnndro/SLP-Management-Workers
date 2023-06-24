@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
         Schema::dropIfExists('panduan');
@@ -15,7 +14,7 @@ return new class extends Migration
             $table->string('panduan_title');
             $table->text('panduan_content');
             $table->string('panduan_image');
-            $table->foreignId('inventaris_role_id')->references('id')->on('inventaris_roles');
+            $table->unsignedBigInteger('inventaris_role_id');
             $table->timestamps();
         });
     }

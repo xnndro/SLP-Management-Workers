@@ -21,7 +21,7 @@ return new class extends Migration
         DB::table('complain_urgencies')->insert([
             ['name' => 'Belum ditugaskan'],
             ['name' => 'Penting'],
-            ['name' => 'Genting']
+            ['name' => 'Genting'],
         ]);
     }
 

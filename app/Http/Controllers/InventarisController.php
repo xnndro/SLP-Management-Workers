@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventaris;
-use App\Models\InventarisRole;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Roles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InventarisController extends Controller
 {
@@ -15,20 +15,18 @@ class InventarisController extends Controller
         $title = 'Hapus Inventaris!';
         $text = 'Apakah anda yakin ingin menghapus inventaris ini?';
         confirmDelete($title, $text);
-        return view('supervisor.pages.inventaris.index', [
-            'inventories' =>  Inventaris::all(),
-            'housekeeping_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Housekeeping')->inventories),
-            'facade_cleaner_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Facade Cleaning')->inventories),
-            'technician_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Technician')->inventories),
-            'gardener_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Gardener')->inventories),
-        ]);
+
+        $inventories = Inventaris::all();
+        $count = Inventaris::with('role')->get()->groupBy('role_id')->map->count();
+
+        return view('supervisor.pages.inventaris.index', compact('inventories', 'count'));
     }
 
     public function createInventaris()
     {
-        return view('supervisor.pages.inventaris.create', [
-            'roles' => InventarisRole::all()
-        ]);
+        $roles = Roles::all();
+
+        return view('supervisor.pages.inventaris.create', compact('roles'));
     }
 
     public function editInventaris() //jangan lupa tambah id disini nanti
@@ -39,13 +37,10 @@ class InventarisController extends Controller
     //Workers
     public function workersInventaris()
     {
-        return view('workers.pages.inventaris.index', [
-            'inventories' =>  Inventaris::all(),
-            'housekeeping_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Housekeeping')->inventories),
-            'facade_cleaner_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Facade Cleaning')->inventories),
-            'technician_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Technician')->inventories),
-            'gardener_count' => count(InventarisRole::firstWhere('inventory_roles_name', 'Gardener')->inventories),
-        ]);
+        $inventories = Inventaris::all();
+        $count = Inventaris::with('role')->get()->groupBy('role_id')->map->count();
+
+        return view('workers.pages.inventaris.index', compact('inventories', 'count'));
     }
 
     // public function updateInventaris(Request $request, $id)
@@ -76,7 +71,7 @@ class InventarisController extends Controller
     // }
 
     // public function add(Request $request){
-        
+
     //     Inventaris::create([
     //         'inventaris_name' => $request->nama,
     //         'inventaris_image' => '../../assets/images/product/p1.jpg',
@@ -86,36 +81,38 @@ class InventarisController extends Controller
     //     ]);
     //     return redirect('/supervisorInventaris');
     // }
-    
-    public function add(Request $request){
+
+    public function add(Request $request)
+    {
         // {"_token":"8CYrqA3TKQT9Ux8Sy7xQ6UT26SryElapEMG2LYKZ","nama":"a","deskripsi":"aaa","total":"1","role_id":"1"}
-        $rules=[
-            'nama'=>'required',
-            'total'=>'required|min:1',
-            'deskripsi'=>'required',
-            'role_id'=>'required',
-            'filegambar'=>'required|image|mimes:jpg,jpeg,png|max:2048',
+        $rules = [
+            'nama' => 'required',
+            'total' => 'required|min:1',
+            'deskripsi' => 'required',
+            'role_id' => 'required',
+            'filegambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
         $id = [
             'required' => ':attribute wajib diisi',
             'min' => ':attribute minimal berisi :min karakter',
         ];
-        $validator = Validator::make($request->all(),$rules, $id);
-        if($validator->fails()){
+        $validator = Validator::make($request->all(), $rules, $id);
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
-        }else{
+        } else {
             $filename = $request->file('filegambar')->getClientOriginalName();
-            $destination_path = 'public/uploads/panduan';
+            $destination_path = 'public/uploads/inventaris';
             $path = $request->file('filegambar')->storeAs($destination_path, $filename);
 
-            $inventaris = Inventaris::create([
-                'inventaris_name' => $request->nama,
-                'inventaris_image' => $path,
-                'inventaris_description' => $request->deskripsi,
-                'inventaris_total' => $request->total,
-                'inventaris_role_id' => $request->role_id
-            ]);
-            return redirect()->back()->with('Success', 'Berhasil menanmbahkan inventaris');
+            $inventaris = new Inventaris();
+            $inventaris->inventaris_name = $request->nama;
+            $inventaris->inventaris_image = $path;
+            $inventaris->inventaris_description = $request->deskripsi;
+            $inventaris->inventaris_total = $request->total;
+            $inventaris->role_id = $request->role_id;
+            $inventaris->save();
+
+            return redirect()->route('supervisorInventaris')->with('success', 'Berhasil menanmbahkan inventaris');
         }
     }
 }

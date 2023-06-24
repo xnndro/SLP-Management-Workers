@@ -10,27 +10,22 @@ use App\Models\Place;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use PhpOption\None;
 
 class KeluhanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     // ================================== SUPERVISOR ==================================
     public function daftarKeluhan()
-    {   
+    {
         $complains = Complain::all();
-        $users = User::where('user_role', 'user')->get();
-        $urgencies = ComplainUrgency::where('id','!=',1)->get();
-        return view('supervisor.pages.keluhan.index', compact('complains','users','urgencies'));
+        $users = User::where('role_id', '!=', 1)->get();
+        $urgencies = ComplainUrgency::where('id', '!=', 1)->get();
+
+        return view('supervisor.pages.keluhan.index', compact('complains', 'users', 'urgencies'));
     }
 
     public function simpanPenugasan(Request $request, Complain $complain)
     {
-        $rules= [
+        $rules = [
             'user' => 'required',
             'urgency' => 'required',
             'description' => 'required',
@@ -42,10 +37,10 @@ class KeluhanController extends Controller
             // 'max' => ':attribute maksimal berisi :max karakter'
         ];
 
-        $validator = Validator::make($request->all(),$rules,$msg);
-        if($validator->fails()){
+        $validator = Validator::make($request->all(), $rules, $msg);
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
-        }else{
+        } else {
             //update
             $complain->complain_urgency = $request->urgency;
             $complain->report_status = 2;
@@ -59,7 +54,7 @@ class KeluhanController extends Controller
             $asg->assign_status = 1;
 
             $asg->save();
-            
+
             session()->flash('success', 'Penugasan berhasil dibuat!');
 
             return redirect()->route('keluhan');
@@ -82,29 +77,30 @@ class KeluhanController extends Controller
         return view('supervisor.pages.keluhan.view');
     }
 
-
     // ================================== WORKERS ==================================
     // --------------------------------- Pelaporan ---------------------------------
     public function daftarPelaporan()
     {
         $complains = Complain::all();
+
         return view('workers.pages.keluhan.pelaporan.index', compact('complains'));
     }
 
     public function buatPelaporan()
-    {   
+    {
         $categories = ComplainCategory::all();
         $places = Place::all();
-        return view('workers.pages.keluhan.pelaporan.create', compact('categories','places'));
+
+        return view('workers.pages.keluhan.pelaporan.create', compact('categories', 'places'));
     }
 
     public function simpanPelaporan(Request $request)
     {
-        $rules= [
+        $rules = [
             'category' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'place' => 'required'
+            'place' => 'required',
         ];
 
         $msg = [
@@ -113,10 +109,10 @@ class KeluhanController extends Controller
             // 'max' => ':attribute maksimal berisi :max karakter'
         ];
 
-        $validator = Validator::make($request->all(),$rules,$msg);
-        if($validator->fails()){
+        $validator = Validator::make($request->all(), $rules, $msg);
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
-        }else{
+        } else {
             //simpan
             $user = auth()->user();
             $complain = new Complain;
@@ -129,7 +125,7 @@ class KeluhanController extends Controller
             $complain->report_status = 1;
 
             $complain->save();
-            
+
             session()->flash('success', 'Laporan berhasil dibuat!');
 
             return redirect()->route('keluhanPelaporan');
@@ -147,6 +143,7 @@ class KeluhanController extends Controller
     {
         $user = auth()->user();
         $assignments = ComplainAssignment::where('user_id', $user->id)->get();
+
         return view('workers.pages.keluhan.penanganan.index', compact('assignments'));
     }
 

@@ -8,13 +8,13 @@
                 <div class="row d-flex justify-content-between">
                     <div class="row col-lg-6">
                         <div class="col-12 align-self-center">
-                            <h4 class="page-title font-weight-medium mb-1" style="color: #0F98D6;">{{ $panduan_title }}</h4>
+                            <h4 class="page-title font-weight-medium mb-1" style="color: #0F98D6;">{{ $panduan->panduan_title }}</h4>
                             <!-- PATH -->
                             <div class="d-flex align-items-center" >
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb m-0 p-0" style="background-color: transparent;">
                                         <li class="breadcrumb-item"><a style="color: #5F76E8;" href="{{ route('workersPanduan') }}">Panduan</a></li>
-                                        <li class="breadcrumb-item text-muted active" aria-current="page">{{ $panduan_title }}</li>
+                                        <li class="breadcrumb-item text-muted active" aria-current="page">{{ $panduan->panduan_title }}</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -24,7 +24,7 @@
                 <h6 class="font-weight-medium mt-3" style="color: #2A3547;">Hal yang harus diperhatikan:</h6>
                 <ol>
                     <h6>
-                        {{ $panduan_content }}
+                        {{ $panduan->panduan_content }}
                     </h6>
                 </ol>
             </div>

@@ -21,7 +21,7 @@ return new class extends Migration
         DB::table('assign_statuses')->insert([
             ['name' => 'Menunggu'],
             ['name' => 'Diterima'],
-            ['name' => 'Ditolak']
+            ['name' => 'Ditolak'],
         ]);
     }
 

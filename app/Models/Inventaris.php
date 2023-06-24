@@ -16,10 +16,11 @@ class Inventaris extends Model
         'inventaris_image',
         'inventaris_description',
         'inventaris_total',
-        'inventaris_role_id'
+        'role_id',
     ];
-    
-    public function role(){
-        return $this->belongsTo(InventarisRole::class);
+
+    public function role()
+    {
+        return $this->belongsTo(Roles::class);
     }
 }

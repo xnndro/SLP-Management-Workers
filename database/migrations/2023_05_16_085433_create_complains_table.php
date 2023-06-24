@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('complain_title');
             $table->text('complain_description');
             $table->foreignId('complain_category');
-            $table->foreignId('complain_urgency')->nullable()->default(null);;
+            $table->foreignId('complain_urgency')->nullable()->default(null);
             $table->foreignId('report_status');
             $table->timestamps();
 

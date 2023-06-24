@@ -9,9 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Models\Complain;
-use App\Models\ComplainAssignment;
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -56,14 +53,18 @@ class User extends Authenticatable
         return $this->hasMany(PaidLeaveList::class);
     }
 
-    public function complain_reports() : HasMany
+    public function complain_reports(): HasMany
     {
         return $this->hasMany(Complain::class);
     }
 
-    public function complain_assignments() : HasMany
+    public function complain_assignments(): HasMany
     {
         return $this->hasMany(ComplainAssignment::class);
     }
 
+    public function roles()
+    {
+        return $this->belongsTo(Roles::class, 'role_id', 'id');
+    }
 }

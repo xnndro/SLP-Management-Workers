@@ -19,7 +19,8 @@ class Panduan extends Model
         'inventaris_role_id',
     ];
 
-    public function role(){
+    public function role()
+    {
         $this->belongsTo(InventarisRole::class);
     }
 }

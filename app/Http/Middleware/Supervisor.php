@@ -15,7 +15,7 @@ class Supervisor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role == 'supervisor') {
+        if (auth()->user()->role_id == 1) {
             return $next($request);
         }
 

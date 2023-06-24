@@ -19,10 +19,10 @@
                     <div class="mb-3 row">
                         <label for="fullName" class="col-sm-4 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('Nama lengkap') is-invalid @enderror"
-                                id="Nama lengkap" value="{{old('Nama_lengkap')}}" name="Nama lengkap"
+                            <input type="text" class="form-control @error('Nama_lengkap') is-invalid @enderror"
+                                id="Nama_lengkap" value="{{old('Nama_lengkap')}}" name="Nama_lengkap"
                                 placeholder="Nama Lengkap">
-                            @error('Nama lengkap')
+                            @error('Nama_lengkap')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
@@ -204,7 +204,7 @@
 
 </div>
 
-@if (count($requests) > 0)
+@if (is_countable($request) && count($request) > 0)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -273,7 +273,12 @@
 @push('after-script')
 @if (count($errors) > 0)
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-    crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
+<script>
+    $(window).on('load', function() {
+        $('#formpengajuancuti').modal('show');
+    });
+</script>
 @endif
 <script>
     // Script untuk tanggal minimum 
@@ -297,11 +302,6 @@
         var date2 = document.getElementById("tanggalAkhir");
         date2.min = date1.value;
     }
-
-    $(window).on('load', function() {
-        $('#formpengajuancuti').modal('show');
-    });
-    
 </script>
 
 @endpush

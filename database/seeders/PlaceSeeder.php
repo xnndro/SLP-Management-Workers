@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DeepPlaceSeeder extends Seeder
+class PlaceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +16,7 @@ class DeepPlaceSeeder extends Seeder
             ['place_name' => 'Tower A - Kamar Mandi Pria Lt.8'],
             ['place_name' => 'Tower A - Library Lt.8'],
             ['place_name' => 'Tower A - Ruang 801'],
-            ['place_name' => 'Tower A - Ruang 802']
+            ['place_name' => 'Tower A - Ruang 802'],
         ]);
     }
 }
