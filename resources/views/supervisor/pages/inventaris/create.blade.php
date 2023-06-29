@@ -35,10 +35,10 @@
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
                                             <input class="form-control @error('filegambar') is-invalid @enderror" value="{{  old('filegambar') }}" type="file" name="filegambar">
+                                            @error('filegambar')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                     </div>
-                                    <button class="btn btn-outline-primary" type="button">
-                                        Unggah
-                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -90,10 +90,9 @@
                     </div>     
                     <!-- 2 button in div and that div is on right side -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="submit" style="border-radius: 14px;" class="px-3 btn btn-primary" onclick="document.getElementById('form').submit()">Tambahkan</button>
-                        <a href="{{ route('supervisorInventaris') }}" style="border-radius: 14px;" class="px-3 btn btn-dark">Batalkan</a>
+                        <button type="submit" class="px-3 btn btn-primary" onclick="document.getElementById('form').submit()">Tambahkan</button>
+                        <a href="{{ route('supervisorInventaris') }}" class="px-3 btn btn-dark">Batalkan</a>
                     </div>
-                
             </div>
             <img style="width: 250px;" src="{{asset('../../assets/images/sapu-form.png')}}" alt="">
         </div>

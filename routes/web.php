@@ -25,8 +25,8 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/editInventaris', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
-    Route::get('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
+    Route::get('/editInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
+    Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
     Route::get('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
 
     Route::get('/keluhan/ulasan', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
@@ -63,9 +63,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/createPanduan', [App\Http\Controllers\PanduanController::class, 'createPanduan'])->name('createPanduan');
         Route::post('/createPanduanStore', [App\Http\Controllers\PanduanController::class, 'add'])->name('addPanduan');
         Route::get('/supervisorDetailPanduan/{id}', [App\Http\Controllers\PanduanController::class, 'supervisorDetailPanduan'])->name('supervisorDetailPanduan');
-        Route::get('/editPanduan', [App\Http\Controllers\PanduanController::class, 'editPanduan'])->name('editPanduan');
-        Route::post('/updatePanduan/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'updatePanduan'])->name('updatePanduan');
-        Route::get('/deletePanduan/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'deletePanduan'])->name('deletePanduan');
+        Route::get('/editPanduan/{id}', [App\Http\Controllers\PanduanController::class, 'editPanduan'])->name('editPanduan');
+        Route::post('/updatePanduan/{id}', [App\Http\Controllers\PanduanController::class, 'updatePanduan'])->name('updatePanduan');
+        Route::get('/deletePanduan/{id}', [App\Http\Controllers\PanduanController::class, 'deletePanduan'])->name('deletePanduan');
 
         // * Supervisor -> Inventaris
         Route::get('/supervisorInventaris', [App\Http\Controllers\InventarisController::class, 'supervisorInventaris'])->name('supervisorInventaris');

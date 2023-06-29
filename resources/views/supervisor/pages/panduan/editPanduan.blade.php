@@ -1,6 +1,8 @@
 @extends('supervisor.layouts.master')
 
 @section('content')
+<form action="/updatePanduan/{{ $panduan->id }}" method="post">
+    @csrf
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 align-self-center">
@@ -26,34 +28,38 @@
                     <div class="mb-3 row justify-content-between">
                         <label class="col-sm-4 col-form-label" style="color: #5F76E8;">Judul Panduan</label>
                         <div class="col-sm-8">
-                        <input type="text" class="form-control" id="input" value="Membersihkan Ruang Kelas">
+                        <input type="text" class="form-control" name="title" id="input" value="{{ $panduan->panduan_title }}">
                         </div>
                     </div>
                     <div class="mb-3 row justify-content-between">
                         <label class="col-sm-5 col-form-label" style="color: #5F76E8;">Posisi</label>
                         <div class="col-sm-5">
-                            <select id="select" class="custom-select form-control bg-white custom-radius custom-shadow border-0">
-                            <option value="1">Housekeeping</option>
-                            <option value="2">Technician</option>
-                            <option value="3">Facade Cleaner</option>
-                            <option value="4">Gardener</option>
-                            </optgroup>
-                        </select>
+                            <select id="select" name="roleId" class="custom-select form-control bg-white custom-radius custom-shadow border-0">
+                                <option>{{ $panduan->role_name }}</option>
+                                @foreach (\App\Models\Roles::all() as $role)
+                                    @if ($panduan->inventaris_role_id == $role->id)
+                                        <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
+                                    @else
+                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                     </div>  
                     <div class="mb-3 row">
                         <label for="textarea" class="col-sm-7 col-form-label" style="color: #5F76E8;">Hal yang perlu diperhatikan</label>
                         <div class="form-group">
-                            <textarea class="form-control" rows="10" type="text" id="input" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique distinctio cupiditate mollitia fugit dicta nesciunt fuga aspernatur reiciendis quaerat officia laborum, sit voluptatibus nulla nihil dignissimos libero corrupti odio quisquam?</textarea>
+                            <textarea class="form-control" rows="10" name="content" type="text" id="input" >{{ $panduan->panduan_content }}</textarea>
                         </div>
                     </div>
                     
                     <!-- 2 button in div and that div is on right side -->
                     <div class="d-flex justify-content-between">
-                        <a href="" type="submit" style="background-color: transparent; color: #ff4f70;" class="ms-3"><i class="fa fa-trash" data-confirm-delete="true" ></i></a>
+                        {{-- <a href="/deletePanduan/{{ 7 }}" type="submit" style="background-color: transparent; color: #ff4f70;" class="ms-3"><i class="fa fa-trash" data-confirm-delete="true" ></i></a> --}}
+                        <a href="/deletePanduan/{{ $panduan->id }}" type="submit" style="background-color: transparent; color: #ff4f70;" class="ms-3"><i class="fa fa-trash" ></i></a>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{{ route('supervisorPanduan') }}" type="submit" style="border-radius: 14px;" class="px-3 btn btn-primary">Simpan</a>
-                            <a href="{{ route('supervisorPanduan') }}" type="submit" style="border-radius: 14px;" class="px-3 btn btn-dark">Batalkan</a>
+                            <button  type="submit" class="px-3 btn btn-primary">Simpan</button>
+                            <a href="{{ route('supervisorPanduan') }}" class="px-3 btn btn-dark">Batalkan</a>
                         </div>
                     </div>
                 </form>
@@ -62,4 +68,5 @@
         </div>
     </div>
 </div>
+</form>
 @endsection
