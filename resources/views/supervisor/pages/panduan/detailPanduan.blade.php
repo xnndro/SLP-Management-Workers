@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('editPanduan') }}" type="button" style="background-color: transparent; color: #5F76E8; border: 0px;" class="btn-circle-lg"><i class="fa fa-edit"></i></a>
+                    <a href="{{ route('editPanduan', ['id'=>$panduan->id]) }}" type="button" style="background-color: transparent; color: #5F76E8; border: 0px;" class="btn-circle-lg"><i class="fa fa-edit"></i></a>
                 </div>
                 <h6 class="font-weight-medium mt-3" style="color: #2A3547;">Hal yang harus diperhatikan:</h6>
                 <ol>

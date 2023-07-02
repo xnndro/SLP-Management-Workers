@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('panduan_title');
             $table->text('panduan_content');
             $table->string('panduan_image');
-            $table->unsignedBigInteger('inventaris_role_id');
+            $table->unsignedBigInteger('role_id');
             $table->timestamps();
         });
     }

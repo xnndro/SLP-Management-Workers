@@ -1,6 +1,8 @@
 @extends('supervisor.layouts.master')
 
 @section('content')
+<form action="/updateInventaris/{{ $inventory->id }}" method="post">
+    @csrf
 <div class="page-breadcrumb mb-4">
     <div class="row">
         <div class="col-12 align-self-center">
@@ -28,17 +30,14 @@
                             <header style="color: #5F76E8;">
                                 <h4>Ubah Foto</h4>
                             </header>
-                            <div>
-                                <img style="height: 300px;" src="{{asset('../../assets/images/product/p2.jpg')}}" alt="">
-                            </div>
                             <form class="mt-10">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control" type="file" id="formFile">
+                                        <input class="form-control @error('filegambar') is-invalid @enderror" value="{{  $inventory->inventaris_image }}" type="file" name="filegambar">
+                                        @error('filegambar')
+                                                <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <button class="btn btn-outline-primary" type="button">
-                                        Unggah
-                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -46,38 +45,41 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label" style="color: #5F76E8;">Nama</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="input" value="Sapu Ruang Kelas">
+                        <input type="text" class="form-control" name="nama" id="input" value="{{ $inventory->inventaris_name }}">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="textarea" class="col-sm-3 col-form-label" style="color: #5F76E8;">Deskripsi</label>
                         <div class="form-group">
-                            <textarea class="form-control" rows="4" type="text" id="input">Untuk membersihkan ruangan kelas atau ruangan beralas karpet</textarea>
+                            <textarea class="form-control" rows="4" name="deskripsi" type="text" id="input">{{ $inventory->inventaris_description }}</textarea>
                         </div>
                     </div>
                     
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label" style="color: #5F76E8;">Total</label>
                         <div class="col-sm-10">
-                        <input type="number" class="form-control" id="input" value="25">
+                        <input type="number" class="form-control" name="total" id="input" value="{{ $inventory->inventaris_total }}">
                         </div>
                     </div>
                     <div class="mb-3 row justify-content-between">
                         <label class="col-sm-5 col-form-label" style="color: #5F76E8;" >Dapat dilihat oleh</label>
                         <div class="col-sm-5">
-                            <select id="select" class="custom-select form-control bg-white custom-radius custom-shadow border-0">
-                            <option value="1">Housekeeping</option>
-                            <option value="2">Technician</option>
-                            <option value="3">Facade Cleaner</option>
-                            <option value="4">Gardener</option>
+                            <select id="select" name="role_id" class="custom-select form-control bg-white custom-radius custom-shadow border-0">
+                                @foreach (\App\Models\Roles::all() as $role)
+                                    @if ($inventory->role_id == $role->id)
+                                        <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
+                                    @else
+                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                                    @endif
+                                @endforeach
                             </optgroup>
                         </select>
                         </div>
                     </div>    
                     <!-- 2 button in div and that div is on right side -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{{ route('supervisorInventaris') }}" type="submit" style="border-radius: 14px;" class="px-3 btn btn-primary">Simpan</a>
-                        <a href="{{ route('supervisorInventaris') }}" type="submit" style="border-radius: 14px;" class="px-3 btn btn-dark">Batalkan</a>
+                        <button class="px-3 btn btn-primary">Simpan</button>
+                        <a href="{{ route('supervisorInventaris') }}" class="px-3 btn btn-dark">Batalkan</a>
                     </div>
                 </form>
             </div>
@@ -85,5 +87,6 @@
         </div>
     </div>
 </div>
+</form>
 
 @endsection

@@ -31,38 +31,49 @@ class PanduanController extends Controller
         return view('supervisor.pages.panduan.detailPanduan', compact('panduan'));
     }
 
-    public function editPanduan() // id nya
+    public function editPanduan($id) // id nya
     {
         $title = 'Hapus Panduan!';
         $text = 'Apakah anda yakin ingin menghapus panduan ini?';
         confirmDelete($title, $text);
 
-        return view('supervisor.pages.panduan.editPanduan');
+        return view('supervisor.pages.panduan.editPanduan', [
+            'panduan' => Panduan::find($id)
+        ]);
     }
 
-    // public function updatePanduan(Request $request, $id)
-    // {
-    //     $this->validate($request, [
-    //                 'title' => 'required',
-    //                 'role' => 'required',
-    //                 'content' => 'required',
-    //             ]);
+    public function updatePanduan(Request $request, $id)
+    {
+        $rules = [
+            'title' => 'required',
+            'roleId' => 'required',
+            'content' => 'required',
+        ];
+        $message = [
+            'required' => ':attribute wajib diisi',
+            'mimes' => 'format jpg, jpeg, png',
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
-    //             $panduan = Panduan::find($id);
-    //             $panduan->title = $request->title;
-    //             $panduan->content = $request->content;
-    //             $panduan->save();
+        $panduan = Panduan::find($id);
+        $panduan->panduan_title = $request->title;
+        $panduan->panduan_content = $request->content;
+        $panduan->role_id = $request->roleId;
+        $panduan->update();
 
-    //             return redirect()->route('supervisorPanduan')->with('success', 'Data berhasil diupdate');
-    // }
+        return redirect()->route('supervisorPanduan')->with('success', 'Data berhasil diupdate');
+    }
 
-    // public function deletePanduan($id)
-    // {
-    //     $panduan = Panduan::find($id);
-    //     $panduan->delete();
+    public function deletePanduan($id)
+    {
+        $panduan = Panduan::find($id);
+        $panduan->delete();
 
-    //     return redirect()->route('panduan')->with('success', 'Data berhasil dihapus');
-    // }
+        return redirect()->route('supervisorPanduan')->with('success', 'Data berhasil dihapus');
+    }
 
     // Workers
     public function workersPanduan()
@@ -86,7 +97,7 @@ class PanduanController extends Controller
             'judul' => 'required',
             'role_id' => 'required',
             'content' => 'required',
-            'filegambar' => 'required|mimes:jpeg,jpg,png|max:2048',
+            // 'filegambar' => 'required|mimes:jpeg,jpg,png|max:2048',
         ];
         $id = [
             'required' => ':attribute wajib diisi',
@@ -97,18 +108,16 @@ class PanduanController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         } else {
-            $filename = $request->file('filegambar')->getClientOriginalName();
-            $destination_path = 'public/uploads/panduan';
-            $path = $request->file('filegambar')->storeAs($destination_path, $filename);
+            $link = '/assets/images/random-panduan/'.mt_rand(1,17).'.png';
 
             $panduan = new Panduan();
             $panduan->panduan_title = $request->judul;
             $panduan->panduan_content = $request->content;
-            $panduan->panduan_image = $path;
-            $panduan->inventaris_role_id = $request->role_id;
+            $panduan->panduan_image = $link;
+            $panduan->role_id = $request->role_id;
             $panduan->save();
 
-            return redirect()->route('supervisorPanduan')->with('success', 'Berhasil menanmbahkan panduan');
+            return redirect()->route('supervisorPanduan')->with('success', 'Berhasil menambahkan panduan');
         }
     }
 }

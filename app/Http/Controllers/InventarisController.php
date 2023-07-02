@@ -29,9 +29,12 @@ class InventarisController extends Controller
         return view('supervisor.pages.inventaris.create', compact('roles'));
     }
 
-    public function editInventaris() //jangan lupa tambah id disini nanti
+    public function editInventaris(Request $request) //jangan lupa tambah id disini nanti
     {
-        return view('supervisor.pages.inventaris.edit');
+        $id = $request->id;
+        return view('supervisor.pages.inventaris.edit', [
+            'inventory' => Inventaris::find($id)
+        ]);
     }
 
     //Workers
@@ -43,44 +46,43 @@ class InventarisController extends Controller
         return view('workers.pages.inventaris.index', compact('inventories', 'count'));
     }
 
-    // public function updateInventaris(Request $request, $id)
-    // {
-    //     $this->validate($request, [
-    //         'name' => 'required',
-    //         'image' => 'required',
-    //         'description' => 'required',
-    //         'total' => 'required',
-    //     ]);
+    public function updateInventaris(Request $request, $id)
+    {
+        $rules = [
+            'nama' => 'required',
+            'total' => 'required|min:1',
+            'deskripsi' => 'required',
+            'role_id' => 'required',
+            // 'filegambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ];
+        $message = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute minimal berisi :min karakter',
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
 
-    //     $inventaris = Inventaris::find($id);
-    //     $inventaris->name = $request->name;
-    //     $inventaris->image = $request->image;
-    //     $inventaris->description = $request->description;
-    //     $inventaris->total = $request->total;
-    //     $inventaris->save();
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
 
-    //     return redirect()->route('supervisorInventaris')->with('success', 'Data berhasil diupdate');
-    // }
+        $inventaris = Inventaris::find($id);
+        $inventaris->inventaris_name = $request->nama;
+        // $inventaris->inventaris_image = $request->image;
+        $inventaris->role_id = $request->role_id;
+        $inventaris->inventaris_description = $request->deskripsi;
+        $inventaris->inventaris_total = $request->total;
+        $inventaris->update();
 
-    // public function deleteInventaris($id)
-    // {
-    //     $inventaris = Inventaris::find($id);
-    //     $inventaris->delete();
+        return redirect()->route('supervisorInventaris')->with('success', 'Data berhasil diupdate');
+    }
 
-    //     return redirect()->route('supervisorInventaris')->with('success', 'Data berhasil dihapus');
-    // }
+    public function deleteInventaris($id)
+    {
+        $inventaris = Inventaris::find($id);
+        $inventaris->delete();
 
-    // public function add(Request $request){
-
-    //     Inventaris::create([
-    //         'inventaris_name' => $request->nama,
-    //         'inventaris_image' => '../../assets/images/product/p1.jpg',
-    //         'inventaris_description' => $request->deskripsi,
-    //         'inventaris_total' => $request->total,
-    //         'inventaris_role_id' => $request->role_id
-    //     ]);
-    //     return redirect('/supervisorInventaris');
-    // }
+        return redirect()->route('supervisorInventaris')->with('success', 'Data berhasil dihapus');
+    }
 
     public function add(Request $request)
     {
@@ -104,9 +106,11 @@ class InventarisController extends Controller
             $destination_path = 'public/uploads/inventaris';
             $path = $request->file('filegambar')->storeAs($destination_path, $filename);
 
+            $link = '../storage/uploads/inventaris/'.$filename;
+
             $inventaris = new Inventaris();
             $inventaris->inventaris_name = $request->nama;
-            $inventaris->inventaris_image = $path;
+            $inventaris->inventaris_image = $link;
             $inventaris->inventaris_description = $request->deskripsi;
             $inventaris->inventaris_total = $request->total;
             $inventaris->role_id = $request->role_id;

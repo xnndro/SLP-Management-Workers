@@ -13,7 +13,7 @@ class InventarisSeeder extends Seeder
     public function run(): void
     {
         Inventaris::create([
-            'inventaris_name' => 'Tempat sampah besar',
+            'inventaris_name' => 'Tempat Sampah Besar',
             'inventaris_image' => '../../assets/images/tempat-sampah-besar.jpg',
             'inventaris_description' => 'Tempat sampah untuk menampung sampah dari setiap lantai',
             'inventaris_total' => 50,
@@ -31,7 +31,14 @@ class InventarisSeeder extends Seeder
             'inventaris_image' => '../../assets/images/tangga.jpg',
             'inventaris_description' => 'Tangga yang digunakan untuk pemeriksaan dan perbaikan lampu atau kerusakan yang terjadi di bagian atas ruangan',
             'inventaris_total' => 35,
-            'role_id' => 3,
+            'role_id' => 5,
+        ]);
+        Inventaris::create([
+            'inventaris_name' => 'Sapu ruangan',
+            'inventaris_image' => '../../assets/images/sapuruangan.png',
+            'inventaris_description' => 'Sapu khusus untuk membersihkan ruangan beralas karpet di setiap lantai',
+            'inventaris_total' => 75,
+            'role_id' => 2,
         ]);
     }
 }
