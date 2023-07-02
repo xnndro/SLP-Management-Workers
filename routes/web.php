@@ -43,14 +43,16 @@ Route::group(['middleware' => ['auth']], function () {
         // * Supervisor -> Jadwal -> workers
         Route::get('/workers', [App\Http\Controllers\TaskSubmissionController::class, 'workers'])->name('workers');
         Route::get('/workersCreate', [App\Http\Controllers\TaskSubmissionController::class, 'workersCreate'])->name('workersCreate');
-        Route::get('/workersEdit', [App\Http\Controllers\TaskSubmissionController::class, 'workersEdit'])->name('workersEdit');
-        Route::post('/workersUpdate/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'workersUpdate'])->name('workersUpdate');
-        Route::get('/workersDelete/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'workersDelete'])->name('workersDelete');
-        Route::get('/workersSchedule', [App\Http\Controllers\TaskSubmissionController::class, 'workersSchedule'])->name('workersSchedule');
+        Route::post('/workersStore', [App\Http\Controllers\TaskSubmissionController::class, 'workersStore'])->name('workersStore');
+        Route::get('/workersEdit/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'workersEdit'])->name('workersEdit');
+        Route::put('/workersUpdate/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'workersUpdate'])->name('workersUpdate');
+        Route::delete('/workersDelete/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'workersDelete'])->name('workersDelete');
+        Route::get('/workersSchedule/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'workersSchedule'])->name('workersSchedule');
 
         // * Supervisor -> Jadwal -> Laporan
         Route::get('/tasksReport', [App\Http\Controllers\TaskSubmissionController::class, 'tasksReport'])->name('tasksReport');
-
+        Route::post('/tasksComment/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'tasksComment'])->name('tasksComment');
+        
         // * Supervisor -> Cuti
         Route::get('/requestList', [App\Http\Controllers\PaidLeaveController::class, 'requestList'])->name('requestList');
         Route::get('/paidLeaveList', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveList'])->name('paidLeaveList');
@@ -85,6 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/scheduleWorkers', [App\Http\Controllers\TaskSubmissionController::class, 'scheduleWorkers'])->name('scheduleWorkers');
         // * Workers -> Jadwal -> Tugas
         Route::get('/tasks', [App\Http\Controllers\TaskSubmissionController::class, 'taskSubmission'])->name('tasks');
+        Route::post('/tasksUpload/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'tasksUpload'])->name('tasksUpload');
+        
 
         // * Workers -> Cuti
         Route::post('/createCuti', [App\Http\Controllers\PaidLeaveController::class, 'createCuti'])->name('createCuti');

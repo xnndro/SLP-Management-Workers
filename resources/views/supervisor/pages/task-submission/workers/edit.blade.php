@@ -6,29 +6,36 @@
         <h3 class="mb-3">Ubah Pekerja</h3>
         <div class="card">
             <div class="card-body">
-                <form action="">
+                <form action="{{route('workersUpdate',$worker->id)}}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+                        <input type="text" class="form-control" id="staticEmail" value="{{$worker->name}}" name="nama">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Posisi</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+                        {{-- select option with role selected id --}}
+                        <select class="form-select" aria-label="Default select example" name="role">
+                            @foreach($role as $role)
+                                <option value="{{$role->id}}" @if($role->id == $worker->roles_id) selected @endif>{{$role->role_name}}</option>
+                            @endforeach
+                        </select>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+                        <input type="text" class="form-control" id="staticEmail" value="{{$worker->email}}" name="email">
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <label for="staticEmail" class="col-sm-2 col-form-label">NIK</label>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword">
+                        <input type="text" class="form-control" id="staticEmail" value="{{$worker->user_nik}}" name="nik">
                         </div>
                     </div>
 

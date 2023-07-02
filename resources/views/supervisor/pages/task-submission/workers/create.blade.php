@@ -6,29 +6,41 @@
         <h3 class="mb-3">Tambahkan Pekerja</h3>
         <div class="card">
             <div class="card-body">
-                <form action="">
+                <form action="{{route('workersStore')}}" method="POST">
+                    @csrf
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+                        <input type="text" class="form-control" id="staticEmail" name="name" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Posisi</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+                        <select class="form-select" aria-label="Default select example" name="role">
+                            @foreach($role as $role)
+                                <option value="{{$role->id}}">{{$role->role_name}}</option>
+                            @endforeach
+                        </select>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+                        <input type="text" class="form-control" id="staticEmail" name="email" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword">
+                        <input type="password" class="form-control" id="inputPassword" name="password" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        {{-- nik --}}
+                        <label for="staticEmail" class="col-sm-2 col-form-label">NIK</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="staticEmail" name="nik" required>
                         </div>
                     </div>
 
