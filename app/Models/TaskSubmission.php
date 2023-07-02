@@ -15,6 +15,7 @@ class TaskSubmission extends Model
         'task_management_id',
         'task_report',
         'task_comment',
+        'task_status',
     ];
 
     public function task_management()

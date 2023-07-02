@@ -10,7 +10,7 @@
                     @csrf
                     <div class="input-group flex-nowrap">
                         <div class="custom-file w-100">
-                             <input class="form-control" type="file" id="formFile" name="formFile">
+                             <input class="form-control" type="file" id="formFile" name="formFile" required>
                         </div>
                         <button class="btn btn-outline-primary" type="submit">
                             Unggah

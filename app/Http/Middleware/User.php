@@ -15,7 +15,7 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role_id != 1) {
+        if (auth()->user()->roles_id != 1) {
             return $next($request);
         }
 
