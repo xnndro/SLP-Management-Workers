@@ -41,7 +41,7 @@
                         <label for="{{route('kategoriCuti')}}" class="col-sm-4 col-form-label">Kategori Cuti</label>
                         <div class="col-sm-8">
                             <select name="category" class="form-select w-100 @error('category') is-invalid @enderror"
-                                id="kategoriCuti">
+                                id="category">
                                 <option value="pilih">Pilih Kategori</option>
                                 <option value="Cuti Umum" {{ old('category')=='Cuti Umum' ? 'selected' : '' }}>Cuti Umum
                                 </option>
@@ -140,7 +140,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Sisa Cuti Kerja</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{20 - $setuju}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">Hari</p>
                         </div>
                     </div>
@@ -156,12 +156,12 @@
                 <div class="d-flex text-white">
                     <div>
                         <img src="{{asset('../../assets/images/write-icon.svg')}}" class="rounded-circle m-n5"
-                            width="150">
+                            width="140">
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Proses Pengajuan</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{$proses}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -178,13 +178,13 @@
                 <div class="d-flex text-white">
                     <div>
                         <img src="{{asset('../../assets/images/success-box.svg')}}" class="rounded-circle m-n5"
-                            width="150">
+/                            width="140">
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Disetujui</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
-                            <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
+                            <h2 class="text-white font-weight-medium">{{$setuju}}</h2>
+                            <p class="text-white font-weight-medium ms-2 mb-1">rec</p>
                         </div>
                     </div>
                 </div>
@@ -226,22 +226,120 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($requests as $request)
-                            @if ($request->status == "1")
-                            {{ $status = "Dalam Proses"}}
-                            @elseif($request->status == "2")
-                            {{$status = "Disetujui"}}
-                            @else
-                            {{$status = "Ditolak"}}
-                            @endif
+                            @foreach($request as $request)
                             <tr>
                                 <td>CT00{{$request->id}}</td>
                                 <td>{{$request->category->name}}</td>
                                 <td>{{$request->created_at->format('Y-m-d')}}</td>
                                 <td>{{$request->start_date}}</td>
                                 <td>{{$request->end_date}}</td>
-                                <td>{{$status}}</td>
+                                <td>
+                                    <button type="button" class=" btn border-0" data-bs-toggle="modal"
+                                            data-bs-target="#detail{{$request->id}}">
+                                            <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
+                                    </button>
+                                </td>
                             </tr>
+
+                            <div class="modal fade" id="detail{{$request->id}}" value="{{$request->id}}" tabindex="-1"
+                                role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-md rounded-5">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row align-items-center" style="width:80vh">
+                                                <h4 class="modal-title text-black" id="myLargeModalLabel">Pengajuan Cuti
+                                                    Kerja</h4>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="POST" action="{{ route('persetujuan', $request->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="mb-3 row text-center">
+                                                    @if ($request->status == "1")
+                                                        <h4 class="text-white bg-primary py-2">Dalam Proses</h2>
+                                                    @elseif($request->status == "2")
+                                                        <h4 class="text-white bg-success py-2">Disetujui</h2>
+                                                    @else
+                                                        <h4 class="text-white bg-danger py-2">Ditolak</h2>
+                                                    @endif
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="idCuti" class="col-sm-4 col-form-label">ID</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control disable" id="idCuti"
+                                                            value="CT00{{$request->id}}" placeholder="Nama Lengkap"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="tanggalPengajuan"
+                                                        class="col-sm-4 col-form-label">Pengajuan</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control" id="idCuti"
+                                                            value="{{$request->created_at->format('Y-m-d')}}" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="kategoriCuti" class="col-sm-4 col-form-label">Kategori
+                                                        Cuti</label>
+                                                    <div class="col-sm-8">
+                                                        <select name="" class="form-select w-100" id="kategoriCuti"
+                                                            disabled>
+                                                            <option value="pilih">Pilih Kategori</option>
+                                                            <option value="cuti_umum" {{ $request->category->name == 'Cuti Umum' ? 'selected' : '' }}>Cuti Umum</option>
+                                                            <option value="cuti_menyusui_melahirkan" {{ $request->category->name == 'Cuti Menyusui & Melahirkan' ? 'selected' : '' }} >Cuti Menyusui & Melahirkan</option>
+                                                            <option value="cuti_kesehatan" {{ $request->category->name == 'Cuti Masalah Kesehatan' ? 'selected' : '' }} >Cuti Masalah Kesehatan</option>
+                                                            <option value="cuti_kedukaan" {{ $request->category->name == 'Cuti Kedukaan' ? 'selected' : '' }} >Cuti Kedukaan</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="tanggalMulai" class="col-sm-4 col-form-label">Tanggal
+                                                        Mulai Cuti</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control" id="tanggalMulai"
+                                                            value="{{$request->start_date}}" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="tanggalAkhir" class="col-sm-4 col-form-label">Tanggal
+                                                        Akhir Cuti</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control" id="tanggalAkhir"
+                                                            value="{{$request->end_date}}" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 row">
+                                                    <label for="pesanCuti" class="col-sm-4 col-form-label">Pesan</label>
+                                                    <div class="col-sm-8">
+                                                        <textarea class="form-control" rows="7" id="pesanCuti"
+                                                            disabled>{{$request->message}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <!-- button -->
+                                            </form>
+                                            @if($request->status == '1')    
+                                                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                                    <a href="{{route('deletePengajuan', $request->id)}}">
+                                                        <button type="submit" class="btn btn-danger" style="width:20vh" value="delete">Batalkan</button>
+                                                    </a>
+                                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                                        <button type="button" class="btn btn-primary px-5" data-bs-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                                    <button type="button" class="btn btn-primary px-5" data-bs-dismiss="modal">Tutup</button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </tbody>
                     </table>

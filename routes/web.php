@@ -59,6 +59,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/kategoriCuti', [App\Http\Controllers\PaidLeaveController::class, 'kategoriCuti'])->name('kategoriCuti');
         Route::get('/lihat_detail', [App\Http\Controllers\PaidLeaveController::class, 'lihat_detail'])->name('lihat_detail');
         Route::get('/paidLeaveCategory', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveCategory'])->name('paidLeaveCategory');
+        Route::get('/setuju/{id}', [App\Http\Controllers\PaidLeaveController::class, 'setuju'])->name('persetujuan');
+        Route::get('/tolak/{id}', [App\Http\Controllers\PaidLeaveController::class, 'tolak'])->name('penolakan');
+        Route::get('/deleteCuti/{id}', [App\Http\Controllers\PaidLeaveController::class, 'deleteCuti'])->name('deleteCuti');
+
 
         // * Supervisor -> Panduan
         Route::get('/supervisorPanduan', [App\Http\Controllers\PanduanController::class, 'supervisorPanduan'])->name('supervisorPanduan');
@@ -96,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
         // * Workers -> Cuti
         Route::post('/createCuti', [App\Http\Controllers\PaidLeaveController::class, 'createCuti'])->name('createCuti');
         Route::get('/pengajuanCuti', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveRequest'])->name('pengajuanCuti');
+        Route::get('/deletePengajuan/{id}', [App\Http\Controllers\PaidLeaveController::class, 'deletePengajuan'])->name('deletePengajuan');
 
         // * Workers -> Panduan
         Route::get('/workersPanduan', [App\Http\Controllers\PanduanController::class, 'workersPanduan'])->name('workersPanduan');
