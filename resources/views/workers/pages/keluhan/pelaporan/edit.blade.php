@@ -26,8 +26,8 @@
     <div class="col-8">
         <div class="card p-3">
             <div class="card-body d-flex flex-column">
-                <form class="row gy-4">
-
+                <form class="row gy-4" method="POST" action="{{route('keluhanPelaporanUpdate',$complain->id)}}" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-4">
@@ -37,7 +37,7 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>22/11/2023</h5>
+                                <h5>{{$complain->created_at}} WIB</h5>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>KF0001</h5>
+                                <h5>{{$complain->id}}</h5>
                             </div>
                         </div>
                     </div>
@@ -66,11 +66,19 @@
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                 <div class="input-group">
-                                    <select class="form-select" id="inputGroupSelect01">
-                                        <option value="">Pilih...</option>
-                                        <option value="1">Inventaris</option>
-                                        <option selected="" value="2">Fasilitas</option>
+                                    <select  name="category" class="form-select @error('category') is-invalid @enderror" id="inputGroupSelect01">
+                                        <option>Pilih...</option>
+                                        @foreach ($categories as $cat)
+                                        <option 
+                                        @if($complain->category->id == $cat->id)
+                                        selected
+                                        @endif
+                                        value="{{$cat->id}}">{{$cat->name}}</option>
+                                        @endforeach
                                     </select>
+                                    @error('category')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -87,8 +95,11 @@
                             <div class="col-sm-12 col-md-12 col-lg-7 mt-lg-n2">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="prenametext"
-                                            value="Air Urinoir Tidak Keluar">
+                                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="prenametext"
+                                            value="{{$complain->complain_title}}">
+                                        @error('title')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -105,9 +116,11 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Deskripsi Keluhan" cols="30"
-                                        rows="10">Ketika tombol flush urinoir ditekan airnya tidak keluar, yang keluar hanya air mata kekecewaan</textarea>
+                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                        placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10">{{$complain->complain_description}}</textarea>
+                                    @error('description')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -121,15 +134,21 @@
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                            <div class="col-sm-0 col-md-0 col-lg-7 mt-n2">
                                 <div class="input-group">
                                     <label class="input-group-text" for="inputGroupSelect01">Di</label>
-                                    <select class="form-select" id="inputGroupSelect01">
-                                        <option value="">Pilih...</option>
-                                        <option value="1">Tower A - R1001</option>
-                                        <option value="2">Tower A - R1002</option>
-                                        <option value="3" selected="">Toilet Pria Lt.8 Tower A</option>
+                                    <select name="place" class="form-select @error('place') is-invalid @enderror" id="inputGroupSelect01">
+                                        <option selected="">Pilih...</option>
+                                        @foreach ($places as $place)
+                                        <option 
+                                        @if($complain->place->id == $place->id)
+                                        selected
+                                        @endif value="{{$place->id}}">{{$place->place_name}}</option>
+                                        @endforeach
                                     </select>
+                                    @error('place')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -139,17 +158,18 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Status</h4>
+                                <h5 class="card-title">Status Laporan</h4>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>Menunggu</h5>
+                                <h5>{{$complain->status->name}}</h5>
                             </div>
                         </div>
                     </div>
-
+                
+                    @if(!is_null($complain->latestAssigned))
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-4">
@@ -159,7 +179,7 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>-</h5>
+                                <h5>{{$complain->urgency->name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -173,10 +193,35 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>-</h5>
+                                <h5>{{$complain->latestAssigned->user->name}}</h5>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Status Penanganan</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7">
+                                <h5>
+                                    @if(!is_null($complain->latestAssigned->submission))
+                                        @if($complain->latestAssigned->submissions->submission_status == 2)
+                                            Selesai
+                                        @else
+                                            Proses
+                                        @endif
+                                    @else
+                                        Belum dikerjakan
+                                    @endif
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
                         <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
@@ -184,14 +229,19 @@
                                 <a href="{{route('keluhanPelaporan')}}"
                                     class="btn waves-effect waves-light btn-outline-primary w-100">Kembali</a>
                             </div>
+                            @if(is_null($complain->latestAssigned))
                             <div class="col-4 d-flex justify-content-center">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-danger w-100">Hapus</button>
+                                <a href="{{route('keluhanPelaporanDelete',$complain->id)}}"
+                                    data-confirm-delete="true"
+                                    class="btn waves-effect waves-light btn-danger w-100">Hapus</a>
                             </div>
+                            @endif
+                            @if(is_null($complain->latestAssigned) && $complain->report_status != 3)
                             <div class="col-4 d-flex justify-content-end">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-primary w-100">Simpan</button>
+                                <input type="submit"
+                                    class="btn waves-effect waves-light btn-primary w-100" value="Simpan">
                             </div>
+                            @endif
                         </div>
                     </div>
 

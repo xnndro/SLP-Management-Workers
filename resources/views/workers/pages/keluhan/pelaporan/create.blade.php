@@ -40,7 +40,7 @@
                             <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                 <div class="input-group">
                                     <select  name="category" class="form-select @error('category') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
+                                        <option selected>Pilih...</option>
                                         @foreach ($categories as $cat)
                                         <option value="{{$cat->id}}">{{$cat->name}}</option>
                                         @endforeach

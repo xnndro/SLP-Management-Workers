@@ -318,7 +318,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<!--  Modal content for reassign task -->
+{{-- <!--  Modal content for reassign task -->
 <div id="reAssignTask" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reAssignTaskModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -382,7 +382,7 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div><!-- /.modal --> --}}
 
 {{-- <!--  Modal content for new assign task -->
 <div id="newAssignTask" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newAssignTaskModalLabel"
@@ -571,6 +571,7 @@
     </div>
 </div>
 
+@if(count($complains) != 0)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -630,7 +631,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="row gy-4 m-4 mt-0" method="POST" action="{{route('keluhanPenugasan', $complain->id)}}">
+                                                    <form class="row gy-4 m-4 mt-0" method="POST" action="{{route('keluhanPenugasan', $complain->id)}}" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                                                             <div class="row d-flex col-12">
@@ -643,7 +644,7 @@
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
                                                                         <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option selected="">Pilih...</option>
+                                                                            <option selected>Pilih...</option>
                                                                             @foreach ($users as $user)
                                                                             <option value="{{$user->id}}">{{$user->name}}</option>
                                                                             @endforeach
@@ -667,7 +668,7 @@
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
                                                                         <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option selected="">Pilih...</option>
+                                                                            <option selected>Pilih...</option>
                                                                             @foreach ($urgencies as $urgency)
                                                                             <option value="{{$urgency->id}}">{{$urgency->name}}</option>
                                                                             @endforeach
@@ -683,7 +684,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                                                             <div class="row d-flex col-12">
                                                                 <div class="col-sm-6 col-md-6 col-lg-4">
-                                                                    <h5 class="fw-medium text-dark">Catatan Penugasan</h4>
+                                                                    <h4 class="fw-medium text-dark">Catatan Penugasan</h4>
                                                                 </div>
                                                                 <div class="d-none d-lg-block col-lg-1">
                                                                     <h5 class="fw-medium text-dark">:</h4>
@@ -703,8 +704,10 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
                                                             <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
                                                                 <div class="col-6 d-flex">
-                                                                    <button type="button" class="btn waves-effect waves-light btn-danger w-50">Tolak
-                                                                        Laporan</button>
+                                                                    <a href="{{route('keluhanDecline',$complain->id)}}" 
+                                                                        data-confirm-delete="true"
+                                                                        class="btn waves-effect waves-light btn-danger w-50">Tolak
+                                                                        Laporan</a>
                                                                 </div>
                                                                 <div class="col-6 d-flex justify-content-end">
                                                                     <input type="submit"
@@ -719,13 +722,319 @@
                                     </div>
 
                                 @elseif ($complain->report_status == 2)
+                                    @if($complain->latestAssigned->assign_status == 1)
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <button type="button" data-bs-toggle="modal" data-bs-target="#editAssignTask"
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#editAssignTask{{$complain->id}}"
                                                 class="btn waves-effect waves-light btn-warning text-white w-75">
                                                 Edit</button>
                                         </div>
                                     </td>
+                                    <!--  Modal content for edit assign task -->
+                                    <div class="modal fade" id="editAssignTask{{$complain->id}}" tabindex="-1" role="dialog" aria-labelledby="editAssignTask{{$complain->id}}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="row gy-4 m-4 mt-0" method="POST" action="{{route('keluhanPenugasanUpdate', $complain->latestAssigned->id)}}">
+                                                        @csrf
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h4 class="fw-medium text-dark">Pekerja</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                                                                    <div class="input-group">
+                                                                        <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option>Pilih...</option>
+                                                                            @foreach ($users as $user)
+                                                                            <option 
+                                                                            @if($complain->latestAssigned->user_id == $user->id)
+                                                                            selected
+                                                                            @endif value="{{$user->id}}">{{$user->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('user')
+                                                                            <div class="text-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h4 class="fw-medium text-dark">Urgensi</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                                                                    <div class="input-group">
+                                                                        <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option>Pilih...</option>
+                                                                            @foreach ($urgencies as $urgency)
+                                                                            <option 
+                                                                            @if($complain->complain_urgency == $urgency->id)
+                                                                            selected
+                                                                            @endif
+                                                                            value="{{$urgency->id}}">{{$urgency->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('urgency')
+                                                                            <div class="text-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h5 class="fw-medium text-dark">Catatan Penugasan</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                                                    <div class="form-group">
+                                                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                            placeholder="Masukkan Catatan Penugasan" cols="30" rows="10">{{$complain->latestAssigned->assign_description}}</textarea>
+                                                                        @error('description')
+                                                                            <div class="text-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
+                                                            <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
+                                                                <div class="col-6 d-flex">
+                                                                    <a href="{{route('keluhanPenugasanDelete',$complain->latestAssigned->id)}}" 
+                                                                        data-confirm-delete="true"
+                                                                        class="btn waves-effect waves-light btn-danger w-50">Batalkan</a>
+                                                                </div>
+                                                                <div class="col-6 d-flex justify-content-end">
+                                                                    <input type="submit"
+                                                                        class="btn waves-effect waves-light btn-primary w-50" value="Tugaskan ulang">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                    @elseif ($complain->latestAssigned->assign_status == 2)
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                        @if (is_null($complain->latestAssigned->submission))
+                                        <button class="btn btn-secondary disabled text-white w-75 flex-item mx-2">
+                                            Proses
+                                        </button>
+                                        @else
+                                            @if ($complain->latestAssigned->submission->submission_status == 1)
+                                            <a href="{{route('keluhanShowFeedback')}}" class="btn waves-effect waves-light btn-success w-75">
+                                                Lihat Riwayat
+                                            </a>
+                                            @elseif($complain->latestAssigned->submission->submission_status == 2)
+                                            <a href="{{route('keluhanVerify')}}" class="btn waves-effect waves-light bg-cyan text-white w-75 flex-item mx-2">
+                                                Verifikasi
+                                            </a>
+                                            @elseif($complain->latestAssigned->submission->submission_status == 3)
+                                            <button class="btn btn-secondary disabled text-white w-75 flex-item mx-2">
+                                                Proses
+                                            </button>
+                                            @endif
+                                        @endif
+                                        </div>
+                                    </td>
+                                    @elseif ($complain->latestAssigned->assign_status == 3 && !is_null($complain->latestAssigned->latestDeclined))
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <button class="btn waves-effect waves-light btn-danger text-white w-75 flex-item mx-2"
+                                                data-bs-toggle="modal" data-bs-target="#reAssignTask{{$complain->id}}">
+                                                Tugaskan Lagi</button>
+                                        </div>
+                                    </td>
+                                    <!--  Modal content for reassign task -->
+                                    <div id="reAssignTask{{$complain->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reAssignTask{{$complain->id}}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="row gy-4 m-4 mt-0">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h4 class="fw-medium text-dark">Pekerja</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-0 col-md-0 col-lg-7">
+                                                                    <h5>{{$complain->latestAssigned->user->name}}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h4 class="fw-medium text-dark">Alasan Penolakan</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                                                    <div class="form-group">
+                                                                        <textarea class="form-control" id="placeholder"
+                                                                            placeholder="Masukkan Catatan Penugasan" cols="30" rows="10"
+                                                                            readonly>{{$complain->latestAssigned->latestDeclined->decline_description}}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
+                                                            <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
+                                                                {{-- <div class="col-6 d-flex">
+                                                                    <button type="button"
+                                                                        class="btn waves-effect waves-light btn-warning text-white w-50">Tugaskan
+                                                                        Lagi</button>
+                                                                </div> --}}
+                                                                <div class="col-12 d-flex justify-content-end">
+                                                                    <button type="button" class="btn waves-effect waves-light btn-primary w-25"
+                                                                                    data-bs-dismiss="modal" data-bs-target="#editAssignTask{{$complain->id}}"
+                                                                                    data-bs-toggle="modal">Tugaskan Baru</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                    <!--  Modal content for edit assign task -->
+                                    <div class="modal fade" id="editAssignTask{{$complain->id}}" tabindex="-1" role="dialog" aria-labelledby="editAssignTask{{$complain->id}}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="row gy-4 m-4 mt-0" method="POST" action="{{route('keluhanPenugasanUpdate', $complain->latestAssigned->id)}}">
+                                                        @csrf
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h4 class="fw-medium text-dark">Pekerja</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                                                                    <div class="input-group">
+                                                                        <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option>Pilih...</option>
+                                                                            @foreach ($users as $user)
+                                                                            <option 
+                                                                            @if($complain->latestAssigned->user_id == $user->id)
+                                                                            selected
+                                                                            @endif value="{{$user->id}}">{{$user->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('user')
+                                                                            <div class="text-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h4 class="fw-medium text-dark">Urgensi</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                                                                    <div class="input-group">
+                                                                        <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option>Pilih...</option>
+                                                                            @foreach ($urgencies as $urgency)
+                                                                            <option 
+                                                                            @if($complain->complain_urgency == $urgency->id)
+                                                                            selected
+                                                                            @endif
+                                                                            value="{{$urgency->id}}">{{$urgency->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('urgency')
+                                                                            <div class="text-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                            <div class="row d-flex col-12">
+                                                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                    <h5 class="fw-medium text-dark">Catatan Penugasan</h4>
+                                                                </div>
+                                                                <div class="d-none d-lg-block col-lg-1">
+                                                                    <h4 class="fw-medium text-dark">:</h4>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                                                    <div class="form-group">
+                                                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                            placeholder="Masukkan Catatan Penugasan" cols="30" rows="10">{{$complain->latestAssigned->assign_description}}</textarea>
+                                                                        @error('description')
+                                                                            <div class="text-danger">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
+                                                            <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
+                                                                <div class="col-6 d-flex">
+                                                                    <a href="{{route('keluhanPenugasanDelete',$complain->latestAssigned->id)}}" 
+                                                                        data-confirm-delete="true"
+                                                                        class="btn waves-effect waves-light btn-danger w-50">Batalkan</a>
+                                                                </div>
+                                                                <div class="col-6 d-flex justify-content-end">
+                                                                    <input type="submit"
+                                                                        class="btn waves-effect waves-light btn-primary w-50" value="Tugaskan ulang">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                    @endif
                                 @endif
                             </tr>
                             @endforeach
@@ -787,8 +1096,8 @@
         </div>
     </div>
 </div>
-
-<!-- If there is no schedulle added -->
+@else
+<!-- If there is no data -->
 <div class="row">
     <div class="col-lg-12 mt-3">
         <div class="card">
@@ -803,6 +1112,6 @@
         </div>
     </div>
 </div>
-
+@endif
 
 @endsection

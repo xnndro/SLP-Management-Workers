@@ -184,6 +184,7 @@
     </div>
 </div>
 
+@if(count($complains) != 0)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -198,11 +199,11 @@
                                 <th>Jenis</th>
                                 <th>Judul</th>
                                 <th>Tanggal Dilaporkan</th>
-                                <th>Status</th>
+                                <th>Status Laporan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <td>KI0001</td>
                                 <td>Inventaris</td>
                                 <td>
@@ -220,13 +221,13 @@
                                 </td>
                                 <td>09-09-2023</td>
                                 <td>Menunggu</td>
-                            </tr>
+                            </tr> --}}
                             @foreach ($complains as $complain)
                             <tr>
                                 <td>{{$complain->id}}</td>
                                 <td>{{$complain->category->name}}</td>
                                 <td>
-                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit')}}">{{$complain->complain_title}}</a>
+                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit',$complain->id)}}">{{$complain->complain_title}}</a>
                                 </td>
                                 <td>{{$complain->created_at}}</td>
                                 <td>{{$complain->status->name}}</td>
@@ -239,7 +240,7 @@
         </div>
     </div>
 </div>
-
+@else
 <!-- If there is no records -->
 <div class="row">
     <div class="col-lg-12 mt-3">
@@ -249,12 +250,13 @@
                     <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_htGEnnUdTG.json"
                         background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
                     </lottie-player>
-                    <h5 class="mt-lg-n2">Belum ada komplain yang masuk</h5>
+                    <h5 class="mt-lg-n2">Belum ada laporan yang dibuat</h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 @if (session('success'))
     <script>
         window.addEventListener('DOMContentLoaded', function() {
