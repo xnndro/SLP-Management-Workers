@@ -19,10 +19,8 @@ class PaidLeaveController extends Controller
         if ($request->isEmpty()) {
             $request = null;
         }
-        $total = count($request);
-        $setuju = count($request->where('status', '2'));
-        $tolak = count($request->where('status', '3'));
-        return view('supervisor.pages.cuti.pengajuan-cuti.index', compact('data', 'total', 'setuju', 'tolak'));
+        $total = PaidLeaveRequest::whereYear('start_date', '2023')->get()->groupBy('status')->map->count();
+        return view('supervisor.pages.cuti.pengajuan-cuti.index', compact('data', 'total'));
     }
 
     public function paidLeaveList()
@@ -48,13 +46,18 @@ class PaidLeaveController extends Controller
     public function paidLeaveRequest()
     {
         $request = PaidLeaveRequest::where('user_id', '1')->whereYear('start_date', '2023')->get();
+        $proses = 0;
+        $setuju = 0;
         if ($request->isEmpty()) {
             $request = null;
+            $proses = 0;
+            $setuju = 0;
+        }else
+        {
+            $setuju = count($request->where('status', '2'));
+            $proses = count($request->where('status', '1'));
         }
-        $proses = count($request->where('status', '1'));
-        $setuju = count($request->where('status', '2'));
 
-        // return view('workers.pages.cuti.pengajuanCuti')->with("requests", $request->get());
         return view('workers.pages.cuti.pengajuanCuti', compact('request', 'proses','setuju')); // ini cara yang lebi bersih
     }
 
@@ -97,7 +100,6 @@ class PaidLeaveController extends Controller
         $data = PaidLeaveRequest::where('id', $request->id)->get();
 
         return view('supervisor.pages.cuti.pengajuan-cuti.index', compact('data'));
-        // return view('supervisor.pages.cuti.pengajuan-cuti.index')->with("data", $request->get());
     }
 
     public function setuju($id)

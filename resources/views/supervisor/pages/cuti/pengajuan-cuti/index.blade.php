@@ -40,7 +40,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Total Pengajuan</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{$total}}</h2>
+                            <h2 class="text-white font-weight-medium">{{$total->count()}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Disetujui</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{$setuju}}</h2>
+                            <h2 class="text-white font-weight-medium">{{$total['2'] ?? '0'}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Ditolak</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{$tolak}}</h2>
+                            <h2 class="text-white font-weight-medium">{{$total['3'] ?? '0'}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>

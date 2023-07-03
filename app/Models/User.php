@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'roles_id',
     ];
 
     /**
@@ -45,7 +46,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsTo(Roles::class,'roles_id','id');
+        return $this->belongsTo(Roles::class);
     }
 
     public function paidLeaveRequest()

@@ -112,7 +112,7 @@
                                     @php $i++; @endphp
                                 </td>
                                 <td>{{$w->name}}</td>
-                                <td>{{$w->roles->role_name ?? 'None'}}</td>
+                                <td>{{$w->role}}</td>
                                 <td>{{$w->status}}</td>
                                 <td>{{
                                     date_format(date_create($w->user_join_date), 'd F Y')

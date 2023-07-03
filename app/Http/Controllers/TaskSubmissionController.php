@@ -104,6 +104,11 @@ class TaskSubmissionController extends Controller
         ->count();
         $total_workers_aktif = User::where('status', 'active')->where('roles_id', '!=', '1')->count();
         $workers = User::where('roles_id', '!=', '1')->get();
+        
+        foreach ($workers as $worker) {
+            $role = Roles::where('id', $worker->roles_id)->first();
+            $worker->role = $role->role_name;
+        }
         return view('supervisor.pages.task-submission.workers.index',compact('total_workers_cuti','total_workers_aktif','workers'));
     }
 

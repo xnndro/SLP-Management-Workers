@@ -20,8 +20,9 @@
                         <label for="fullName" class="col-sm-4 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control @error('Nama_lengkap') is-invalid @enderror"
-                                id="Nama_lengkap" value="{{old('Nama_lengkap')}}" name="Nama_lengkap"
-                                placeholder="Nama Lengkap">
+                                id="Nama_lengkap" value="{{Auth::user()->name}}" name="Nama_lengkap"
+                                placeholder="Nama Lengkap" readonly>
+                                
                             @error('Nama_lengkap')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -31,7 +32,7 @@
                         <label for="jobPosition" class="col-sm-4 col-form-label">Posisi</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control @error('posisi') is-invalid @enderror" id="posisi"
-                                placeholder="Posisi Pekerjaan" name="posisi" value="{{old('posisi')}}">
+                                placeholder="Posisi Pekerjaan" name="posisi" value="{{Auth::user()->roles->role_name}}" readonly>
                             @error('posisi')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -140,7 +141,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Sisa Cuti Kerja</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{20 - $setuju}}</h2>
+                            <h2 class="text-white font-weight-medium">{{20 - $setuju }}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">Hari</p>
                         </div>
                     </div>
@@ -178,7 +179,7 @@
                 <div class="d-flex text-white">
                     <div>
                         <img src="{{asset('../../assets/images/success-box.svg')}}" class="rounded-circle m-n5"
-/                            width="140">
+                            width="140">
                     </div>
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Disetujui</h6>
@@ -369,15 +370,17 @@
 @endsection
 
 @push('after-script')
-@if (count($errors) > 0)
-<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-crossorigin="anonymous"></script>
 <script>
+    @if (count($errors) > 0)
     $(window).on('load', function() {
         $('#formpengajuancuti').modal('show');
     });
+    @else
+    $(window).on('load', function() {
+        $('#formpengajuancuti').modal('hide');
+    });
+    @endif
 </script>
-@endif
 <script>
     // Script untuk tanggal minimum 
     var now = new Date();

@@ -18,7 +18,7 @@ class KeluhanController extends Controller
     public function daftarKeluhan()
     {
         $complains = Complain::where('report_status','!=',3)->get();
-        $users = User::where('role_id', '!=', 1)->get();
+        $users = User::where('roles_id', '!=', 1)->get();
         $urgencies = ComplainUrgency::where('id', '!=', 1)->get();
         
         $title = 'Konfirmasi';
