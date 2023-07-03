@@ -17,7 +17,7 @@ class ComplainDecline extends Model
         'decline_description',
     ];
 
-    public function asssignment(): BelongsTo
+    public function assignment(): BelongsTo
     {
         return $this->belongsTo(ComplainAssignment::class);
     }

@@ -29,6 +29,11 @@ class ComplainAssignment extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function latestDeclined(): HasOne
+    {
+        return $this->hasOne(ComplainDecline::class)->latestOfMany();
+    }
 
     public function declines(): HasMany
     {

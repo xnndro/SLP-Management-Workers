@@ -28,11 +28,6 @@ class Complain extends Model
         return $this->hasOne(ComplainAssignment::class)->latestOfMany();
     }
 
-    public function latestDeclined(): HasOne
-    {
-        return $this->hasOne(ComplainDecline::class)->latestOfMany();
-    }
-
     public function submission(): HasOne
     {
         return $this->hasOne(ComplainSubmission::class)->latestOfMany();

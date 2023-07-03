@@ -88,7 +88,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<!--  Decline Job Modal -->
+{{-- <!--  Decline Job Modal -->
 <div class="modal fade" id="declineJob" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -158,7 +158,7 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div><!-- /.modal --> --}}
 
 <div class="page-breadcrumb mt-n5 ms-n4 mb-3">
     <div class="row">
@@ -251,6 +251,7 @@
     </div>
 </div>
 
+@if(count($assignments) != 0)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -354,9 +355,91 @@
                                             </a>
                                             <a href="{{route('tolakPenugasan',$asg->id)}}"
                                                 class="btn waves-effect waves-light btn-danger text-white w-50 flex-item mx-2"
-                                                data-bs-toggle="modal" data-bs-target="#declineJob">
+                                                data-bs-toggle="modal" data-bs-target="#declineJob{{$asg->id}}">
                                                 Tolak
                                             </a>
+                                            <!--  Decline Job Modal -->
+                                            <div class="modal fade" id="declineJob{{$asg->id}}" tabindex="-1" role="dialog" aria-labelledby="declineJob{{$asg->id}}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title text-dark fw-medium" id="scrollableModalTitle">{{$asg->complain->complain_title}}</h3>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="row m-4 gy-4 mt-0" method="POST" action="{{route('tolakPenugasan',$asg->id)}}" enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                                    <div class="row d-flex col-12">
+                                                                        <div class="col-sm-12 col-md-12 col-lg-4">
+                                                                            <h5 class="card-title text-dark fw-medium">Urgensi</h4>
+                                                                        </div>
+                                                                        <div class="d-none d-lg-block col-lg-1">
+                                                                            <h5 class="card-title">:</h4>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-sm-12 col-md-12 col-lg-7">
+                                                                            @if($asg->complain->complain_urgency == 2)
+                                                                                <img class="complain-icon" src="{{asset('../../assets/images/keluhan-penting.svg')}}" width="20" alt="">
+                                                                            @elseif ($asg->complain->complain_urgency == 3)
+                                                                                <img class="complain-icon" src="{{asset('../../assets/images/keluhan-genting.svg')}}" width="20" alt="">
+                                                                            @endif
+                                                                            {{$asg->complain->urgency->name}}
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                                    <div class="row d-flex col-12">
+                                                                        <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                            <h5 class="card-title text-dark fw-medium">Catatan Penugasan</h4>
+                                                                        </div>
+                                                                        <div class="d-none d-lg-block col-lg-1">
+                                                                            <h5 class="card-title">:</h4>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                                                            <div class="form-group">
+                                                                                <textarea class="form-control" id="placeholder"
+                                                                                    placeholder="Masukkan Deskripsi Keluhan" cols="20" rows="5"
+                                                                                    readonly>{{$asg->assign_description}}</textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                                                                    <div class="row d-flex col-12">
+                                                                        <div class="col-sm-6 col-md-6 col-lg-4">
+                                                                            <h5 class="card-title text-dark fw-medium">Alasan Penolakan</h4>
+                                                                        </div>
+                                                                        <div class="d-none d-lg-block col-lg-1">
+                                                                            <h5 class="card-title">:</h4>
+                                                                        </div>
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                                                            <div class="form-group">
+                                                                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                                    placeholder="Masukkan Alasan Penolakan" cols="20" rows="5"></textarea>
+                                                                                @error('description')
+                                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-end">
+                                                                    <div class="col-12 d-flex justify-content-end">
+                                                                        <input type="submit" class="btn waves-effect waves-light btn-danger w-25" data-confirm-delete="true" value="Tolak">
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
                                         </div>
                                     </div>
                                 </td>
@@ -377,7 +460,7 @@
         </div>
     </div>
 </div>
-
+@else
 <!-- If there is no record -->
 <div class="row">
     <div class="col-lg-12 mt-3">
@@ -387,11 +470,11 @@
                     <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_htGEnnUdTG.json"
                         background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
                     </lottie-player>
-                    <h5 class="mt-lg-n2">Belum ada komplain yang masuk</h5>
+                    <h5 class="mt-lg-n2">Belum ada penanganan yang ditugaskan</h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+@endif
 @endsection
