@@ -40,7 +40,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Total Pengajuan</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{$total}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Disetujui</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{$setuju}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Pengajuan Ditolak</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">236</h2>
+                            <h2 class="text-white font-weight-medium">{{$tolak}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -126,27 +126,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @foreach ($data as $request)
-                            <tr>
-                                <td>CT00{{$request->id}}</td>
-                                <td>{{$request->user->name}}</td>
-                                <td>{{$request->user->user_role}}</td>
-                                <td>{{$request->created_at->format('Y-m-d')}}</td>
-                                <td>{{$request->start_date}}</td>
-                                <td>{{$request->end_date}}</td>
-                                <td>
-                                    {{-- <div class="actions">
-                                        <a href="{{ route('lihat_detail', $request->id) }}" id="suspendd"
-                                            data-toggle="modal" data-target="#detail{{ $request->id }}"
-                                            class="btn btn-sm bg-danger-light">Lihat</a>
-                                    </div> --}}
-                                    <button type="button" class=" btn border-0" data-bs-toggle="modal"
-                                        data-bs-target="#detail{{$request->id}}">
-                                        <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
-                                    </button>
-                                </td>
-                            </tr>
+                            @foreach ($data as $request)
+                                <tr>
+                                    <td>CT00{{$request->id}}</td>
+                                    <td>{{$request->user->name}}</td>
+                                    <td>{{$request->user->user_role}}</td>
+                                    <td>{{$request->created_at->format('Y-m-d')}}</td>
+                                    <td>{{$request->start_date}}</td>
+                                    <td>{{$request->end_date}}</td>
+                                    <td>
+                                        {{-- <div class="actions">
+                                            <a href="{{ route('lihat_detail', $request->id) }}" id="suspendd"
+                                                data-toggle="modal" data-target="#detail{{ $request->id }}"
+                                                class="btn btn-sm bg-danger-light">Lihat</a>
+                                        </div> --}}
+                                        <button type="button" class=" btn border-0" data-bs-toggle="modal"
+                                            data-bs-target="#detail{{$request->id}}">
+                                            <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
+                                        </button>
+                                    </td>
+                                </tr>
 
                             {{-- Start Modal --}}
                             <div class="modal fade" id="detail{{$request->id}}" value="{{$request->id}}" tabindex="-1"
@@ -154,7 +153,7 @@
                                 <div class="modal-dialog modal-md rounded-5">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <div class="row align-items-end" style="width:80vh">
+                                            <div class="row align-items-center" style="width:80vh">
                                                 <h4 class="modal-title text-black" id="myLargeModalLabel">Pengajuan Cuti
                                                     Kerja</h4>
                                             </div>
@@ -162,7 +161,9 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="">
+                                            <form action="POST" action="{{ route('persetujuan', $request->id) }}">
+                                                @csrf
+                                                @method('PUT')
                                                 <div class="mb-3 row">
                                                     <label for="idCuti" class="col-sm-4 col-form-label">ID</label>
                                                     <div class="col-sm-8">
@@ -192,7 +193,7 @@
                                                         class="col-sm-4 col-form-label">Posisi</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="jobPosition"
-                                                            value="{{$request->user->user_role}}" disabled>
+                                                            value="{{$request->user->role_id}}" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
@@ -202,17 +203,10 @@
                                                         <select name="" class="form-select w-100" id="kategoriCuti"
                                                             disabled>
                                                             <option value="pilih">Pilih Kategori</option>
-                                                            <option value="cuti_umum" {{ $request->category->name ==
-                                                                'Cuti Umum' ? 'selected' : '' }}>Cuti Umum</option>
-                                                            <option value="cuti_menyusui_melahirkan" {{ $request->
-                                                                category->name == 'Cuti Menyusui & Melahirkan' ?
-                                                                'selected' : '' }} >Cuti Menyusui & Melahirkan</option>
-                                                            <option value="cuti_kesehatan" {{ $request->category->name
-                                                                == 'Cuti Masalah Kesehatan' ? 'selected' : '' }} >Cuti
-                                                                Masalah Kesehatan</option>
-                                                            <option value="cuti_kedukaan" {{ $request->category->name ==
-                                                                'Cuti Kedukaan' ? 'selected' : '' }} >Cuti Kedukaan
-                                                            </option>
+                                                            <option value="cuti_umum" {{ $request->category->name == 'Cuti Umum' ? 'selected' : '' }}>Cuti Umum</option>
+                                                            <option value="cuti_menyusui_melahirkan" {{ $request->category->name == 'Cuti Menyusui & Melahirkan' ? 'selected' : '' }} >Cuti Menyusui & Melahirkan</option>
+                                                            <option value="cuti_kesehatan" {{ $request->category->name == 'Cuti Masalah Kesehatan' ? 'selected' : '' }} >Cuti Masalah Kesehatan</option>
+                                                            <option value="cuti_kedukaan" {{ $request->category->name == 'Cuti Kedukaan' ? 'selected' : '' }} >Cuti Kedukaan</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -241,13 +235,15 @@
                                                 </div>
 
                                                 <!-- button -->
-                                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                                    <button type="submit" class="btn btn-primary"
-                                                        style="width:20vh">Setuju</button>
-                                                    <button type="submit" class="btn btn-danger"
-                                                        style="width:20vh">Tolak</button>
-                                                </div>
                                             </form>
+                                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                                <a href="{{route('persetujuan', $request->id)}}">
+                                                    <button type="submit" class="btn btn-primary" style="width:20vh" value="acc">Setuju</button>
+                                                </a>
+                                                <a href="{{route('penolakan', $request->id)}}">
+                                                    <button type="submit" class="btn btn-danger" style="width:20vh" value="ignore">Tolak</button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
