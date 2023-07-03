@@ -23,13 +23,15 @@ return new class extends Migration
             $table->string('password');
             $table->string('user_nik');
             $table->date('user_join_date');
-            $table->string('role_id');
+            $table->unsignedBigInteger('roles_id');
+            $table->string('status')->default('active');
             $table->rememberToken();
             $table->timestamps();
         });
 
         DB::table('users')->insert([
-            ['name' => 'supervisor', 'email' => 'supervisor@stavvy.com', 'password' => Hash::make('supervisor'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'role_id' => 1],
+            ['name' => 'supervisor', 'email' => 'supervisor@stavvy.com', 'password' => Hash::make('supervisor'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'roles_id' => 1],
+            ['name' => 'user', 'email' =>'user@stavvy.com', 'password' => Hash::make('user'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'roles_id' => 2],
         ]);
     }
 

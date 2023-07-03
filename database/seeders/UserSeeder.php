@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('12345'),
                 'user_nik' => $faker->nik(),
                 'user_join_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
-                'role_id' => rand(1, 5),
+                'roles_id' => rand(2, 5),
             ]);
         }
     }

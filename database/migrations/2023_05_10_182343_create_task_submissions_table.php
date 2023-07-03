@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('task_management_id');
             $table->string('task_report');
-            $table->string('task_comment');
+            $table->string('task_comment')->default('');
+            $table->string('task_status')->default('submitted');
             $table->timestamps();
 
             // $table->foreign('task_management_id')->references('id')->on('task_management');

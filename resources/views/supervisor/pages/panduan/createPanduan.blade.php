@@ -25,15 +25,6 @@
             <div class="card-body col-lg-12">
                 <form action="">
                     <div class="mb-3 row justify-content-between">
-                        <div class="col-sm-8">
-                            <label for="" class="form-label"style="color: #5F76E8;">Gambar</label>
-                            <input type="file" class="form-control @error('filegambar') is-invalid @enderror" value="{{  old('filegambar') }}" name="filegambar">
-                            @error('filegambar')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="mb-3 row justify-content-between">
                         <label class="col-sm-4 col-form-label" style="color: #5F76E8;">Judul Panduan</label>
                         <div class="col-sm-8">
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" value="{{  old('judul') }}" name="judul" placeholder="Judul Panduan">
@@ -72,8 +63,8 @@
 
                     <!-- 2 button in div and that div is on right side -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button style="border-radius: 14px;" class="px-3 btn btn-primary" onclick="document.getElementById('form').submit()">Tambahkan</button>
-                        <a href="{{ route('supervisorPanduan') }}" style="border-radius: 14px;" class="px-3 btn btn-dark">Batalkan</a>
+                        <button class="px-3 btn btn-primary" onclick="document.getElementById('form').submit()">Tambahkan</button>
+                        <a href="{{ route('supervisorPanduan') }}" class="px-3 btn btn-dark">Batalkan</a>
                     </div>
                 </form>
             </div>

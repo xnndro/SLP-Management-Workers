@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function index()
     {
         // get user id and if 1 so redirect to dashboard
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->roles_id == 1) {
             return view('supervisor.pages.dashboard');
         } else {
             return view('workers.pages.dashboard');

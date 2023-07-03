@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function roles()
+    {
+        return $this->belongsTo(Roles::class,'roles_id','id');
+    }
+
     public function paidLeaveRequest()
     {
         return $this->hasMany(PaidLeaveRequest::class);
@@ -63,8 +68,4 @@ class User extends Authenticatable
         return $this->hasMany(ComplainAssignment::class);
     }
 
-    public function roles()
-    {
-        return $this->belongsTo(Roles::class, 'role_id', 'id');
-    }
 }
