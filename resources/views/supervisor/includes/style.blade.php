@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{asset('../../assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css')}}">
 <link rel="stylesheet" href="{{asset('../../assets/libs/fullcalendar/dist/fullcalendar.min.css  ')}}">
 <link rel="stylesheet" href="{{asset('../../dist/css/style.min.css ')}}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <style>
 .dataTables_wrapper .dataTables_filter {

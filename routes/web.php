@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/keluhan/ulasan', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profileEdit');
+    Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profileUpdate');
 
     Route::group(['middleware' => ['supervisor']], function () {
         // Disini nanti semua route yang hanya bisa diakses oleh supervisor
