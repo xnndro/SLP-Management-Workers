@@ -130,7 +130,7 @@
                                 <tr>
                                     <td>CT00{{$request->id}}</td>
                                     <td>{{$request->user->name}}</td>
-                                    <td>{{$request->user->user_role}}</td>
+                                    <td>{{$request->user->roles->role_name}}</td>
                                     <td>{{$request->created_at->format('Y-m-d')}}</td>
                                     <td>{{$request->start_date}}</td>
                                     <td>{{$request->end_date}}</td>
@@ -193,7 +193,7 @@
                                                         class="col-sm-4 col-form-label">Posisi</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="jobPosition"
-                                                            value="{{$request->user->role_id}}" disabled>
+                                                            value="{{$request->user->roles->role_name}}" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">

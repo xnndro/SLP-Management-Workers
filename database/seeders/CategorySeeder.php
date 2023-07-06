@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $category = ['Cuti Umum', 'Cuti Menyusui& Melahirkan', 'Cuti Masalah Kesehatan', 'Cuti Kedukaan'];
+        $category = ['Cuti Umum', 'Cuti Menyusui & Melahirkan', 'Cuti Masalah Kesehatan', 'Cuti Kedukaan'];
         $faker = Faker::create('id_ID');
         for ($i = 0; $i <= 3; $i++) {
             DB::table('paid_leave_categories')->insert([

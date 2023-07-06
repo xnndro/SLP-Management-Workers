@@ -5,3 +5,26 @@
 <link rel="stylesheet" href="{{asset('../../assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css')}}">
 {{-- <link rel="stylesheet" href="{{asset('../../assets/libs/fullcalendar/dist/fullcalendar.min.css  ')}}"> --}}
 <link rel="stylesheet" href="{{asset('../../dist/css/style.min.css ')}}">
+
+<style>
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+        text-align: left;
+    }
+    
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5em;
+        display: inline-block;
+        width: auto;
+    }
+    
+    .dataTables_wrapper .dataTables_length {
+        float: left;
+        text-align: right;
+    }
+    
+    .dataTables_wrapper .dataTables_length select {
+        width: auto;
+        display: inline-block;
+    }
+    </style>
