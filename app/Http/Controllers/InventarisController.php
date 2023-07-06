@@ -29,7 +29,7 @@ class InventarisController extends Controller
         return view('supervisor.pages.inventaris.create', compact('roles'));
     }
 
-    public function editInventaris(Request $request) //jangan lupa tambah id disini nanti
+    public function editInventaris(Request $request)
     {
         $id = $request->id;
         return view('supervisor.pages.inventaris.edit', [
@@ -50,13 +50,15 @@ class InventarisController extends Controller
     {
         $rules = [
             'nama' => 'required',
-            'total' => 'required|min:1',
+            'total' => 'required|min:1|min_digits:1',
             'deskripsi' => 'required',
-            'role_id' => 'required',
-            // 'filegambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'role_id' => 'required|numeric',
+            'filegambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
         $message = [
             'required' => ':attribute wajib diisi',
+            'numeric' => 'Posisi wajib dipilih',
+            'min_digits' => 'Total harus berisi angka',
             'min' => ':attribute minimal berisi :min karakter',
         ];
         $validator = Validator::make($request->all(), $rules, $message);
@@ -64,16 +66,23 @@ class InventarisController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
+        else {
+            $filename = $request->file('filegambar')->getClientOriginalName();
+            $destination_path = 'public/uploads/inventaris';
+            $path = $request->file('filegambar')->storeAs($destination_path, $filename);
 
-        $inventaris = Inventaris::find($id);
-        $inventaris->inventaris_name = $request->nama;
-        // $inventaris->inventaris_image = $request->image;
-        $inventaris->role_id = $request->role_id;
-        $inventaris->inventaris_description = $request->deskripsi;
-        $inventaris->inventaris_total = $request->total;
-        $inventaris->update();
+            $link = '../storage/uploads/inventaris/'.$filename;
 
-        return redirect()->route('supervisorInventaris')->with('success', 'Data berhasil diupdate');
+            $inventaris = Inventaris::find($id);
+            $inventaris->inventaris_name = $request->nama;
+            $inventaris->inventaris_image = $link;
+            $inventaris->inventaris_description = $request->deskripsi;
+            $inventaris->inventaris_total = $request->total;
+            $inventaris->role_id = $request->role_id;
+            $inventaris->update();
+
+            return redirect()->route('supervisorInventaris')->with('success', 'Data berhasil diupdate');
+        }
     }
 
     public function deleteInventaris($id)
@@ -86,16 +95,17 @@ class InventarisController extends Controller
 
     public function add(Request $request)
     {
-        // {"_token":"8CYrqA3TKQT9Ux8Sy7xQ6UT26SryElapEMG2LYKZ","nama":"a","deskripsi":"aaa","total":"1","role_id":"1"}
         $rules = [
             'nama' => 'required',
-            'total' => 'required|min:1',
+            'total' => 'required|min:1|min_digits:1',
             'deskripsi' => 'required',
-            'role_id' => 'required',
+            'role_id' => 'required|numeric',
             'filegambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ];
         $id = [
             'required' => ':attribute wajib diisi',
+            'numeric' => 'Posisi wajib dipilih',
+            'min_digits' => 'Total harus berisi angka',
             'min' => ':attribute minimal berisi :min karakter',
         ];
         $validator = Validator::make($request->all(), $rules, $id);
@@ -116,7 +126,7 @@ class InventarisController extends Controller
             $inventaris->role_id = $request->role_id;
             $inventaris->save();
 
-            return redirect()->route('supervisorInventaris')->with('success', 'Berhasil menanmbahkan inventaris');
+            return redirect()->route('supervisorInventaris')->with('success', 'Berhasil menambahkan inventaris');
         }
     }
 }

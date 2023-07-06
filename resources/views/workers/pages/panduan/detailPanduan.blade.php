@@ -23,9 +23,7 @@
                 </div>
                 <h6 class="font-weight-medium mt-3" style="color: #2A3547;">Hal yang harus diperhatikan:</h6>
                 <ol>
-                    <h6>
-                        {{ $panduan->panduan_content }}
-                    </h6>
+                    <h6>{{ $panduan->panduan_content }}</h6>
                 </ol>
             </div>
             <div style="float: inline-end;">
