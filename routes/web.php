@@ -25,10 +25,6 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/editInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
-    Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
-    Route::get('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
-
     Route::get('/keluhan/ulasan', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
 
     Route::group(['middleware' => ['supervisor']], function () {
@@ -71,12 +67,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/supervisorDetailPanduan/{id}', [App\Http\Controllers\PanduanController::class, 'supervisorDetailPanduan'])->name('supervisorDetailPanduan');
         Route::get('/editPanduan/{id}', [App\Http\Controllers\PanduanController::class, 'editPanduan'])->name('editPanduan');
         Route::post('/updatePanduan/{id}', [App\Http\Controllers\PanduanController::class, 'updatePanduan'])->name('updatePanduan');
-        Route::get('/deletePanduan/{id}', [App\Http\Controllers\PanduanController::class, 'deletePanduan'])->name('deletePanduan');
+        Route::delete('/deletePanduan/{id}', [App\Http\Controllers\PanduanController::class, 'deletePanduan'])->name('deletePanduan');
 
         // * Supervisor -> Inventaris
         Route::get('/supervisorInventaris', [App\Http\Controllers\InventarisController::class, 'supervisorInventaris'])->name('supervisorInventaris');
         Route::get('/createInventaris', [App\Http\Controllers\InventarisController::class, 'createInventaris'])->name('createInventaris');
         Route::post('/createInventarisStore', [App\Http\Controllers\InventarisController::class, 'add'])->name('addInventaris');
+        Route::get('/editInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
+        Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
+        Route::delete('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris'); 
 
         // * Supervisor -> Keluhan
         Route::get('/keluhan', [App\Http\Controllers\KeluhanController::class, 'daftarKeluhan'])->name('keluhan');

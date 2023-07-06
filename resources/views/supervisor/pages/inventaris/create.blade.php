@@ -74,8 +74,8 @@
                         <label class="col-sm-5 col-form-label" style="color: #5F76E8;" >Dapat dilihat oleh</label>
                         <div class="col-sm-5">
                             <select id="select"class="custom-select form-control bg-white custom-radius custom-shadow border-0 @error('role_id') is-invalid @enderror" name="role_id">
+                                <option value="select">Select role</option>
                                 @foreach ($roles as $role)
-                                    {{-- if error --}}
                                     @if (old('role_id') == $role->id)
                                         <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
                                     @else
@@ -88,7 +88,8 @@
                             @enderror
                         </div>
                     </div>     
-                    <!-- 2 button in div and that div is on right side -->
+                    
+                    {{-- Button --}}
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="px-3 btn btn-primary" onclick="document.getElementById('form').submit()">Tambahkan</button>
                         <a href="{{ route('supervisorInventaris') }}" class="px-3 btn btn-dark">Batalkan</a>

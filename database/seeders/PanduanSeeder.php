@@ -7,9 +7,6 @@ use Illuminate\Database\Seeder;
 
 class PanduanSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Panduan::create([
@@ -87,7 +84,7 @@ class PanduanSeeder extends Seeder
                                 Pemangkasan: Lakukan pemangkasan pada tanaman rooftop untuk menjaga bentuknya, mendorong pertumbuhan yang sehat, dan mencegah kepadatan yang berlebihan. Pemangkasan juga membantu meningkatkan sirkulasi udara di sekitar tanaman.
                                 Inspeksi Struktur dan Keamanan: Periksa secara berkala struktur atap, sistem penahan tanaman, dan keamanan keseluruhan tanaman rooftop. Pastikan tidak ada kerusakan atau kebocoran yang dapat mempengaruhi integritas bangunan dan keselamatan pengguna.
                                 Pemantauan Cuaca dan Kondisi Lingkungan: Perhatikan perubahan cuaca, kelembaban udara, dan kondisi lingkungan sekitar. Hal ini akan membantu Anda mengambil tindakan pencegahan atau perlindungan yang diperlukan, seperti perlindungan dari angin kencang atau perubahan suhu yang ekstrem.',
-            'panduan_image' => '/assets/images/random-panduan/3.png',
+            'panduan_image' => '/assets/images/random-panduan/16.png',
             'role_id' => 4,
         ]);
     }

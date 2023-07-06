@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Panduan;
 use App\Models\Roles;
+use App\Models\Panduan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PanduanController extends Controller
 {
     // Supervisor
-    public function supervisorPanduan()
+    public function supervisorPanduan(Request $request)
     {
-        $panduans = Panduan::all();
+        if($request->search){
+            $panduans = Panduan::where('panduan_title','LIKE','%'.$request->search.'%')->get();
+        }else{
+            $panduans = Panduan::all();
+        }
 
         return view('supervisor.pages.panduan.panduan', compact('panduans'));
     }
@@ -31,7 +37,7 @@ class PanduanController extends Controller
         return view('supervisor.pages.panduan.detailPanduan', compact('panduan'));
     }
 
-    public function editPanduan($id) // id nya
+    public function editPanduan($id)
     {
         $title = 'Hapus Panduan!';
         $text = 'Apakah anda yakin ingin menghapus panduan ini?';
@@ -46,18 +52,18 @@ class PanduanController extends Controller
     {
         $rules = [
             'title' => 'required',
-            'roleId' => 'required',
+            'role_id' => 'required|numeric',
             'content' => 'required',
         ];
         $message = [
             'required' => ':attribute wajib diisi',
-            'mimes' => 'format jpg, jpeg, png',
+            'numeric' => 'Posisi wajib dipilih',
         ];
         $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
+        
         $panduan = Panduan::find($id);
         $panduan->panduan_title = $request->title;
         $panduan->panduan_content = $request->content;
@@ -76,9 +82,15 @@ class PanduanController extends Controller
     }
 
     // Workers
-    public function workersPanduan()
+    public function workersPanduan(Request $request)
     {
-        $panduans = Panduan::all();
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        if($request->search){
+            $panduans = Panduan::where('panduan_title','LIKE','%'.$request->search.'%')->where('role_id', $user->roles_id)->get();
+        }else{
+            $panduans = Panduan::where('role_id', $user->roles_id)->get();
+        }
 
         return view('workers.pages.panduan.panduan', compact('panduans'));
     }
@@ -90,19 +102,25 @@ class PanduanController extends Controller
         return view('workers.pages.panduan.detailPanduan', compact('panduan'));
     }
 
+    public function searchPanduan(Request $request){
+        if($request->search){
+            $searchPanduan = Panduan::where('name','LIKE','%'.$request->search.'%')->latest();
+            return view('workers.page.panduan', compact('searchPanduan'));
+        }else{
+            return redirect()->back()->with('message', 'Tidak ada Panduan yang dicari');
+        }
+    }
+
     public function add(Request $request)
     {
-        // {"_token":"8CYrqA3TKQT9Ux8Sy7xQ6UT26SryElapEMG2LYKZ","judul":"bakso","role_id":"3","content":"bersihin yang benar"}
         $rules = [
             'judul' => 'required',
-            'role_id' => 'required',
+            'role_id' => 'required|numeric',
             'content' => 'required',
-            // 'filegambar' => 'required|mimes:jpeg,jpg,png|max:2048',
         ];
         $id = [
             'required' => ':attribute wajib diisi',
-            // 'image' => ':attribute wajib berupa file gambar',
-            'mimes' => 'format jpg, jpeg, png',
+            'numeric' => 'Posisi wajib dipilih',
         ];
         $validator = Validator::make($request->all(), $rules, $id);
         if ($validator->fails()) {
