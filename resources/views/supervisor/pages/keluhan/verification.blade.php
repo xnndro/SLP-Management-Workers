@@ -7,11 +7,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">IMG-2008-05-13T22:33:00</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Bukti Penanganan Keluhan : {{$asg->complain->complain_title}}</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
-            <div class="modal-body">
-                <img class="img-fluid" id="preview" width="auto">
+            <div class="modal-body d-flex justify-content-center w-auto" style="min-height: 565px">
+                <img class="img-fluid" src="{{ asset($asg->submissions->submission_img)}}" id="preview" alt="" style="height:auto; width: 795px">
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -42,25 +42,8 @@
     <div class="col-8">
         <div class="card p-3">
             <div class="card-body d-flex flex-column">
-                <form class="row gy-4">
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Waktu Dikerjakan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-7">
-                                <div class="input-group">
-                                    <div class="form-group">
-                                        <h5>25/4/2023, 18:30 WIB</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <form class="row gy-4" method="POST" action="{{route('keluhanVerifyStore',$asg->id)}}" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-12 col-md-12 col-lg-4">
@@ -70,7 +53,25 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-7">
-                                <a href="{{route('keluhanShow')}}">Air Urinoir Tidak Keluar</a>
+                                <a class="fw-bold" href="{{route('keluhanShow',$asg->id)}}">{{$asg->complain->complain_title}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Tanggal Dikerjakan</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-7">
+                                <div class="input-group">
+                                    <div class="form-group">
+                                        <h5>{{$asg->submissions->created_at}} WIB</h5>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,12 +86,11 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
+                                    <textarea class="form-control" id="placeholder" disabled
                                         placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10"
-                                        readonly>Sudah siap dipakai bos</textarea>
+                                        disabled>{{$asg->submissions->submission_description}}</textarea>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -105,8 +105,10 @@
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control" type="file" id="formFile"
-                                            value="{{asset('../../assets/images/img2.jpg')}}">
+                                        <input class="form-control" type="text" id="formFile" disabled
+                                            value="{{str_replace("/storage/uploads/penanganan/", "", $asg->submissions->submission_img)}}">
+                                        {{-- <input class="form-control" type="text" id="formFile"
+                                            value="{{asset('../../assets/images/img2.jpg')}}"> --}}
                                     </div>
                                     <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                                         data-bs-target="#image-preview" type="button">
@@ -114,7 +116,6 @@
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -128,8 +129,11 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="placeholder" placeholder="Masukkan Ulasan"
-                                        cols="30" rows="10"></textarea>
+                                    <textarea name="ulasan" class="form-control @error('ulasan') is-invalid @enderror" id="placeholder"
+                                        placeholder="Masukkan catatan penanganan" cols="30" rows="10"></textarea>
+                                    @error('ulasan')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -140,15 +144,15 @@
                         <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
                             <div class="col-4">
                                 <a href="{{route('keluhan')}}"
-                                    class="btn waves-effect waves-light btn-outline-primary w-100">Kembali</a>
+                                    class="btn waves-effect waves-light btn-outline-primary w-75">Kembali</a>
                             </div>
                             <div class="col-4 d-flex justify-content-center">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-danger w-100">Tolak</button>
+                                <input type="submit" data-confirm-delete="true" name="Tolak"
+                                    class="btn waves-effect waves-light btn-danger w-75" value="Tolak">
                             </div>
                             <div class="col-4 d-flex justify-content-end">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-primary w-100">Verifikasi</button>
+                                <input type="submit" name="Terima"
+                                    class="btn waves-effect waves-light btn-primary w-75" value="Terima">
                             </div>
                         </div>
                     </div>
@@ -161,4 +165,18 @@
         </div>
     </div>
 </div>
+
+@push('after-script')
+<script>
+    var fileInput = document.getElementById('formFile');
+
+    fileInput.addEventListener('change', function() {
+        var fileName = fileInput.value.split('\\').pop();
+        var label = fileInput.nextElementSibling;
+
+        label.innerText = fileName ? fileName : 'Pilih File';
+    });
+</script>
+@endpush
+
 @endsection

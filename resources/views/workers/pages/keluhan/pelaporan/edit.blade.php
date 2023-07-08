@@ -44,14 +44,29 @@
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">ID</h4>
+                            <div class="col-sm-12 col-md-12 col-lg-4">
+                                <h5 class="card-title">Judul Keluhan</h4>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>{{$complain->id}}</h5>
+                            <div class="col-sm-12 col-md-12 col-lg-7 mt-lg-n2">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="text" name="judul_keluhan" 
+                                        @if($complain->report_status == 1)
+                                        class="form-control @error('judul_keluhan') is-invalid @enderror"
+                                        id="prenametext"
+                                        @else
+                                        class="form-control-plaintext"
+                                        disabled
+                                        @endif
+                                        value="{{$complain->complain_title}}">
+                                        @error('judul_keluhan')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -66,8 +81,12 @@
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                 <div class="input-group">
-                                    <select  name="category" class="form-select @error('category') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option>Pilih...</option>
+                                    <select  name="jenis_keluhan" 
+                                    @if($complain->report_status != 1)
+                                        disabled
+                                    @endif
+                                    class="form-select @error('jenis_keluhan') is-invalid @enderror" id="inputGroupSelect01">
+                                        <option value="pilih" selected="">Pilih...</option>
                                         @foreach ($categories as $cat)
                                         <option 
                                         @if($complain->category->id == $cat->id)
@@ -76,32 +95,10 @@
                                         value="{{$cat->id}}">{{$cat->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('category')
+                                </div>
+                                @error('jenis_keluhan')
                                         <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-12 col-md-12 col-lg-4">
-                                <h5 class="card-title">Judul Keluhan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-7 mt-lg-n2">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="prenametext"
-                                            value="{{$complain->complain_title}}">
-                                        @error('title')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -116,9 +113,13 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                    <textarea name="deskripsi_keluhan"
+                                        @if($complain->report_status != 1)
+                                        disabled
+                                        @endif
+                                        class="form-control @error('deskripsi_keluhan') is-invalid @enderror" id="placeholder"
                                         placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10">{{$complain->complain_description}}</textarea>
-                                    @error('description')
+                                    @error('deskripsi_keluhan')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -137,8 +138,12 @@
                             <div class="col-sm-0 col-md-0 col-lg-7 mt-n2">
                                 <div class="input-group">
                                     <label class="input-group-text" for="inputGroupSelect01">Di</label>
-                                    <select name="place" class="form-select @error('place') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
+                                    <select name="lokasi" 
+                                        @if($complain->report_status != 1)
+                                            disabled
+                                        @endif
+                                        class="form-select @error('lokasi') is-invalid @enderror" id="inputGroupSelect01">
+                                        <option value="pilih" selected="">Pilih...</option>
                                         @foreach ($places as $place)
                                         <option 
                                         @if($complain->place->id == $place->id)
@@ -146,10 +151,10 @@
                                         @endif value="{{$place->id}}">{{$place->place_name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('place')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
+                                @error('lokasi')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>
@@ -221,6 +226,23 @@
                             </div>
                         </div>
                     </div>
+
+                    @if(!is_null($complain->latestAssigned->submissions) && $complain->latestAssigned->submissions->submission_status == 2)
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Tanggal Ditangani</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7">
+                                {{$complain->latestAssigned->submissions->created_at}}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
                     @endif
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">

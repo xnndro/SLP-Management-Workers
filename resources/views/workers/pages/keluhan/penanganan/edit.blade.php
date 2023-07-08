@@ -1,17 +1,37 @@
 @extends('workers.layouts.master')
 
 @section('content')
-<!-- Modal for image preview -->
+<!-- Modal for old image preview -->
+<div class="modal fade" id="image-preview-old" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Bukti Penanganan Keluhan : {{$asg->complain->complain_title}}</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center w-auto" style="min-height: 565px">
+                <img class="img-fluid" src="{{ asset($asg->submissions->submission_img)}}" id="preview" alt="" style="height:auto; width: 795px">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal for new image preview -->
 <div class="modal fade" id="image-preview" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">IMG-2008-05-13T22:33:00</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Bukti Penanganan Keluhan : {{$asg->complain->complain_title}}</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
-            <div class="modal-body">
-                <img class="img-fluid" id="preview" width="auto">
+            <div class="modal-body d-flex justify-content-center w-auto" style="min-height: 565px">
+                <img src="" id="preview" alt="" style="height:auto; width: 795px">
+                <div class="d-flex flex-column align-items-center justify-content-center" id="previewText">
+                    <i class="fas fa-image my-3" style="font-size: 50px;"></i>
+                    <h4 class="modal-title">Belum ada gambar diunggah</h4>
+                </div>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -42,32 +62,37 @@
     <div class="col-8">
         <div class="card p-3">
             <div class="card-body d-flex flex-column">
-                <form class="row gy-4">
+                <form class="row gy-4" method="POST" action="{{route('keluhanPenangananUpdate',$asg->id)}}" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-12 col-md-12 col-lg-4">
-                                <h5 class="card-title text-dark fw-medium">Urgensi</h4>
+                                <h5 class="card-title">Judul Keluhan</h5>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
+                                <h5 class="card-title">:</h5>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-7 text-warning">
-                                Penting
+                            <div class="col-sm-12 col-md-12 col-lg-7">
+                                <a class="fw-bold" href="{{route('keluhanPenangananShow', $asg->id)}}">{{$asg->complain->complain_title}}</a>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-12 col-md-12 col-lg-4">
-                                <h5 class="card-title">Judul Keluhan</h4>
+                                <h5 class="card-title text-dark fw-medium">Urgensi</h5>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
+                                <h5 class="card-title">:</h5>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-7">
-                                <a href="{{route('keluhanPenangananShow')}}">Air Urinoir Tidak Keluar</a>
+                                @if($asg->complain->complain_urgency == 2)
+                                    <img class="complain-icon" src="{{asset('../../assets/images/keluhan-penting.svg')}}" width="20" alt="">
+                                @elseif ($asg->complain->complain_urgency == 3)
+                                    <img class="complain-icon" src="{{asset('../../assets/images/keluhan-genting.svg')}}" width="20" alt="">
+                                @endif
+                                {{$asg->complain->urgency->name}}
                             </div>
                         </div>
                     </div>
@@ -75,95 +100,105 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Catatan Penugasan</h4>
+                                <h5 class="card-title">Catatan Penugasan</h5>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
+                                <h5 class="card-title">:</h5>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
                                     <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10"
-                                        readonly>Tolong diapakan dulu apa itu supaya ga apa kali apanya</textarea>
+                                        cols="30" rows="10"
+                                        disabled>{{$asg->assign_description}}</textarea>
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Waktu Dikerjakan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <div class="form-group">
-                                        <input type="datetime-local" class="form-control w-100"
-                                            value="2008-05-13T22:33:00">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-5">
-                                <h5 class="card-title">Catatan Penanganan</h4>
+                                <h5 class="card-title">Catatan Penanganan</h5>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
+                                <h5 class="card-title">:</h5>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Catatan Penanganan" cols="30"
-                                        rows="10">Sudah Siap Bos</textarea>
+                                    <textarea name="catatan_penanganan" class="form-control @error('catatan_penanganan') is-invalid @enderror" id="placeholder"
+                                        placeholder="Masukkan catatan penanganan" cols="30" rows="10">{{$asg->submissions->submission_description}}</textarea>
+                                    @error('catatan_penanganan')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
                         </div>
                     </div>
 
-
-
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <h5 class="card-title">Unggah Bukti Penanganan</h4>
+                                <h5 class="card-title">Unggah Bukti Penanganan</h5>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
+                                <h5 class="card-title">:</h5>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control" type="file" id="formFile"
-                                            value="{{asset('../../assets/images/img2.jpg')}}">
+                                        <input class="form-control" type="text" id="formFile" disabled
+                                            value="{{str_replace("/storage/uploads/penanganan/", "", $asg->submissions->submission_img)}}">
+                                        {{-- <input class="form-control" type="text" id="formFile"
+                                            value="{{asset('../../assets/images/img2.jpg')}}"> --}}
+                                    </div>
+                                    <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#image-preview-old" type="button">
+                                        Lihat
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 my-2">
+                                <h6 class="">
+                                    <i class="fas fa-upload fa-md"></i>
+                                    Unggah baru
+                                </h6>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
+                                <div class="input-group flex-nowrap">
+                                    <div class="custom-file w-100">
+                                        <input onchange="previewImage(event)" class="form-control @error('bukti_penanganan') is-invalid @enderror" value="{{  old('formFile') }}" 
+                                        type="file" id="formFile" name="bukti_penanganan" value="{{$asg->submissions->submission_img}}">
                                     </div>
                                     <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                                         data-bs-target="#image-preview" type="button">
                                         Lihat
                                     </button>
                                 </div>
+                                @error('bukti_penanganan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>
                     </div>
 
+
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
                         <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <a href="{{route('keluhanPenanganan')}}"
-                                    class="btn waves-effect waves-light btn-outline-primary w-75">Kembali</a>
+                                    class="btn waves-effect waves-light btn-outline-primary w-100">Kembali</a>
                             </div>
-                            <div class="col-6 d-flex justify-content-end">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-primary w-75">Simpan</button>
+                            <div class="col-4 d-flex justify-content-center">
+                                <a href="{{route('keluhanPenangananDelete',$asg->id)}}"
+                                    data-confirm-delete="true"
+                                    class="btn waves-effect waves-light btn-danger w-100">Hapus</a>
+                            </div>
+                            <div class="col-4 d-flex justify-content-end">
+                                <input type="submit"
+                                    class="btn waves-effect waves-light btn-primary w-100" value="Simpan">
                             </div>
                         </div>
                     </div>
@@ -176,5 +211,46 @@
         </div>
     </div>
 </div>
+
+@push('after-script')
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var preview = document.getElementById("preview");
+                preview.setAttribute("src", e.target.result);
+                preview.style.display = "block";
+                
+                var previewText = document.getElementById("previewText");
+                if (previewText.classList.contains("d-flex")) {
+                    previewText.classList.remove("d-flex");
+                }
+                if (!previewText.classList.contains("d-none")) {
+                    previewText.classList.add("d-none");
+                }
+            }
+            reader.readAsDataURL(input.files[0]);
+            console.log(previewText);
+            console.log(previewText.classList);
+        } else {
+            var preview = document.getElementById("preview");
+            preview.style.display = "none";
+            
+            var previewText = document.getElementById("previewText");
+            if (previewText.classList.contains("d-none")) {
+                previewText.classList.remove("d-none");
+            }
+            if (!previewText.classList.contains("d-flex")) {
+                previewText.classList.add("d-flex");
+            }
+            console.log(previewText);
+            console.log(previewText.classList);
+        }
+    }
+
+  </script>
+@endpush
 
 @endsection

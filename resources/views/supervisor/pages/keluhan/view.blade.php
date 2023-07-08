@@ -26,50 +26,8 @@
     <div class="col-8">
         <div class="card p-3">
             <div class="card-body d-flex flex-column">
-                <form class="row gy-4">
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Tanggal</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>22/11/2023</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">ID</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>KF0001</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Jenis Keluhan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <h5>Fasilitas</h5>
-                            </div>
-                        </div>
-                    </div>
-
+                <form class="row gy-4" method="" action="" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-12 col-md-12 col-lg-4">
@@ -79,7 +37,41 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-7 mt-lg-n2">
-                                <h5>Air Urinoir Tidak Keluar</h5>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        {{$complain->complain_title}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-12 col-md-12 col-lg-4">
+                                <h5 class="card-title">Tanggal Dilaporkan</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7">
+                                <h5>{{$complain->created_at}} WIB</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-12 col-md-612 col-lg-4">
+                                <h5 class="card-title">Jenis Keluhan</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                                <div class="input-group">
+                                    {{$complain->category->name}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,9 +86,10 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10"
-                                        readonly>Ketika tombol flush urinoir ditekan airnya tidak keluar, yang keluar hanya air mata kekecewaan</textarea>
+                                    <textarea name="description"
+                                        disabled
+                                        class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                        placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10">{{$complain->complain_description}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -110,8 +103,10 @@
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <h5>Toilet Pria Lt.8 Tower A</h5>
+                            <div class="col-sm-0 col-md-0 col-lg-7 mt-n2">
+                                <div class="input-group">
+                                    {{$complain->place->place_name}}
+                                </div>
                             </div>
 
                         </div>
@@ -120,27 +115,34 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Status</h4>
+                                <h5 class="card-title">Status Laporan</h4>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>Menunggu</h5>
+                                <h5>{{$complain->status->name}}</h5>
                             </div>
                         </div>
                     </div>
+                
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
+                            <div class="col-sm-12 col-md-12 col-lg-4">
                                 <h5 class="card-title">Urgensi</h4>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 text-warning">
-                                <h5>Penting</h5>
+                            <div class="col-sm-12 col-md-12 col-lg-7">
+                                <h5>
+                                @if($complain->complain_urgency == 2)
+                                    <img class="complain-icon" src="{{asset('../../assets/images/keluhan-penting.svg')}}" width="20" alt="">
+                                @elseif ($complain->complain_urgency == 3)
+                                    <img class="complain-icon" src="{{asset('../../assets/images/keluhan-genting.svg')}}" width="20" alt="">
+                                @endif
+                                {{$complain->urgency->name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -154,7 +156,21 @@
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>HK - Hermione Gringer</h5>
+                                <h5>{{$complain->user->name}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Ditangani Oleh</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7">
+                                <h5>{{$complain->latestAssigned->user->name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -162,22 +178,48 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Dilaporkan Oleh</h4>
+                                <h5 class="card-title">Status Penanganan</h4>
                             </div>
                             <div class="d-none d-lg-block col-lg-1">
                                 <h5 class="card-title">:</h4>
                             </div>
                             <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>Teknisi - Jack Sparrow</h5>
+                                <h5>
+                                    @if(!is_null($complain->latestAssigned->submissions))
+                                        @if($complain->latestAssigned->submissions->submission_status == 2)
+                                            Selesai
+                                        @else
+                                            Proses
+                                        @endif
+                                    @else
+                                        Belum dikerjakan
+                                    @endif
+                                </h5>
                             </div>
                         </div>
                     </div>
+
+                    @if(!is_null($complain->latestAssigned->submissions) && $complain->latestAssigned->submissions->submission_status == 2)
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Tanggal Ditangani</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7">
+                                {{$complain->latestAssigned->submissions->created_at}}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
 
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
                         <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                            <div class="col-12 d-flex justify-content-start">
-                                <a href="{{route('keluhan')}}"
-                                    class="btn waves-effect waves-light btn-outline-primary w-25">Kembali</a>
+                            <div class="col-4">
+                                <a href="{{route('keluhanPenanganan')}}"
+                                    class="btn waves-effect waves-light btn-outline-primary w-100">Kembali</a>
                             </div>
                         </div>
                     </div>

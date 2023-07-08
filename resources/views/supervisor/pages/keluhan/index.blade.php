@@ -61,424 +61,6 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<!--  Modal content for the decline job -->
-<div class="modal fade" id="declineJob" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-dark fw-medium" id="scrollableModalTitle">Air Urinoir Tidak
-                    Keluar</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <form class="row m-4 gy-4 mt-0">
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-12 col-md-12 col-lg-4">
-                                <h5 class="card-title text-dark fw-medium">Urgensi</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-7 text-warning">
-                                Penting
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title text-dark fw-medium">Catatan Penugasan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
-                                <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Deskripsi Keluhan" cols="20" rows="5"
-                                        readonly>Tolong diapakan dulu apa itu supaya ga apa kali apanya</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title text-dark fw-medium">Alasan Penolakan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
-                                <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Alasan Penolakan" cols="20" rows="5"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-end">
-                        <div class="col-12 d-flex justify-content-end">
-                            <button type="button" class="btn waves-effect waves-light btn-danger w-25">Tolak</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-{{-- <!--  Modal content for assign task -->
-<div class="modal fade" id="assignTask" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <form class="row gy-4 m-4 mt-0" method="POST" action="{{route('keluhanPenugasan', $complain->id)}}">
-                    @csrf
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Pekerja</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
-                                        @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Urgensi</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
-                                        @foreach ($urgencies as $urgency)
-                                        <option value="{{$urgency->id}}">{{$urgency->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('urgency')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="fw-medium text-dark">Catatan Penugasan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
-                                <div class="form-group">
-                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
-                                        placeholder="Masukkan Catatan Penugasan" cols="30" rows="10"></textarea>
-                                    @error('description')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
-                        <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                            <div class="col-6 d-flex">
-                                <button type="button" class="btn waves-effect waves-light btn-danger w-50">Tolak
-                                    Laporan</button>
-                            </div>
-                            <div class="col-6 d-flex justify-content-end">
-                                <input type="submit"
-                                    class="btn waves-effect waves-light btn-primary w-50" value="Tugaskan">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal --> --}}
-
-<!--  Modal content for edit assign task -->
-<div class="modal fade" id="editAssignTask" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <form class="row gy-4 m-4 mt-0">
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Pekerja</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select class="form-select" id="inputGroupSelect01">
-                                        <option value="">Pilih...</option>
-                                        <option selected="" value="1">Teknisi - Jack Sparrow</option>
-                                        <option value="2">HK - Harmione Ginger</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Urgensi</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select class="form-select" id="inputGroupSelect01">
-                                        <option value="">Pilih...</option>
-                                        <option selected="" value="1">Penting</option>
-                                        <option value="2">Genting</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="fw-medium text-dark">Catatan Penugasan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
-                                <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Catatan Penugasan" cols="30"
-                                        rows="10">Tolong diapakan dulu apa itu supaya ga apa kali apanya</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
-                        <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                            <div class="col-6 d-flex">
-                                <button type="button" class="btn waves-effect waves-light btn-danger w-50">Tolak
-                                    Laporan</button>
-                            </div>
-                            <div class="col-6 d-flex justify-content-end">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-primary w-50">Tugaskan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-{{-- <!--  Modal content for reassign task -->
-<div id="reAssignTask" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reAssignTaskModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <form class="row gy-4 m-4 mt-0">
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Pekerja</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>Teknisi - Jack Sparrow</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="fw-medium text-dark">Alasan Penolakan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
-                                <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Catatan Penugasan" cols="30" rows="10"
-                                        readonly>Maaf saya sibux boss</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
-                        <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                            <div class="col-6 d-flex">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-warning text-white w-50">Tugaskan
-                                    Lagi</button>
-                            </div>
-                            <div class="col-6 d-flex justify-content-end">
-                                <!-- <button type="button" class="btn waves-effect waves-light btn-primary w-50"
-                                                data-bs-dismiss="modal" data-bs-target="#newAssignTask"
-                                                data-bs-toggle="modal">Tugaskan Baru</button> -->
-
-                                <button type="button" class="btn waves-effect waves-light btn-primary w-50">Tugaskan
-                                    Baru</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal --> --}}
-
-{{-- <!--  Modal content for new assign task -->
-<div id="newAssignTask" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newAssignTaskModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-            </div>
-            <div class="modal-body">
-                <form class="row gy-4 m-4 mt-0" method="POST" action="">
-                    @csrf
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Pekerja</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
-                                        @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h4 class="fw-medium text-dark">Urgensi</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h4 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
-                                        @foreach ($urgencies as $urgency)
-                                        <option value="{{$urgency->id}}">{{$urgency->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('urgency')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="fw-medium text-dark">Catatan Penugasan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="fw-medium text-dark">:</h4>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 my-2">
-                                <div class="form-group">
-                                    <textarea class="form-control" id="placeholder"
-                                        placeholder="Masukkan Catatan Penugasan" cols="30" rows="10"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
-                        <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                            <div class="col-6 d-flex">
-                                <button type="button" class="btn waves-effect waves-light btn-danger w-50">Tolak
-                                    Laporan</button>
-                            </div>
-                            <div class="col-6 d-flex justify-content-end">
-                                <button type="button"
-                                    class="btn waves-effect waves-light btn-primary w-50">Tugaskan</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal --> --}}
-
 <div class="page-breadcrumb mt-n5 ms-n4 mb-3">
     <div class="row">
         <div class="col-7 align-self-center">
@@ -500,7 +82,6 @@
     </div>
 </div>
 
-
 <div class="row my-3">
     <div class="col-md-6 col-lg-3 col-xlg-3">
         <div class="card card-hover bg-primary m-0">
@@ -512,7 +93,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Menunggu</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">60</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_wait}}</h2>
                             <!-- <span class="font-12">keluhan</span> -->
                         </div>
                     </div>
@@ -531,7 +112,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Proses</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">40</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_process}}</h2>
                         </div>
                     </div>
                 </div>
@@ -549,7 +130,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Selesai</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">17</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_finished}}</h2>
                         </div>
                     </div>
                 </div>
@@ -582,7 +163,7 @@
                         style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Jenis</th>
                                 <th>Judul</th>
                                 <th>Tanggal Dilaporkan</th>
@@ -590,29 +171,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($complains as $key => $complain)
                             <tr>
-                                <td>KF0001</td>
+                                <td>{{$key + 1}}</td>
                                 <td>Fasilitas</td>
                                 <td>
-                                    <a class="fw-bold" href="{{route('keluhanShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{route('keluhanShowFeedback')}}"
-                                            class="btn waves-effect waves-light btn-success w-75">Lihat
-                                            Riwayat</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @foreach ($complains as $complain)
-                            <tr>
-                                <td>{{$complain->id}}</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanShow')}}">{{$complain->complain_title}}</a>
+                                    <a class="fw-bold" href="{{route('keluhanShow',$complain->id)}}">{{$complain->complain_title}}</a>
                                 </td>
                                 <td>{{$complain->created_at}}</td>
                                 @if ($complain->report_status == 1)    
@@ -643,13 +207,13 @@
                                                                 </div>
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
-                                                                        <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option selected>Pilih...</option>
+                                                                        <select name="pekerja" class="form-select @error('pekerja') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option value="pilih" selected>Pilih...</option>
                                                                             @foreach ($users as $user)
                                                                             <option value="{{$user->id}}">{{$user->name}}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('user')
+                                                                        @error('pekerja')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -667,13 +231,13 @@
                                                                 </div>
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
-                                                                        <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option selected>Pilih...</option>
+                                                                        <select name="urgensi" class="form-select @error('urgensi') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option value="pilih" selected>Pilih...</option>
                                                                             @foreach ($urgencies as $urgency)
                                                                             <option value="{{$urgency->id}}">{{$urgency->name}}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('urgency')
+                                                                        @error('urgensi')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -691,9 +255,9 @@
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                                                     <div class="form-group">
-                                                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                        <textarea name="catatan_penugasan" class="form-control @error('catatan_penugasan') is-invalid @enderror" id="placeholder"
                                                                             placeholder="Masukkan Catatan Penugasan" cols="30" rows="10"></textarea>
-                                                                        @error('description')
+                                                                        @error('catatan_penugasan')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -752,8 +316,8 @@
                                                                 </div>
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
-                                                                        <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option>Pilih...</option>
+                                                                        <select name="pekerja" class="form-select @error('pekerja') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option value="pilih">Pilih...</option>
                                                                             @foreach ($users as $user)
                                                                             <option 
                                                                             @if($complain->latestAssigned->user_id == $user->id)
@@ -761,7 +325,7 @@
                                                                             @endif value="{{$user->id}}">{{$user->name}}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('user')
+                                                                        @error('pekerja')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -779,8 +343,8 @@
                                                                 </div>
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
-                                                                        <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option>Pilih...</option>
+                                                                        <select name="urgensi" class="form-select @error('urgensi') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option value="pilih">Pilih...</option>
                                                                             @foreach ($urgencies as $urgency)
                                                                             <option 
                                                                             @if($complain->complain_urgency == $urgency->id)
@@ -789,7 +353,7 @@
                                                                             value="{{$urgency->id}}">{{$urgency->name}}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('urgency')
+                                                                        @error('urgensi')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -807,9 +371,9 @@
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                                                     <div class="form-group">
-                                                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                        <textarea name="catatan_penugasan" class="form-control @error('catatan_penugasan') is-invalid @enderror" id="placeholder"
                                                                             placeholder="Masukkan Catatan Penugasan" cols="30" rows="10">{{$complain->latestAssigned->assign_description}}</textarea>
-                                                                        @error('description')
+                                                                        @error('catatan_penugasan')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -838,20 +402,20 @@
                                     @elseif ($complain->latestAssigned->assign_status == 2)
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                        @if (is_null($complain->latestAssigned->submission))
+                                        @if (is_null($complain->latestAssigned->submissions))
                                         <button class="btn btn-secondary disabled text-white w-75 flex-item mx-2">
                                             Proses
                                         </button>
                                         @else
-                                            @if ($complain->latestAssigned->submission->submission_status == 1)
-                                            <a href="{{route('keluhanShowFeedback')}}" class="btn waves-effect waves-light btn-success w-75">
-                                                Lihat Riwayat
-                                            </a>
-                                            @elseif($complain->latestAssigned->submission->submission_status == 2)
-                                            <a href="{{route('keluhanVerify')}}" class="btn waves-effect waves-light bg-cyan text-white w-75 flex-item mx-2">
+                                            @if ($complain->latestAssigned->submissions->submission_status == 1)
+                                            <a href="{{route('keluhanVerify', $complain->latestAssigned->id)}}" class="btn waves-effect waves-light bg-cyan text-white w-75 flex-item mx-2">
                                                 Verifikasi
                                             </a>
-                                            @elseif($complain->latestAssigned->submission->submission_status == 3)
+                                            @elseif($complain->latestAssigned->submissions->submission_status == 2)
+                                            <a href="{{route('keluhanShowFeedback', $complain->latestAssigned->id)}}" class="btn waves-effect waves-light btn-success w-75">
+                                                Lihat Riwayat
+                                            </a>
+                                            @elseif($complain->latestAssigned->submissions->submission_status == 3)
                                             <button class="btn btn-secondary disabled text-white w-75 flex-item mx-2">
                                                 Proses
                                             </button>
@@ -904,7 +468,7 @@
                                                                     <div class="form-group">
                                                                         <textarea class="form-control" id="placeholder"
                                                                             placeholder="Masukkan Catatan Penugasan" cols="30" rows="10"
-                                                                            readonly>{{$complain->latestAssigned->latestDeclined->decline_description}}</textarea>
+                                                                            disabled>{{$complain->latestAssigned->latestDeclined->decline_description}}</textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -912,11 +476,6 @@
 
                                                         <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
                                                             <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
-                                                                {{-- <div class="col-6 d-flex">
-                                                                    <button type="button"
-                                                                        class="btn waves-effect waves-light btn-warning text-white w-50">Tugaskan
-                                                                        Lagi</button>
-                                                                </div> --}}
                                                                 <div class="col-12 d-flex justify-content-end">
                                                                     <button type="button" class="btn waves-effect waves-light btn-primary w-25"
                                                                                     data-bs-dismiss="modal" data-bs-target="#editAssignTask{{$complain->id}}"
@@ -951,8 +510,8 @@
                                                                 </div>
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
-                                                                        <select name="user" class="form-select @error('user') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option>Pilih...</option>
+                                                                        <select name="pekerja" class="form-select @error('pekerja') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option value="pilih">Pilih...</option>
                                                                             @foreach ($users as $user)
                                                                             <option 
                                                                             @if($complain->latestAssigned->user_id == $user->id)
@@ -960,7 +519,7 @@
                                                                             @endif value="{{$user->id}}">{{$user->name}}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('user')
+                                                                        @error('pekerja')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -978,8 +537,8 @@
                                                                 </div>
                                                                 <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
                                                                     <div class="input-group">
-                                                                        <select name="urgency" class="form-select @error('urgency') is-invalid @enderror" id="inputGroupSelect01">
-                                                                            <option>Pilih...</option>
+                                                                        <select name="urgensi" class="form-select @error('urgensi') is-invalid @enderror" id="inputGroupSelect01">
+                                                                            <option value="pilih">Pilih...</option>
                                                                             @foreach ($urgencies as $urgency)
                                                                             <option 
                                                                             @if($complain->complain_urgency == $urgency->id)
@@ -988,7 +547,7 @@
                                                                             value="{{$urgency->id}}">{{$urgency->name}}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('urgency')
+                                                                        @error('urgensi')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -1006,9 +565,9 @@
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                                                     <div class="form-group">
-                                                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                        <textarea name="catatan_penugasan" class="form-control @error('catatan_penugasan') is-invalid @enderror" id="placeholder"
                                                                             placeholder="Masukkan Catatan Penugasan" cols="30" rows="10">{{$complain->latestAssigned->assign_description}}</textarea>
-                                                                        @error('description')
+                                                                        @error('catatan_penugasan')
                                                                             <div class="text-danger">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
@@ -1038,57 +597,6 @@
                                 @endif
                             </tr>
                             @endforeach
-                            <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#editAssignTask"
-                                            class="btn waves-effect waves-light btn-warning text-white w-75">
-                                            Edit</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{route('keluhanVerify')}}"
-                                            class="btn waves-effect waves-light bg-cyan text-white w-75 flex-item mx-2">Verifikasi</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <button class="btn waves-effect waves-light btn-danger text-white w-75 flex-item mx-2"
-                                            data-bs-toggle="modal" data-bs-target="#reAssignTask">
-                                            Tugaskan
-                                            Lagi</button>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
     Route::get('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
 
-    Route::get('/keluhan/ulasan', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
+    Route::get('/keluhan/ulasan/{asg}', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
 
     Route::group(['middleware' => ['supervisor']], function () {
         // Disini nanti semua route yang hanya bisa diakses oleh supervisor
@@ -81,8 +81,9 @@ Route::group(['middleware' => ['auth']], function () {
         // * Supervisor -> Keluhan
         Route::get('/keluhan', [App\Http\Controllers\KeluhanController::class, 'daftarKeluhan'])->name('keluhan');
         Route::delete('/keluhan/tolak/{complain}', [App\Http\Controllers\KeluhanController::class, 'tolakLaporan'])->name('keluhanDecline');
-        Route::get('/keluhan/verifikasi', [App\Http\Controllers\KeluhanController::class, 'verifikasi'])->name('keluhanVerify');
-        Route::get('/keluhan/detail', [App\Http\Controllers\KeluhanController::class, 'detailKeluhan'])->name('keluhanShow');
+        Route::get('/keluhan/verifikasi/{asg}', [App\Http\Controllers\KeluhanController::class, 'verifikasi'])->name('keluhanVerify');
+        Route::post('/keluhan/verifikasi/simpan/{asg}', [App\Http\Controllers\KeluhanController::class, 'simpanVerifikasi'])->name('keluhanVerifyStore');
+        Route::get('/keluhan/detail/{complain}', [App\Http\Controllers\KeluhanController::class, 'detailKeluhan'])->name('keluhanShow');
         Route::post('/keluhan/penugasan/{complain}', [App\Http\Controllers\KeluhanController::class, 'simpanPenugasan'])->name('keluhanPenugasan');
         Route::post('/keluhan/penugasan/update/{asg}', [App\Http\Controllers\KeluhanController::class, 'updatePenugasan'])->name('keluhanPenugasanUpdate');
         Route::delete('/keluhan/penugasan/hapus/{asg}', [App\Http\Controllers\KeluhanController::class, 'hapusPenugasan'])->name('keluhanPenugasanDelete');
@@ -116,11 +117,14 @@ Route::group(['middleware' => ['auth']], function () {
 
         // * Workers -> keluhan -> Penanganan
         Route::get('/penangananKeluhan', [App\Http\Controllers\KeluhanController::class, 'daftarPenanganan'])->name('keluhanPenanganan');
-        Route::get('/penangananKeluhan/buat', [App\Http\Controllers\KeluhanController::class, 'buatPenanganan'])->name('keluhanPenangananCreate');
-        Route::get('/penangananKeluhan/detail', [App\Http\Controllers\KeluhanController::class, 'detailKeluhanPenanganan'])->name('keluhanPenangananShow');
-        Route::get('/penangananKeluhan/edit', [App\Http\Controllers\KeluhanController::class, 'editPenanganan'])->name('keluhanPenangananEdit');
+        Route::get('/penangananKeluhan/buat/{asg}', [App\Http\Controllers\KeluhanController::class, 'buatPenanganan'])->name('keluhanPenangananCreate');
+        Route::post('/penangananKeluhan/simpan/{asg}', [App\Http\Controllers\KeluhanController::class, 'simpanPenanganan'])->name('keluhanPenangananStore');
+        Route::get('/penangananKeluhan/detail/{asg}', [App\Http\Controllers\KeluhanController::class, 'detailKeluhanPenanganan'])->name('keluhanPenangananShow');
+        Route::get('/penangananKeluhan/edit/{asg}', [App\Http\Controllers\KeluhanController::class, 'editPenanganan'])->name('keluhanPenangananEdit');
+        Route::post('/penangananKeluhan/update/{asg}', [App\Http\Controllers\KeluhanController::class, 'updatePenanganan'])->name('keluhanPenangananUpdate');
         Route::get('/penangananKeluhan/terima/{asg}', [App\Http\Controllers\KeluhanController::class, 'terimaPenugasan'])->name('terimaPenugasan');
         Route::delete('/penangananKeluhan/tolak/{asg}', [App\Http\Controllers\KeluhanController::class, 'tolakPenugasan'])->name('tolakPenugasan');
+        Route::delete('/penangananKeluhan/hapus/{asg}', [App\Http\Controllers\KeluhanController::class, 'hapusPenanganan'])->name('keluhanPenangananDelete');
 
         // * Workers -> Inventaris
         Route::get('/workersInventaris', [App\Http\Controllers\InventarisController::class, 'workersInventaris'])->name('workersInventaris');
