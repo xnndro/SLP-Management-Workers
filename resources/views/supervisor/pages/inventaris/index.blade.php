@@ -113,8 +113,7 @@
                                         <td class="text-center">{{ $inventory->inventaris_total }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('editInventaris', ['id'=>$inventory->id]) }}" type="button" style="background-color: transparent; color: #22ca80;" class="btn-circle-lg"><i class="fa fa-edit"></i></a>
-                                            {{-- <a href="" type="submit" style="background-color: transparent; color: #ff4f70;" data-confirm-delete="true" class="btn-circle-lg"><i class="fa fa-trash"></i></a> --}}
-                                            <a href="{{ route('deleteInventaris', ['id'=>$inventory->id]) }}" type="submit" style="background-color: transparent; color: #ff4f70;" class="btn-circle-lg"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('deleteInventaris', ['id'=>$inventory->id]) }}" type="submit" style="background-color: transparent; color: #ff4f70;"data-confirm-delete="true" class="btn-circle-lg"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -7,9 +7,6 @@ use Illuminate\Database\Seeder;
 
 class InventarisSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Inventaris::create([

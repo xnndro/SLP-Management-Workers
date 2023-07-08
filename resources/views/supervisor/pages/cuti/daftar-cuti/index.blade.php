@@ -15,25 +15,29 @@
     <!-- End Title -->
     <div class="row" style="background-color: #31CFD2;margin-top: 10vh;">
         <div class="col-lg-12 d-flex flex-row justify-content-between">
-            <div class="col-lg-4 d-flex justify-content-center align-items-center bottom-0 position-relative" style="margin-bottom: 13.4vh;">
+            <div class="col-lg-4 d-flex justify-content-center align-items-center bottom-0 position-relative" style="margin-bottom: 17.5vh;">
                 <img src="{{asset('../../assets/images/list-cuti-icon.svg')}}" alt="" class="img-fluid position-absolute">
             </div>
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <h5 class="text-black">Cari Berdasarkan nama</h5>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nama / Posisi" aria-label="Nama / Posisi" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
-                    </div>
-                </div>
+                 <div class="form-group">
+                     <h5 class="text-black">Cari Berdasarkan nama</h5>
+                     <form action="" method="get">
+                         <div class="input-group">
+                             <input type="text" class="form-control" name="search_nama_posisi" placeholder="Nama / Posisi">
+                             <button class="input-group-text btn btn-outline-secondary" type="submit" id="button-addon2">Cari</button>
+                         </div>
+                     </form>
+                 </div>
             </div>
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <h5 class="text-black">Cari Berdasarkan Tanggal</h5>
-                    <div class="input-group">
-                        <input type="date" class="form-control" placeholder="DD/MM/YYYY" aria-label="DD/MM/YYYY" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
-                    </div>
+                    <form action="" method="get">
+                        <div class="input-group">
+                            <input type="date" class="form-control" name="search_tanggal" placeholder="MM/DD/YYYY" >
+                            <button class="input-group-text btn btn-outline-secondaryy" type="submit" id="button-addon2">Cari</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -142,7 +146,7 @@
                                                 <tr>
                                                     <td>CT00{{$data->id}}</td>
                                                     <td>{{$data->user->name}}</td>
-                                                    <td>{{$data->user->roles->name}}</td>
+                                                    <td>{{$data->user->roles->role_name}}</td>
                                                     <td>
                                                         <button type="button" class=" btn border-0" data-bs-toggle="modal" data-bs-target="#detail{{$data->id}}">
                                                             <img src="{{asset('../../assets/images/detail-icon.svg')}}" alt="" srcset="">
@@ -173,7 +177,7 @@
                                                                     <div class="mb-3 row">
                                                                         <label for="tanggalPengajuan" class="col-sm-4 col-form-label">Pengajuan</label>
                                                                         <div class="col-sm-8">
-                                                                        <input type="date" class="form-control" id="idCuti" value="{{$data->created_at}}" disabled>
+                                                                        <input type="date" class="form-control" id="idCuti" value="{{$data->created_at->format('Y-m-d')}}" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div class="mb-3 row">
@@ -185,7 +189,7 @@
                                                                     <div class="mb-3 row">
                                                                         <label for="jobPosition" class="col-sm-4 col-form-label">Posisi</label>
                                                                         <div class="col-sm-8">
-                                                                        <input type="text" class="form-control" id="jobPosition" value="{{$data->user->roles->name}}" disabled>
+                                                                        <input type="text" class="form-control" id="jobPosition" value="{{$data->user->roles->role_name}}" disabled>
                                                                         </div>
                                                                     </div>
                                                                     <div class="mb-3 row">

@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\PaidLeaveCategory;
 use App\Models\PaidLeaveRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon; 
+use Carbon\Carbon;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 class PaidLeaveController extends Controller
 {
@@ -23,13 +27,34 @@ class PaidLeaveController extends Controller
         return view('supervisor.pages.cuti.pengajuan-cuti.index', compact('data', 'total'));
     }
 
-    public function paidLeaveList()
+    public function paidLeaveList(Request $request)
     {
         $data = PaidLeaveRequest::where('status', '2')->get(); 
+        $keyword1 = $request->search_nama_posisi;
+        $keyword2 = $request->search_tanggal;
         $umum = count($data->where('category_id', '1'));
         $mm = count($data->where('category_id', '2'));
         $kesehatan = count($data->where('category_id', '3'));
         $kedukaan = count($data->where('category_id', '4'));
+        if($keyword1 == ""){
+            $data = PaidLeaveRequest::where('status', '2')->get(); 
+        }
+        elseif($keyword1 != ""){         
+            $data = PaidLeaveRequest::where('status', '2')->get();
+            $data = $data->where('user.name','LIKE',$keyword1);
+            if(count($data) == 0){
+                $data = PaidLeaveRequest::where('status', '2')->get();
+                $data = $data->where('user.roles.role_name', 'LIKE', $keyword1); 
+            }
+        }
+        if($keyword2 == ""){
+            $data = PaidLeaveRequest::where('status', '2')->get();
+        }
+        elseif($keyword2 != ""){
+            $data = PaidLeaveRequest::where('status', '2')->get();
+            $data = $data->where('start_date','<=',$keyword2);
+            $data = $data->where('end_date','>=',$keyword2);
+        }
         return view('supervisor.pages.cuti.daftar-cuti.index', compact('data', 'umum', 'mm', 'kesehatan', 'kedukaan'));
     }
 
@@ -45,7 +70,7 @@ class PaidLeaveController extends Controller
 
     public function paidLeaveRequest()
     {
-        $request = PaidLeaveRequest::where('user_id', '1')->whereYear('start_date', '2023')->get();
+        $request = PaidLeaveRequest::where('user_id', Auth::user()->id)->whereYear('start_date', '2023')->get();
         $proses = 0;
         $setuju = 0;
         if ($request->isEmpty()) {
@@ -83,7 +108,7 @@ class PaidLeaveController extends Controller
             $category = $category->get();
             //return dd($category);
             $cuti = new PaidLeaveRequest();
-            $cuti->user_id = '1'; // ini jangan lupa di ubah, di assign ke user yang request
+            $cuti->user_id = Auth::user()->id; 
             $cuti->category_id = $category[0]->id;
             $cuti->start_date = $request->tanggalMulai;
             $cuti->end_date = $request->tanggalAkhir;

@@ -11,7 +11,7 @@
             <form class="col-sm-4">
                 <div class="customize-input">
                     <div class="d-flex justify-content-end align-items-center">
-                        <input class="form-control custom-shadow custom-radius border-0 bg-white" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control custom-shadow custom-radius border-0 bg-white" type="search" placeholder="Search" aria-label="Search" name="search">
                         <svg style="position:absolute;" class="z-1 m-2 p-1" xmlns="http://www.w3.org/2000/svg" width="24" position="absolute" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search form-control-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </div>
                 </div>
