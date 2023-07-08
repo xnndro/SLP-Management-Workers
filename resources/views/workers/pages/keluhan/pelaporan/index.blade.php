@@ -121,7 +121,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Menunggu</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">60</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_wait}}</h2>
                             <!-- <span class="font-12">keluhan</span> -->
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Proses</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">40</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_process}}</h2>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Selesai</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">17</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_finished}}</h2>
                         </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                         style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Jenis</th>
                                 <th>Judul</th>
                                 <th>Tanggal Dilaporkan</th>
@@ -203,28 +203,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <tr>
-                                <td>KI0001</td>
-                                <td>Inventaris</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit')}}">Tangga Hilang</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>Menunggu</td>
-                            </tr>
+                            @foreach ($complains as $key => $complain)
                             <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanPelaporanEdit')}}">Air Urinoir Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>Menunggu</td>
-                            </tr> --}}
-                            @foreach ($complains as $complain)
-                            <tr>
-                                <td>{{$complain->id}}</td>
+                                <td>{{$key + 1}}</td>
                                 <td>{{$complain->category->name}}</td>
                                 <td>
                                     <a class="fw-bold" href="{{route('keluhanPelaporanEdit',$complain->id)}}">{{$complain->complain_title}}</a>

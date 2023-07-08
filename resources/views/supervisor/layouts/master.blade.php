@@ -54,7 +54,7 @@
 
             </div>
             <footer class="footer text-center text-muted">
-                All Rights Reserved by Kelompok 5.
+                All Rights Reserved by Kelompok 1.
             </footer>
         </div>
     </div>

@@ -31,30 +31,6 @@
                     @csrf
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Jenis Keluhan</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
-                                <div class="input-group">
-                                    <select  name="category" class="form-select @error('category') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected>Pilih...</option>
-                                        @foreach ($categories as $cat)
-                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
                             <div class="col-sm-12 col-md-12 col-lg-4">
                                 <h5 class="card-title">Judul Keluhan</h4>
                             </div>
@@ -63,12 +39,36 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-7 mt-lg-n2">
                                 <div class="form-group">
-                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="placeholder"
+                                    <input type="text" name="judul_keluhan" class="form-control @error('judul_keluhan') is-invalid @enderror" id="placeholder"
                                         placeholder="Masukkan Judul Keluhan">
-                                    @error('title')
+                                    @error('judul_keluhan')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Jenis Keluhan</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7 mt-lg-n2">
+                                <div class="input-group">
+                                    <select  name="jenis_keluhan" class="form-select @error('jenis_keluhan') is-invalid @enderror" id="inputGroupSelect01">
+                                        <option value="pilih" selected>Pilih...</option>
+                                        @foreach ($categories as $cat)
+                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('jenis_keluhan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -83,9 +83,9 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                 <div class="form-group">
-                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                    <textarea name="deskripsi_keluhan" class="form-control @error('deskripsi_keluhan') is-invalid @enderror" id="placeholder"
                                         placeholder="Masukkan Deskripsi Keluhan" cols="30" rows="10"></textarea>
-                                    @error('description')
+                                    @error('deskripsi_keluhan')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -105,16 +105,16 @@
                             <div class="col-sm-0 col-md-0 col-lg-7 mt-n2">
                                 <div class="input-group">
                                     <label class="input-group-text" for="inputGroupSelect01">Di</label>
-                                    <select name="place" class="form-select @error('place') is-invalid @enderror" id="inputGroupSelect01">
-                                        <option selected="">Pilih...</option>
+                                    <select name="lokasi" class="form-select @error('lokasi') is-invalid @enderror" id="inputGroupSelect01">
+                                        <option value="pilih" selected="">Pilih...</option>
                                         @foreach ($places as $place)
                                         <option value="{{$place->id}}">{{$place->place_name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('place')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
+                                @error('lokasi')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>

@@ -192,7 +192,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Ditugaskan</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">60</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_assigned}}</h2>
                             <!-- <span class="font-12">keluhan</span> -->
                         </div>
                     </div>
@@ -211,7 +211,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Dikerjakan</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">40</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_process}}</h2>
                         </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
                     <div class="ms-auto align-items-center">
                         <h6 class="font-weight-normal text-truncate">Diverifikasi</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">17</h2>
+                            <h2 class="text-white font-weight-medium">{{$count_verified}}</h2>
                         </div>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
                         style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Jenis</th>
                                 <th>Judul</th>
                                 <th>Tanggal Ditugaskan</th>
@@ -270,79 +270,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($assignments as $key => $asg)
                             <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanPenangananShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{route('keluhanShowFeedback')}}" class="btn waves-effect waves-light btn-success w-75">Lihat
-                                            Ulasan</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanPenangananShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{route('keluhanPenangananCreate')}}"
-                                            class="btn waves-effect waves-light btn-primary w-75">Unggah</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanPenangananShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{route('keluhanPenangananEdit')}}"
-                                            class="btn waves-effect waves-light btn-warning text-white w-75">Edit</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            {{-- <tr>
-                                <td>KF0001</td>
-                                <td>Fasilitas</td>
-                                <td>
-                                    <a class="fw-bold" href="{{route('keluhanPenangananShow')}}">Air Urinoir
-                                        Tidak
-                                        Keluar</a>
-                                </td>
-                                <td>09-09-2023</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <button type="button"
-                                            class="btn waves-effect waves-light bg-cyan text-white w-50 flex-item mx-2">Terima</button>
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-danger text-white w-50 flex-item mx-2"
-                                            data-bs-toggle="modal" data-bs-target="#declineJob">Tolak</button>
-                                    </div>
-                                </td>
-                            </tr> --}}
-                            @foreach ($assignments as $asg)
-                            <tr>
-                                <td>{{$asg->id}}</td>
+                                <td>{{$key + 1}}</td>
                                 <td>{{$asg->complain->category->name}}</td>
                                 <td>
-                                    <a class="fw-bold" href="{{route('keluhanPenangananShow')}}">{{$asg->complain->complain_title}}</a>
+                                    <a class="fw-bold" href="{{route('keluhanPenangananShow',$asg->id)}}">{{$asg->complain->complain_title}}</a>
                                 </td>
                                 <td>{{$asg->created_at}}</td>
                                 @if ($asg->assign_status == 1)    
@@ -404,7 +337,7 @@
                                                                             <div class="form-group">
                                                                                 <textarea class="form-control" id="placeholder"
                                                                                     placeholder="Masukkan Deskripsi Keluhan" cols="20" rows="5"
-                                                                                    readonly>{{$asg->assign_description}}</textarea>
+                                                                                    disabled>{{$asg->assign_description}}</textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -420,9 +353,9 @@
                                                                         </div>
                                                                         <div class="col-sm-12 col-md-12 col-lg-12 my-2">
                                                                             <div class="form-group">
-                                                                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="placeholder"
+                                                                                <textarea name="alasan_penolakan" class="form-control @error('alasan_penolakan') is-invalid @enderror" id="placeholder"
                                                                                     placeholder="Masukkan Alasan Penolakan" cols="20" rows="5"></textarea>
-                                                                                @error('description')
+                                                                                @error('alasan_penolakan')
                                                                                     <div class="text-danger">{{ $message }}</div>
                                                                                 @enderror
                                                                             </div>
@@ -444,12 +377,37 @@
                                     </div>
                                 </td>
                                 @elseif ($asg->assign_status == 2)
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{route('keluhanPenangananCreate')}}"
-                                            class="btn waves-effect waves-light btn-primary w-75">Unggah</a>
-                                    </div>
-                                </td>
+                                    @if (is_null($asg->submissions))
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{route('keluhanPenangananCreate',$asg->id)}}"
+                                                class="btn waves-effect waves-light btn-primary w-75">Unggah</a>
+                                        </div>
+                                    </td>
+                                    @else
+                                        @if ($asg->submissions->submission_status == 1)
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{route('keluhanPenangananEdit',$asg->id)}}"
+                                                    class="btn waves-effect waves-light btn-warning text-white w-75">Edit</a>
+                                            </div>
+                                        </td>
+                                        @elseif ($asg->submissions->submission_status == 2)
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{route('keluhanShowFeedback',$asg->id)}}" class="btn waves-effect waves-light btn-success w-75">Lihat
+                                                    Ulasan</a>
+                                            </div>
+                                        </td>
+                                        @elseif($asg->submissions->submission_status == 3)
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{route('keluhanPenangananEdit',$asg->id)}}"
+                                                    class="btn waves-effect waves-light btn-danger text-white w-75">Unggah Ulang</a>
+                                            </div>
+                                        </td>
+                                        @endif
+                                    @endif
                                 @endif
                             </tr>
                             @endforeach
