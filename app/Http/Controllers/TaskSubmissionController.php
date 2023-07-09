@@ -7,7 +7,6 @@ use App\Models\Roles;
 use App\Models\ScheduleForm;
 use App\Models\TaskManagement;
 use App\Models\TaskSubmission;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,22 +99,24 @@ class TaskSubmissionController extends Controller
         confirmDelete($title, $text);
 
         $total_workers_cuti = User::where('status', 'cuti')
-        ->where('roles_id', '!=', '1')
-        ->count();
+            ->where('roles_id', '!=', '1')
+            ->count();
         $total_workers_aktif = User::where('status', 'active')->where('roles_id', '!=', '1')->count();
         $workers = User::where('roles_id', '!=', '1')->get();
-        
+
         foreach ($workers as $worker) {
             $role = Roles::where('id', $worker->roles_id)->first();
             $worker->role = $role->role_name;
         }
-        return view('supervisor.pages.task-submission.workers.index',compact('total_workers_cuti','total_workers_aktif','workers'));
+
+        return view('supervisor.pages.task-submission.workers.index', compact('total_workers_cuti', 'total_workers_aktif', 'workers'));
     }
 
     public function workersCreate()
     {
         $role = Roles::all();
-        return view('supervisor.pages.task-submission.workers.create',compact('role'));
+
+        return view('supervisor.pages.task-submission.workers.create', compact('role'));
     }
 
     public function workersStore(Request $request)
@@ -136,7 +137,8 @@ class TaskSubmissionController extends Controller
     {
         $worker = User::find($id);
         $role = Roles::all();
-        return view('supervisor.pages.task-submission.workers.edit',compact('worker','role'));
+
+        return view('supervisor.pages.task-submission.workers.edit', compact('worker', 'role'));
     }
 
     public function workersUpdate(Request $request, $id)
@@ -172,9 +174,9 @@ class TaskSubmissionController extends Controller
             ];
         }
         $name = User::find($id);
-        return view('supervisor.pages.task-submission.workers.workersSchedule',compact('events','name'));
-    }
 
+        return view('supervisor.pages.task-submission.workers.workersSchedule', compact('events', 'name'));
+    }
 
     // Laporan kerja
     public function tasksReport()
@@ -187,19 +189,20 @@ class TaskSubmissionController extends Controller
         // get total task submission by mapping the task_status
         $total_submission = TaskSubmission::all()->groupBy('task_status')->map->count();
         // dd($total_submission['commented']);
-        return view('supervisor.pages.task-submission.tasksReport.index',compact('submission','total_submission'));
+        return view('supervisor.pages.task-submission.tasksReport.index', compact('submission', 'total_submission'));
     }
 
     // Workers
     public function taskSubmission()
     {
         $tasks = TaskManagement::where('user_id', Auth::user()->id)->where('work_date', date('Y-m-d'))->get();
-    
+
         $task_submission = TaskSubmission::where('task_status', 'commented')
-            ->whereHas('task_management', function($query) {
+            ->whereHas('task_management', function ($query) {
                 $query->where('user_id', Auth::user()->id);
             })->get();
-        return view('workers.pages.task',compact('tasks','task_submission'));
+
+        return view('workers.pages.task', compact('tasks', 'task_submission'));
     }
 
     public function tasksUpload(Request $request, $id)
@@ -225,6 +228,7 @@ class TaskSubmissionController extends Controller
 
         return redirect()->route('tasksReport')->with('success', 'Data berhasil ditambahkan');
     }
+
     public function scheduleWorkers()
     {
         $events = [];

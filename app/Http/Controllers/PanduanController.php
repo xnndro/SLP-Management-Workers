@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Roles;
 use App\Models\Panduan;
+use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +14,9 @@ class PanduanController extends Controller
     // Supervisor
     public function supervisorPanduan(Request $request)
     {
-        if($request->search){
-            $panduans = Panduan::where('panduan_title','LIKE','%'.$request->search.'%')->get();
-        }else{
+        if ($request->search) {
+            $panduans = Panduan::where('panduan_title', 'LIKE', '%'.$request->search.'%')->get();
+        } else {
             $panduans = Panduan::all();
         }
 
@@ -44,7 +44,7 @@ class PanduanController extends Controller
         confirmDelete($title, $text);
 
         return view('supervisor.pages.panduan.editPanduan', [
-            'panduan' => Panduan::find($id)
+            'panduan' => Panduan::find($id),
         ]);
     }
 
@@ -63,7 +63,7 @@ class PanduanController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        
+
         $panduan = Panduan::find($id);
         $panduan->panduan_title = $request->title;
         $panduan->panduan_content = $request->content;
@@ -86,9 +86,9 @@ class PanduanController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::find($id);
-        if($request->search){
-            $panduans = Panduan::where('panduan_title','LIKE','%'.$request->search.'%')->where('role_id', $user->roles_id)->get();
-        }else{
+        if ($request->search) {
+            $panduans = Panduan::where('panduan_title', 'LIKE', '%'.$request->search.'%')->where('role_id', $user->roles_id)->get();
+        } else {
             $panduans = Panduan::where('role_id', $user->roles_id)->get();
         }
 
@@ -102,11 +102,13 @@ class PanduanController extends Controller
         return view('workers.pages.panduan.detailPanduan', compact('panduan'));
     }
 
-    public function searchPanduan(Request $request){
-        if($request->search){
-            $searchPanduan = Panduan::where('name','LIKE','%'.$request->search.'%')->latest();
+    public function searchPanduan(Request $request)
+    {
+        if ($request->search) {
+            $searchPanduan = Panduan::where('name', 'LIKE', '%'.$request->search.'%')->latest();
+
             return view('workers.page.panduan', compact('searchPanduan'));
-        }else{
+        } else {
             return redirect()->back()->with('message', 'Tidak ada Panduan yang dicari');
         }
     }
@@ -126,7 +128,7 @@ class PanduanController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         } else {
-            $link = '/assets/images/random-panduan/'.mt_rand(1,17).'.png';
+            $link = '/assets/images/random-panduan/'.mt_rand(1, 17).'.png';
 
             $panduan = new Panduan();
             $panduan->panduan_title = $request->judul;

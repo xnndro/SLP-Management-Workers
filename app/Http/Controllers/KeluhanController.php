@@ -13,26 +13,25 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Nette\Utils\Strings;
 
 class KeluhanController extends Controller
 {
     // ================================== SUPERVISOR ==================================
     public function daftarKeluhan()
     {
-        $complains = Complain::where('report_status','!=',3)->get();
+        $complains = Complain::where('report_status', '!=', 3)->get();
         $users = User::where('roles_id', '!=', 1)->get();
         $urgencies = ComplainUrgency::where('id', '!=', 1)->get();
-        
+
         $title = 'Konfirmasi';
         $text = 'Apakah anda yakin?';
         confirmDelete($title, $text);
 
-        $count_wait = Complain::where('report_status',1)->count();
+        $count_wait = Complain::where('report_status', 1)->count();
         $count_finished = Complain::whereHas('latestAssigned.submissions', function ($query) {
-                                    $query->where('submission_status', 2);
-                                })->count();
-        $count_process = (Complain::where('report_status',2)->count()) - $count_finished;
+            $query->where('submission_status', 2);
+        })->count();
+        $count_process = (Complain::where('report_status', 2)->count()) - $count_finished;
 
         return view('supervisor.pages.keluhan.index', compact('complains', 'users', 'urgencies', 'count_wait', 'count_finished', 'count_process'));
     }
@@ -56,7 +55,7 @@ class KeluhanController extends Controller
         $msg = [
             'required' => 'Kolom '.str_replace('_', ' ', ':attribute').' wajib diisi',
             'pekerja' => 'Kolom pekerja wajib dipilih',
-            'urgensi' => 'Kolom pekerja wajib dipilih'
+            'urgensi' => 'Kolom pekerja wajib dipilih',
         ];
 
         $validator = Validator::make($request->all(), $rules, $msg);
@@ -92,7 +91,7 @@ class KeluhanController extends Controller
         $msg = [
             'required' => 'Kolom '.str_replace('_', ' ', ':attribute').' wajib diisi',
             'pekerja' => 'Kolom pekerja wajib dipilih',
-            'urgensi' => 'Kolom pekerja wajib dipilih'
+            'urgensi' => 'Kolom pekerja wajib dipilih',
         ];
 
         $validator = Validator::make($request->all(), $rules, $msg);
@@ -102,7 +101,7 @@ class KeluhanController extends Controller
             $complain = Complain::findOrFail($asg->complain->id);
             $complain->complain_urgency = $request->urgensi;
             $complain->save();
-            
+
             $asg->user_id = $request->pekerja;
             $asg->assign_description = $request->catatan_penugasan;
             $asg->assign_status = 1;
@@ -119,10 +118,10 @@ class KeluhanController extends Controller
         $complain->report_status = 1;
         $complain->save();
 
-        if(is_null($asg->latestDeclined)){
+        if (is_null($asg->latestDeclined)) {
             $asg->delete();
         }
-        
+
         return redirect()->route('keluhan')->with('success', 'Penugasan berhasil dibatalkan!');
     }
 
@@ -131,10 +130,12 @@ class KeluhanController extends Controller
         $title = 'Tolak Penanganan!';
         $text = 'Apakah anda yakin ingin menolak penanganan ini?';
         confirmDelete($title, $text);
+
         return view('supervisor.pages.keluhan.verification', compact('asg'));
     }
 
-    public function simpanVerifikasi(Request $request, ComplainAssignment $asg){
+    public function simpanVerifikasi(Request $request, ComplainAssignment $asg)
+    {
         $rules = [
             'ulasan' => 'required',
         ];
@@ -149,25 +150,24 @@ class KeluhanController extends Controller
         } else {
             $submission = ComplainSubmission::findOrFail($asg->submissions->id);
             $submission->submission_feedback = $request->ulasan;
-            if($request->has('Terima')){
+            if ($request->has('Terima')) {
                 $submission->submission_status = 2;
-            }
-            elseif ($request->has('Tolak')){
+            } elseif ($request->has('Tolak')) {
                 $submission->submission_status = 3;
             }
             $submission->save();
-    
+
             return redirect()->route('keluhan')->with('success', 'Penanganan telah diverifikasi!');
         }
     }
 
-
     public function ulasan(ComplainAssignment $asg)
     {
         $user = auth()->user();
-        if($user->id != $asg->user_id && $user->roles_id != 1){
+        if ($user->id != $asg->user_id && $user->roles_id != 1) {
             return redirect()->back();
         }
+
         return view('supervisor.pages.keluhan.feedback', compact('asg', 'user'));
     }
 
@@ -182,15 +182,15 @@ class KeluhanController extends Controller
     public function daftarPelaporan()
     {
         $user = auth()->user();
-        $complains = Complain::where('user_id',$user->id)->get();
-        $count_wait = Complain::where('user_id',$user->id)
-                                ->where('report_status',1)->count();
+        $complains = Complain::where('user_id', $user->id)->get();
+        $count_wait = Complain::where('user_id', $user->id)
+            ->where('report_status', 1)->count();
         $count_finished = Complain::whereHas('latestAssigned.submissions', function ($query) {
-                                    $query->where('submission_status', 2);
-                                })->where('user_id',$user->id)
-                                  ->count();
-        $count_process = (Complain::where('user_id',$user->id)
-                                    ->where('report_status',2)->count()) - $count_finished;
+            $query->where('submission_status', 2);
+        })->where('user_id', $user->id)
+            ->count();
+        $count_process = (Complain::where('user_id', $user->id)
+            ->where('report_status', 2)->count()) - $count_finished;
 
         return view('workers.pages.keluhan.pelaporan.index', compact('complains', 'count_wait', 'count_finished', 'count_process'));
     }
@@ -288,6 +288,7 @@ class KeluhanController extends Controller
     public function hapusPelaporan(Complain $complain)
     {
         $complain->delete();
+
         return redirect()->route('keluhanPelaporan')->with('success', 'Laporan berhasil dihapus!');
     }
 
@@ -296,24 +297,24 @@ class KeluhanController extends Controller
     {
         $user = auth()->user();
         $assignments = ComplainAssignment::where('user_id', $user->id)
-                                        ->where('assign_status','!=',3)
-                                        ->get();
+            ->where('assign_status', '!=', 3)
+            ->get();
         $count_verified = ComplainAssignment::whereHas('submissions', function ($query) {
-                                    $query->where('submission_status', 2);
-                                })->where('user_id',$user->id)
-                                    ->count();
+            $query->where('submission_status', 2);
+        })->where('user_id', $user->id)
+            ->count();
         $count_process = ComplainAssignment::whereHas('submissions', function ($query) {
-                                    $query->where('submission_status', 1);
-                                })->where('user_id',$user->id)
-                                    ->count();
-        $count_assigned = (ComplainAssignment::where('user_id',$user->id)
-                                    ->where('assign_status','!=',3)->count()) - ($count_verified + $count_process);
+            $query->where('submission_status', 1);
+        })->where('user_id', $user->id)
+            ->count();
+        $count_assigned = (ComplainAssignment::where('user_id', $user->id)
+            ->where('assign_status', '!=', 3)->count()) - ($count_verified + $count_process);
 
         // $title = 'Tolak Penugasan!';
         // $text = 'Apakah anda yakin menolak tugas ini?';
         // confirmDelete($title, $text);
 
-        return view('workers.pages.keluhan.penanganan.index', compact('assignments','count_assigned','count_process','count_verified'));
+        return view('workers.pages.keluhan.penanganan.index', compact('assignments', 'count_assigned', 'count_process', 'count_verified'));
     }
 
     public function terimaPenugasan(ComplainAssignment $asg)
@@ -342,16 +343,16 @@ class KeluhanController extends Controller
             $declined->complain_assignment_id = $asg->id;
             $declined->decline_description = $request->alasan_penolakan;
             $declined->save();
-    
+
             $asg->assign_status = 3;
             $asg->save();
-    
+
             return redirect()->route('keluhanPenanganan')->with('success', 'Penugasan telah ditolak!');
         }
     }
 
     public function buatPenanganan(ComplainAssignment $asg)
-    {    
+    {
         return view('workers.pages.keluhan.penanganan.create', compact('asg'));
     }
 
@@ -359,13 +360,13 @@ class KeluhanController extends Controller
     {
         $rules = [
             'bukti_penanganan' => 'required|image|mimes:jpg,jpeg,png',
-            'catatan_penanganan' => 'required'
+            'catatan_penanganan' => 'required',
         ];
         $msg = [
             'required' => 'Kolom '.str_replace('_', ' ', ':attribute').' wajib diisi',
             // 'min' => 'Kolom '.str_replace('_', ' ', ':attribute').' minimal berisi :min karakter'),
-            'image'=> 'Kolom '.str_replace('_', ' ', ':attribute').' harus berupa gambar',
-            'mimes'=> 'File harus dalam format jpg, jpeg, dan png'
+            'image' => 'Kolom '.str_replace('_', ' ', ':attribute').' harus berupa gambar',
+            'mimes' => 'File harus dalam format jpg, jpeg, dan png',
         ];
         $validator = Validator::make($request->all(), $rules, $msg);
         if ($validator->fails()) {
@@ -373,13 +374,13 @@ class KeluhanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         } else {
             $img = $request->file('bukti_penanganan');
-            $filename = 'Penanganan_'.str_replace(' ', '_', $asg->complain->complain_title).'_'.str_replace(array(" ", ":"), array("_","-"), date('Y-m-d H:i:s')).'.'.$img->getClientOriginalExtension();
+            $filename = 'Penanganan_'.str_replace(' ', '_', $asg->complain->complain_title).'_'.str_replace([' ', ':'], ['_', '-'], date('Y-m-d H:i:s')).'.'.$img->getClientOriginalExtension();
             $destination_path = 'public/uploads/penanganan';
             $path = $img->storeAs($destination_path, $filename);
 
             // $link = Storage::url($path);
             $link = '/storage/uploads/penanganan/'.$filename;
-    
+
             $submission = new ComplainSubmission();
             $submission->complain_assignment_id = $asg->id;
             $submission->submission_img = $link;
@@ -404,6 +405,7 @@ class KeluhanController extends Controller
         $title = 'Hapus Penanganan!';
         $text = 'Apakah anda yakin ingin menghapus penanganan ini?';
         confirmDelete($title, $text);
+
         return view('workers.pages.keluhan.penanganan.edit', compact('asg'));
     }
 
@@ -411,13 +413,13 @@ class KeluhanController extends Controller
     {
         $rules = [
             'bukti_penanganan' => 'required|image|mimes:jpg,jpeg,png',
-            'catatan_penanganan' => 'required'
+            'catatan_penanganan' => 'required',
         ];
         $msg = [
             'required' => 'Kolom '.str_replace('_', ' ', ':attribute').' wajib diisi',
             // 'min' => 'Kolom '.str_replace('_', ' ', ':attribute').' minimal berisi :min karakter'),
-            'image'=> 'Kolom '.str_replace('_', ' ', ':attribute').' harus berupa gambar',
-            'mimes'=> 'File harus dalam format jpg, jpeg, dan png'
+            'image' => 'Kolom '.str_replace('_', ' ', ':attribute').' harus berupa gambar',
+            'mimes' => 'File harus dalam format jpg, jpeg, dan png',
         ];
         $validator = Validator::make($request->all(), $rules, $msg);
         if ($validator->fails()) {
@@ -425,13 +427,13 @@ class KeluhanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         } else {
             $img = $request->file('bukti_penanganan');
-            $filename = 'Penanganan_'.str_replace(' ', '_', $asg->complain->complain_title).'_'.str_replace(array(" ", ":"), array("_","-"), date('Y-m-d H:i:s')).'.'.$img->getClientOriginalExtension();
+            $filename = 'Penanganan_'.str_replace(' ', '_', $asg->complain->complain_title).'_'.str_replace([' ', ':'], ['_', '-'], date('Y-m-d H:i:s')).'.'.$img->getClientOriginalExtension();
             $destination_path = 'public/uploads/penanganan';
             $path = $img->storeAs($destination_path, $filename);
 
             // $link = Storage::url($path);
             $link = '/storage/uploads/penanganan/'.$filename;
-            
+
             $submission = ComplainSubmission::findOrFail($asg->submissions->id);
             $submission->submission_img = $link;
             $submission->submission_description = $request->catatan_penanganan;
@@ -449,7 +451,7 @@ class KeluhanController extends Controller
     {
         $submission = ComplainSubmission::findOrFail($asg->submissions->id);
         $submission->delete();
+
         return redirect()->route('keluhanPenanganan')->with('success', 'Penanganan berhasil dihapus!');
     }
-
 }

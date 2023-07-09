@@ -32,8 +32,9 @@ class InventarisController extends Controller
     public function editInventaris(Request $request)
     {
         $id = $request->id;
+
         return view('supervisor.pages.inventaris.edit', [
-            'inventory' => Inventaris::find($id)
+            'inventory' => Inventaris::find($id),
         ]);
     }
 
@@ -65,8 +66,7 @@ class InventarisController extends Controller
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
-        }
-        else {
+        } else {
             $filename = $request->file('filegambar')->getClientOriginalName();
             $destination_path = 'public/uploads/inventaris';
             $path = $request->file('filegambar')->storeAs($destination_path, $filename);

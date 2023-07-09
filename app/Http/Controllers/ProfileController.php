@@ -10,27 +10,25 @@ class ProfileController extends Controller
     public function index()
     {
         $data = Auth::user();
-        if($data->roles_id == 1)
-        {
+        if ($data->roles_id == 1) {
             $values = 'supervisor.layouts.master';
-        }else
-        {
-            $values ='workers.layouts.master';
+        } else {
+            $values = 'workers.layouts.master';
         }
-        return view('profile.index', compact('data','values'));
+
+        return view('profile.index', compact('data', 'values'));
     }
 
     public function edit()
     {
         $data = Auth::user();
-        if($data->roles_id == 1)
-        {
+        if ($data->roles_id == 1) {
             $values = 'supervisor.layouts.master';
-        }else
-        {
-            $values ='workers.layouts.master';
+        } else {
+            $values = 'workers.layouts.master';
         }
-        return view('profile.edit', compact('data','values'));
+
+        return view('profile.edit', compact('data', 'values'));
     }
 
     public function update(Request $request)
