@@ -31,7 +31,7 @@ return new class extends Migration
 
         DB::table('users')->insert([
             ['name' => 'supervisor', 'email' => 'supervisor@stavvy.com', 'password' => Hash::make('supervisor'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'roles_id' => 1],
-            ['name' => 'user', 'email' =>'user@stavvy.com', 'password' => Hash::make('user'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'roles_id' => 2],
+            ['name' => 'user', 'email' => 'user@stavvy.com', 'password' => Hash::make('user'), 'user_nik' => '123456789', 'user_join_date' => '2021-01-01', 'roles_id' => 2],
         ]);
     }
 

@@ -22,32 +22,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="editJadwal" tabindex="-1" aria-labelledby="editJadwalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editJadwalLabel">Edit Jadwal</h1>
-            </div>
-            <form class="mt-4" action="" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <div class="input-group flex-nowrap">
-                        <div class="custom-file w-100">
-                            <input class="form-control" type="file" id="formFile" name="formFile">
-                        </div>
-                    </div>
-                </div>  
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">
-                        Edit Jadwal
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 
 @if(count($form) == 0)
     <div class="row">    
@@ -101,6 +75,32 @@
                                             <a href="{{route('scheduleDelete', $f->id)}}" class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
                                         </td>
                                 </tr>
+
+                                <div class="modal fade" id="editJadwal" tabindex="-1" aria-labelledby="editJadwalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="editJadwalLabel">Edit Jadwal</h1>
+                                            </div>
+                                            <form class="mt-4" action="{{route('scheduleEdit',$f->id)}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    <div class="input-group flex-nowrap">
+                                                        <div class="custom-file w-100">
+                                                            <input class="form-control" type="file" id="formFile" name="formFile">
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button class="btn btn-primary" type="submit">
+                                                        Edit Jadwal
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endforeach                                
                             </tbody>
                         </table>

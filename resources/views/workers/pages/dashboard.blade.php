@@ -68,10 +68,7 @@
                 <div class="badge"> <span>Important</span> </div>
             </div>
             <div class="mt-4">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
+                <h1 class="text-danger">{{$task}}</h1>
             </div>
         </div>
     </div>
@@ -87,10 +84,7 @@
                 <div class="badge"> <span>Important</span> </div>
             </div>
             <div class="mt-4">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
+                <h1 class="text-danger">{{$cuti}}</h1>
             </div>
         </div>
     </div>
@@ -106,10 +100,7 @@
                 <div class="badge"> <span>Important</span> </div>
             </div>
             <div class="mt-4">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
+                <h1 class="text-danger">{{$report}}</h1>
             </div>
         </div>
     </div>

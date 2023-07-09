@@ -25,7 +25,6 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
     Route::get('/editInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
     Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
     Route::get('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
@@ -36,7 +35,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profileEdit');
     Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profileUpdate');
-
 
     Route::group(['middleware' => ['supervisor']], function () {
         // Disini nanti semua route yang hanya bisa diakses oleh supervisor
@@ -59,7 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
         // * Supervisor -> Jadwal -> Laporan
         Route::get('/tasksReport', [App\Http\Controllers\TaskSubmissionController::class, 'tasksReport'])->name('tasksReport');
         Route::post('/tasksComment/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'tasksComment'])->name('tasksComment');
-        
+
         // * Supervisor -> Cuti
         Route::get('/requestList', [App\Http\Controllers\PaidLeaveController::class, 'requestList'])->name('requestList');
         Route::get('/paidLeaveList', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveList'])->name('paidLeaveList');
@@ -69,7 +67,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/setuju/{id}', [App\Http\Controllers\PaidLeaveController::class, 'setuju'])->name('persetujuan');
         Route::get('/tolak/{id}', [App\Http\Controllers\PaidLeaveController::class, 'tolak'])->name('penolakan');
         Route::get('/deleteCuti/{id}', [App\Http\Controllers\PaidLeaveController::class, 'deleteCuti'])->name('deleteCuti');
-
 
         // * Supervisor -> Panduan
         Route::get('/supervisorPanduan', [App\Http\Controllers\PanduanController::class, 'supervisorPanduan'])->name('supervisorPanduan');
@@ -86,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/createInventarisStore', [App\Http\Controllers\InventarisController::class, 'add'])->name('addInventaris');
         Route::get('/editInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
         Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
-        Route::delete('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris'); 
+        Route::delete('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
 
         // * Supervisor -> Keluhan
         Route::get('/keluhan', [App\Http\Controllers\KeluhanController::class, 'daftarKeluhan'])->name('keluhan');
@@ -106,7 +103,6 @@ Route::group(['middleware' => ['auth']], function () {
         // * Workers -> Jadwal -> Tugas
         Route::get('/tasks', [App\Http\Controllers\TaskSubmissionController::class, 'taskSubmission'])->name('tasks');
         Route::post('/tasksUpload/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'tasksUpload'])->name('tasksUpload');
-        
 
         // * Workers -> Cuti
         Route::post('/createCuti', [App\Http\Controllers\PaidLeaveController::class, 'createCuti'])->name('createCuti');

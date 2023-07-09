@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             PanduanSeeder::class,
             InventarisSeeder::class,
             PlaceSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
         ]);
 
     }
