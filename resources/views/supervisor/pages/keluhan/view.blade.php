@@ -125,8 +125,22 @@
                             </div>
                         </div>
                     </div>
-                
 
+                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
+                        <div class="row d-flex col-12">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <h5 class="card-title">Dilaporkan Oleh</h4>
+                            </div>
+                            <div class="d-none d-lg-block col-lg-1">
+                                <h5 class="card-title">:</h4>
+                            </div>
+                            <div class="col-sm-0 col-md-0 col-lg-7">
+                                <h5>{{$complain->user->name}}</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if(!is_null($complain->latestAssigned))
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
                         <div class="row d-flex col-12">
                             <div class="col-sm-12 col-md-12 col-lg-4">
@@ -143,20 +157,6 @@
                                     <img class="complain-icon" src="{{asset('../../assets/images/keluhan-genting.svg')}}" width="20" alt="">
                                 @endif
                                 {{$complain->urgency->name}}</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-start">
-                        <div class="row d-flex col-12">
-                            <div class="col-sm-6 col-md-6 col-lg-4">
-                                <h5 class="card-title">Dilaporkan Oleh</h4>
-                            </div>
-                            <div class="d-none d-lg-block col-lg-1">
-                                <h5 class="card-title">:</h4>
-                            </div>
-                            <div class="col-sm-0 col-md-0 col-lg-7">
-                                <h5>{{$complain->user->name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -214,11 +214,11 @@
                         </div>
                     </div>
                     @endif
-
+                    @endif
                     <div class="col-sm-12 col-md-12 col-lg-12 d-flex align-items-stretch mt-5">
                         <div class="row d-flex col-12 d-flex justify-content-between align-items-start">
                             <div class="col-4">
-                                <a href="{{route('keluhanPenanganan')}}"
+                                <a href="{{route('keluhan')}}"
                                     class="btn waves-effect waves-light btn-outline-primary w-100">Kembali</a>
                             </div>
                         </div>

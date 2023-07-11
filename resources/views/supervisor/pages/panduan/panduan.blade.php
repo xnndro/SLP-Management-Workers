@@ -31,7 +31,13 @@
                         <div class="mt-5">
                             <h6 class="page-title font-weight-medium mb-1 text-break text-wrap" style="color: #0F98D6;">{{ $panduan->panduan_title }}</h6>
                             <div class="d-flex align-items-end">
-                                <a href="{{ route('supervisorDetailPanduan', ['id'=>$panduan->id]) }}" class="px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
+                                <a href="{{ route('supervisorDetailPanduan', ['id'=>$panduan->id]) }}" class="me-3 px-4 btn btn-primary mt-2 z-1"><h6 class="mb-0">Lihat</h6></a>
+                                {{-- <a href="{{ route('deletePanduan', $panduan->id) }}" style="background-color: transparent; color: #ff4f70;" class="ms-3 btn-circle-lg"><i data-confirm-delete="true" class="fa fa-trash"></i></a> --}}
+                                <form action="{{route('deletePanduan', $panduan->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">Hapus</button>
+                                </form>
                             </div>
                         </div>
                     </div>

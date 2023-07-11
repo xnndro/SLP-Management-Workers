@@ -35,7 +35,7 @@
                             <label class="col-sm-5 col-form-label" style="color: #5F76E8;">Posisi</label>
                             <div class="col-sm-5">
                                 <select id="select" name="role_id" class="custom-select form-control bg-white custom-radius custom-shadow border-0">
-                                    <<option value="select">Select role</option>
+                                    <option value="select">Select role</option>
                                     @foreach (\App\Models\Roles::all() as $role)
                                         @if ($panduan->role_id == $role->id)
                                             <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
@@ -55,8 +55,7 @@
                         
                         {{-- Button --}}
                         <div class="d-flex justify-content-between">
-                            @method('delete')
-                            <a href="{{ route('deletePanduan', ['id'=>$panduan->id]) }}" type="submit" style="background-color: transparent; color: #ff4f70;" class="ms-3" data-confirm-delete="true" class="btn-circle-lg"><i class="fa fa-trash"></i></a>
+                            {{-- <a href="{{ route('deletePanduan', $panduan->id) }}" style="background-color: transparent; color: #ff4f70;" class="ms-3" data-confirm-delete="true" class="btn-circle-lg"><i class="fa fa-trash"></i></a> --}}
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button  type="submit" class="px-3 btn btn-primary">Simpan</button>
                                 <a href="{{ route('supervisorPanduan') }}" class="px-3 btn btn-dark">Batalkan</a>

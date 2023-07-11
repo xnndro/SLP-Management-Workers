@@ -168,7 +168,7 @@ class TaskSubmissionController extends Controller
         $events = [];
         foreach ($task as $t) {
             $events[] = [
-                'title' => $t->task_category->task_category_name,
+                'title' => $t->task_category->task_category_name . ' di ' . $t->place->place_name,
                 'start' => $t->work_date,
                 'end' => $t->work_date,
             ];
@@ -182,7 +182,7 @@ class TaskSubmissionController extends Controller
     public function tasksReport()
     {
         $title = 'Hapus Laporan!';
-        $text = 'Apakah anda yakin ingin menghapus laporan pekerjaan ini?';
+        $text = 'Apakah anda yakin ingin menolak laporan pekerjaan ini?';
         confirmDelete($title, $text);
 
         $submission = TaskSubmission::where('task_status', 'submitted')->get();
@@ -192,10 +192,18 @@ class TaskSubmissionController extends Controller
         return view('supervisor.pages.task-submission.tasksReport.index', compact('submission', 'total_submission'));
     }
 
+    public function tasksDecline($id)
+    {
+        $submission = TaskSubmission::find($id);
+        $submission->save();
+
+        return redirect()->route('tasksReport')->with('success', 'Laporan berhasil dihapus');
+    }
+
     // Workers
     public function taskSubmission()
     {
-        $tasks = TaskManagement::where('user_id', Auth::user()->id)->where('work_date', date('Y-m-d'))->get();
+        $tasks = TaskManagement::where('user_id', Auth::user()->id)->where('work_date', date('Y/m/d'))->get();
 
         $task_submission = TaskSubmission::where('task_status', 'commented')
             ->whereHas('task_management', function ($query) {
@@ -213,7 +221,7 @@ class TaskSubmissionController extends Controller
 
         $task = new TaskSubmission();
         $task->task_management_id = $id;
-        $task->task_report = $path;
+        $task->task_report = $filename;
         $task->save();
 
         return redirect()->route('tasks')->with('success', 'Data berhasil ditambahkan');
@@ -226,6 +234,11 @@ class TaskSubmissionController extends Controller
         $task->task_status = 'commented';
         $task->save();
 
+        $task_management = TaskManagement::find($task->task_management_id);
+        $task_management->task_status = 'commented';
+        $task_management->save();
+    
+
         return redirect()->route('tasksReport')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -235,7 +248,7 @@ class TaskSubmissionController extends Controller
         $task = TaskManagement::where('user_id', '2')->get(); //ini jangan lupa diganti user_id
         foreach ($task as $t) {
             $events[] = [
-                'title' => $t->task_category->task_category_name,
+                'title' => $t->task_category->task_category_name . ' di ' . $t->place->place_name,
                 'start' => $t->work_date,
                 'end' => $t->work_date,
             ];

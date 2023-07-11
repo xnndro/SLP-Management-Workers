@@ -16,7 +16,7 @@ class TasksImport implements ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow
             'user_id' => \App\Models\User::where('name', $row['user_id'])->first()->id,
             'work_date' => $row['work_date'],
             'place_id' => \App\Models\Place::firstOrCreate(['place_name' => $row['place_id']])->id,
-            'task_category_id' => \App\Models\TaskCategory::firstOrCreate(['task_category_name' => $row['task_category_id']])->id,
+            'task_category_id' => $row['task_category_id'],
             'task_status' => $row['work_date'] < date('Y-m-d') ? 'done' : $row['task_status'],
         ]);
     }

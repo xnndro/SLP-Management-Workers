@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             InventarisSeeder::class,
             PlaceSeeder::class,
             CategorySeeder::class,
+            TaskCategory::class,
         ]);
 
     }

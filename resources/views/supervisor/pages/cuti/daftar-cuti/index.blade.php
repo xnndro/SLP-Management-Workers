@@ -88,7 +88,7 @@
                         <div class="card-body">
                             <div class="d-flex text-white">
                                 <div>
-                                    <img src="{{asset('../../assets/images/kesehatan icon.svg')}}" class="" width="100">   
+                                    <img src="{{asset('../../assets/images/kesehatan-icon.svg')}}" class="" width="100">   
                                 </div>
                                 <div class="ms-auto">
                                     <h6 class="font-weight-normal text-truncate">Cuti Kesehatan</h6>

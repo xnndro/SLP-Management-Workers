@@ -454,4 +454,14 @@ class KeluhanController extends Controller
 
         return redirect()->route('keluhanPenanganan')->with('success', 'Penanganan berhasil dihapus!');
     }
+
+    public function ulasanPenanganan(ComplainAssignment $asg)
+    {
+        $user = auth()->user();
+        if ($user->id != $asg->user_id && $user->roles_id != 1) {
+            return redirect()->back();
+        }
+
+        return view('supervisor.pages.keluhan.feedback', compact('asg', 'user'));
+    }
 }

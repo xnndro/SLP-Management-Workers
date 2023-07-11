@@ -20,8 +20,9 @@ class PaidLeaveController extends Controller
             $request = null;
         }
         $total = PaidLeaveRequest::whereYear('start_date', '2023')->get()->groupBy('status')->map->count();
+        $total_pengajuan = PaidLeaveRequest::all()->count();
 
-        return view('supervisor.pages.cuti.pengajuan-cuti.index', compact('data', 'total'));
+        return view('supervisor.pages.cuti.pengajuan-cuti.index', compact('data', 'total','total_pengajuan'));
     }
 
     public function paidLeaveList(Request $request)

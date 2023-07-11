@@ -40,7 +40,7 @@
                     <div class="ms-auto">
                         <h6 class="font-weight-normal text-truncate">Total Pengajuan</h6>
                         <div class="d-flex align-items-center">
-                            <h2 class="text-white font-weight-medium">{{$total->count()}}</h2>
+                            <h2 class="text-white font-weight-medium">{{$total_pengajuan}}</h2>
                             <p class="text-white font-weight-medium ms-2 mb-2">rec</p>
                         </div>
                     </div>
@@ -126,9 +126,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $no = 1; @endphp
                             @foreach ($data as $request)
                                 <tr>
-                                    <td>CT00{{$request->id}}</td>
+                                    <td>{{$no}}</td>
+                                    @php $no++; @endphp
                                     <td>{{$request->user->name}}</td>
                                     <td>{{$request->user->roles->role_name}}</td>
                                     <td>{{$request->created_at->format('Y-m-d')}}</td>

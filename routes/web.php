@@ -28,10 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/editInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'editInventaris'])->name('editInventaris');
     Route::post('/updateInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'updateInventaris'])->name('updateInventaris');
     Route::get('/deleteInventaris/{id}', [App\Http\Controllers\InventarisController::class, 'deleteInventaris'])->name('deleteInventaris');
+    Route::get('/kategoriCuti', [App\Http\Controllers\PaidLeaveController::class, 'kategoriCuti'])->name('kategoriCuti');
 
-    Route::get('/keluhan/ulasan/{asg}', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
-
-    Route::get('/keluhan/ulasan', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profileEdit');
     Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profileUpdate');
@@ -57,11 +55,11 @@ Route::group(['middleware' => ['auth']], function () {
         // * Supervisor -> Jadwal -> Laporan
         Route::get('/tasksReport', [App\Http\Controllers\TaskSubmissionController::class, 'tasksReport'])->name('tasksReport');
         Route::post('/tasksComment/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'tasksComment'])->name('tasksComment');
+        Route::delete('/tasksDelete/{id}', [App\Http\Controllers\TaskSubmissionController::class, 'tasksDecline'])->name('tasksDelete');
 
         // * Supervisor -> Cuti
         Route::get('/requestList', [App\Http\Controllers\PaidLeaveController::class, 'requestList'])->name('requestList');
         Route::get('/paidLeaveList', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveList'])->name('paidLeaveList');
-        Route::get('/kategoriCuti', [App\Http\Controllers\PaidLeaveController::class, 'kategoriCuti'])->name('kategoriCuti');
         Route::get('/lihat_detail', [App\Http\Controllers\PaidLeaveController::class, 'lihat_detail'])->name('lihat_detail');
         Route::get('/paidLeaveCategory', [App\Http\Controllers\PaidLeaveController::class, 'paidLeaveCategory'])->name('paidLeaveCategory');
         Route::get('/setuju/{id}', [App\Http\Controllers\PaidLeaveController::class, 'setuju'])->name('persetujuan');
@@ -94,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/keluhan/penugasan/{complain}', [App\Http\Controllers\KeluhanController::class, 'simpanPenugasan'])->name('keluhanPenugasan');
         Route::post('/keluhan/penugasan/update/{asg}', [App\Http\Controllers\KeluhanController::class, 'updatePenugasan'])->name('keluhanPenugasanUpdate');
         Route::delete('/keluhan/penugasan/hapus/{asg}', [App\Http\Controllers\KeluhanController::class, 'hapusPenugasan'])->name('keluhanPenugasanDelete');
+        Route::get('/keluhan/ulasan/{asg}', [App\Http\Controllers\KeluhanController::class, 'ulasan'])->name('keluhanShowFeedback');
     });
 
     Route::group(['middleware' => ['user']], function () {
@@ -131,6 +130,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/penangananKeluhan/terima/{asg}', [App\Http\Controllers\KeluhanController::class, 'terimaPenugasan'])->name('terimaPenugasan');
         Route::delete('/penangananKeluhan/tolak/{asg}', [App\Http\Controllers\KeluhanController::class, 'tolakPenugasan'])->name('tolakPenugasan');
         Route::delete('/penangananKeluhan/hapus/{asg}', [App\Http\Controllers\KeluhanController::class, 'hapusPenanganan'])->name('keluhanPenangananDelete');
+        Route::get('/penangananKeluhan/ulasan/{asg}', [App\Http\Controllers\KeluhanController::class, 'ulasanPenanganan'])->name('keluhanPenangananFeedback');
 
         // * Workers -> Inventaris
         Route::get('/workersInventaris', [App\Http\Controllers\InventarisController::class, 'workersInventaris'])->name('workersInventaris');

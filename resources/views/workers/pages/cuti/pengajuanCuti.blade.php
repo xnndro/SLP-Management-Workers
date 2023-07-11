@@ -218,7 +218,7 @@
                         style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>No</th>
                                 <th>Kategori Cuti</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Tanggal Mulai</th>
@@ -227,9 +227,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $i=1 @endphp
                             @foreach($request as $request)
                             <tr>
-                                <td>CT00{{$request->id}}</td>
+                                <td>{{$i}}</td>
+                                @php $i++ @endphp
                                 <td>{{$request->category->name}}</td>
                                 <td>{{$request->created_at->format('Y-m-d')}}</td>
                                 <td>{{$request->start_date}}</td>

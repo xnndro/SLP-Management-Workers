@@ -8,8 +8,13 @@
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white"
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+              @if($data->roles->id == 1)
+              <img src="../../assets/images/supervisor.png"
                 alt="Avatar" class="img-fluid my-4" style="width: 80px;" />
+              @else
+              <img src="../../assets/images/worker.png"
+                alt="Avatar" class="img-fluid my-4" style="width: 80px;" />
+              @endif
               <h5 class="text-black">{{$data->name}}</h5>
               <p class="text-black">{{$data->roles->role_name}}</p>
               <a href="{{route('profileEdit')}}" class="btn btn-sm btn-warning">Edit</a>

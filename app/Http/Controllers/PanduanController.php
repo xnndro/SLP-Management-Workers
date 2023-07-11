@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use SebastianBergmann\CodeUnit\Exception;
 
 class PanduanController extends Controller
 {
@@ -50,6 +51,7 @@ class PanduanController extends Controller
 
     public function updatePanduan(Request $request, $id)
     {
+        // dd($request->all());
         $rules = [
             'title' => 'required',
             'role_id' => 'required|numeric',
@@ -67,7 +69,7 @@ class PanduanController extends Controller
         $panduan = Panduan::find($id);
         $panduan->panduan_title = $request->title;
         $panduan->panduan_content = $request->content;
-        $panduan->role_id = $request->roleId;
+        $panduan->role_id = $request->role_id;
         $panduan->update();
 
         return redirect()->route('supervisorPanduan')->with('success', 'Data berhasil diupdate');
@@ -75,10 +77,11 @@ class PanduanController extends Controller
 
     public function deletePanduan($id)
     {
-        $panduan = Panduan::find($id);
+        $panduan = Panduan::findOrfail($id);
         $panduan->delete();
 
         return redirect()->route('supervisorPanduan')->with('success', 'Data berhasil dihapus');
+        
     }
 
     // Workers

@@ -2,7 +2,7 @@
     <ul id="sidebarnav">
         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{route('home')}}"
             aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
-                class="hide-menu">Dashboard</span></a></li>
+                class="hide-menu">Dasbor</span></a></li>
         <li class="list-divider"></li>
         <li class="nav-small-cap"><span class="hide-menu">Pekerja</span></li>
         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"

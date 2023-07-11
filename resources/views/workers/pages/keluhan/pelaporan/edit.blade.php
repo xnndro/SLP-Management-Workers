@@ -148,7 +148,11 @@
                                         <option 
                                         @if($complain->place->id == $place->id)
                                         selected
-                                        @endif value="{{$place->id}}">{{$place->place_name}}</option>
+                                        value="{{$place->id}}"
+                                        @else 
+                                        value="{{$place->id}}"
+                                        @endif
+                                        >{{$place->place_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

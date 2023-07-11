@@ -13,8 +13,6 @@ return new class extends Migration
             $table->unsignedBigInteger('panduan_id')->nullable();
             $table->string('task_category_name');
             $table->timestamps();
-
-            $table->foreign('panduan_id')->references('id')->on('panduan');
         });
     }
 

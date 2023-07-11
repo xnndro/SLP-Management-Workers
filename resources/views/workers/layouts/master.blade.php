@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLP Management Workers</title>
-    
+    <link rel="icon" href="{{asset('../../assets/images/logo-tab.png')}}" type="image/png">
     @stack('before-style')
     @include('workers.includes.style')
     @stack('after-style')

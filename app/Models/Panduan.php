@@ -23,4 +23,9 @@ class Panduan extends Model
     {
         $this->belongsTo(InventarisRole::class);
     }
+
+    public function task_category()
+    {
+        $this->belongsTo(TaskCategory::class);
+    }
 }

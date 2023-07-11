@@ -395,7 +395,7 @@
                                         @elseif ($asg->submissions->submission_status == 2)
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{route('keluhanShowFeedback',$asg->id)}}" class="btn waves-effect waves-light btn-success w-75">Lihat
+                                                <a href="{{route('keluhanPenangananFeedback',$asg->id)}}" class="btn waves-effect waves-light btn-success w-75">Lihat
                                                     Ulasan</a>
                                             </div>
                                         </td>

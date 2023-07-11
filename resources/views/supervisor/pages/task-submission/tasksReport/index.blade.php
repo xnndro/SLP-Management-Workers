@@ -111,7 +111,7 @@
                                     <td>
                                         <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#bukti{{$s->id}}">Bukti</button>
                                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#acc{{$s->id}}">Setujui</button>
-                                        <button type="submit" class="btn btn-sm btn-danger" data-confirm-delete="true">Tolak</button>
+                                        <a href="{{route('tasksDelete',$s->id)}}" class="btn btn-sm btn-danger" data-confirm-delete="true">Hapus</button>
                                     </td>
                                 </tr>
 
@@ -124,7 +124,7 @@
                                                 <h4 class="modal-title" id="myLargeModalLabel">Bukti Kerja</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <img src="{{asset('../../../'.$s->task_report)}}" class="img-fluid" alt="...">
+                                                <img src="{{asset('storage/uploads/tasks/'.$s->task_report)}}" class="img-fluid" alt="...">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

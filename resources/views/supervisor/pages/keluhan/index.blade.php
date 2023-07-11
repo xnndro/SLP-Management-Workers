@@ -183,7 +183,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#assignTask{{$complain->id}}"
-                                                class="btn waves-effect waves-light btn-primary w-75">
+                                                class="btn waves-effect waves-light btn-primary w-100">
                                                 Tugaskan</button>
                                         </div>
                                     </td>
@@ -290,7 +290,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <button type="button" data-bs-toggle="modal" data-bs-target="#editAssignTask{{$complain->id}}"
-                                                class="btn waves-effect waves-light btn-warning text-white w-75">
+                                                class="btn waves-effect waves-light btn-warning text-white w-100">
                                                 Edit</button>
                                         </div>
                                     </td>
@@ -403,20 +403,20 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                         @if (is_null($complain->latestAssigned->submissions))
-                                        <button class="btn btn-secondary disabled text-white w-75 flex-item mx-2">
+                                        <button class="btn btn-secondary disabled text-white w-100 flex-item mx-2">
                                             Proses
                                         </button>
                                         @else
                                             @if ($complain->latestAssigned->submissions->submission_status == 1)
-                                            <a href="{{route('keluhanVerify', $complain->latestAssigned->id)}}" class="btn waves-effect waves-light bg-cyan text-white w-75 flex-item mx-2">
+                                            <a href="{{route('keluhanVerify', $complain->latestAssigned->id)}}" class="btn waves-effect waves-light bg-cyan text-white w-100 flex-item mx-2">
                                                 Verifikasi
                                             </a>
                                             @elseif($complain->latestAssigned->submissions->submission_status == 2)
-                                            <a href="{{route('keluhanShowFeedback', $complain->latestAssigned->id)}}" class="btn waves-effect waves-light btn-success w-75">
+                                            <a href="{{route('keluhanShowFeedback', $complain->latestAssigned->id)}}" class="btn waves-effect waves-light btn-success w-100">
                                                 Lihat Riwayat
                                             </a>
                                             @elseif($complain->latestAssigned->submissions->submission_status == 3)
-                                            <button class="btn btn-secondary disabled text-white w-75 flex-item mx-2">
+                                            <button class="btn btn-secondary disabled text-white w-100 flex-item mx-2">
                                                 Proses
                                             </button>
                                             @endif
@@ -426,7 +426,7 @@
                                     @elseif ($complain->latestAssigned->assign_status == 3 && !is_null($complain->latestAssigned->latestDeclined))
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <button class="btn waves-effect waves-light btn-danger text-white w-75 flex-item mx-2"
+                                            <button class="btn waves-effect waves-light btn-danger text-white w-100 flex-item mx-2"
                                                 data-bs-toggle="modal" data-bs-target="#reAssignTask{{$complain->id}}">
                                                 Tugaskan Lagi</button>
                                         </div>
